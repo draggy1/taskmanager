@@ -1,0 +1,11 @@
+[0m[[0m[0minfo[0m] [0m[0mWaiting for measurement data to sync...[0m
+[0m[[0m[0minfo[0m] [0m[0mReading scoverage instrumentation [/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/scoverage-data/scoverage.coverage][0m
+[0m[[0m[0minfo[0m] [0m[0mReading scoverage measurements...[0m
+[0m[[0m[0minfo[0m] [0m[0mGenerating scoverage reports...[0m
+[0m[[0m[0minfo[0m] [0m[0mWritten Cobertura report [/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/coverage-report/cobertura.xml][0m
+[0m[[0m[0minfo[0m] [0m[0mWritten XML coverage report [/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/scoverage-report/scoverage.xml][0m
+[0m[[0m[0minfo[0m] [0m[0mWritten HTML coverage report [/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/scoverage-report/index.html][0m
+[0m[[0m[0minfo[0m] [0m[0mStatement coverage.: 31.58%[0m
+[0m[[0m[0minfo[0m] [0m[0mBranch coverage....: 0.00%[0m
+[0m[[0m[0minfo[0m] [0m[0mCoverage reports completed[0m
+[0m[[0m[0minfo[0m] [0m[0mAll done. Coverage was stmt=[31.58%] branch=[0.00%][0m

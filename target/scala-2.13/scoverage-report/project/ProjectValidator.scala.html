@@ -1,0 +1,231 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          project/ProjectValidator.scala.html
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier, monospace;'>1 <span style=''>package project
+</span>2 <span style=''>
+</span>3 <span style=''>import authentication.{DuplicatedProjectId, Error}
+</span>4 <span style=''>import project.commands.CreateProjectCommand
+</span>5 <span style=''>import project.queries.GetProjectByIdQuery
+</span>6 <span style=''>
+</span>7 <span style=''>import javax.inject.Inject
+</span>8 <span style=''>import scala.concurrent.ExecutionContext.Implicits.global
+</span>9 <span style=''>import scala.concurrent.Future
+</span>10 <span style=''>
+</span>11 <span style=''>case class ProjectValidator @Inject()(aggregate: ProjectAggregate) {
+</span>12 <span style=''>  def validate(command: CreateProjectCommand): Future[Either[Error, CreateProjectCommand]] =
+</span>13 <span style=''>    </span><span style='background: #AEF1AE'>aggregate.getProject(GetProjectByIdQuery(command.projectId))
+</span>14 <span style=''></span><span style='background: #AEF1AE'>      .map {
+</span>15 <span style=''></span><span style='background: #AEF1AE'>        case Some(_) =&gt; Left(DuplicatedProjectId)
+</span>16 <span style=''></span><span style='background: #AEF1AE'>        case None =&gt; Right(command)
+</span>17 <span style=''></span><span style='background: #AEF1AE'>      }</span><span style=''>
+</span>18 <span style=''>}
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Tests</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          88
+        </td>
+        <td>
+          461
+          -
+          499
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          project.queries.GetProjectByIdQuery.apply
+        </td>
+        <td>
+          project.projectvalidatortest
+        </td>
+        <td style="background: #AEF1AE">
+          project.queries.GetProjectByIdQuery.apply(command.projectId)
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          87
+        </td>
+        <td>
+          481
+          -
+          498
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          project.commands.CreateProjectCommand.projectId
+        </td>
+        <td>
+          project.projectvalidatortest
+        </td>
+        <td style="background: #AEF1AE">
+          command.projectId
+        </td>
+      </tr><tr>
+        <td>
+          14
+        </td>
+        <td>
+          92
+        </td>
+        <td>
+          512
+          -
+          512
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.concurrent.ExecutionContext.Implicits.global
+        </td>
+        <td>
+          project.projectvalidatortest
+        </td>
+        <td style="background: #AEF1AE">
+          scala.concurrent.ExecutionContext.Implicits.global
+        </td>
+      </tr><tr>
+        <td>
+          14
+        </td>
+        <td>
+          93
+        </td>
+        <td>
+          440
+          -
+          607
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          scala.concurrent.Future.map
+        </td>
+        <td>
+          project.projectvalidatortest
+        </td>
+        <td style="background: #AEF1AE">
+          ProjectValidator.this.aggregate.getProject(project.queries.GetProjectByIdQuery.apply(command.projectId)).map[Either[authentication.Error,project.commands.CreateProjectCommand]](((x0$1: Option[project.Project]) =&gt; x0$1 match {
+  case (value: project.Project): Some[project.Project](_) =&gt; scala.`package`.Left.apply[authentication.DuplicatedProjectId.type, Nothing](authentication.DuplicatedProjectId)
+  case scala.None =&gt; scala.`package`.Right.apply[Nothing, project.commands.CreateProjectCommand](command)
+}))(scala.concurrent.ExecutionContext.Implicits.global)
+        </td>
+      </tr><tr>
+        <td>
+          15
+        </td>
+        <td>
+          89
+        </td>
+        <td>
+          543
+          -
+          562
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          authentication.DuplicatedProjectId
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          authentication.DuplicatedProjectId
+        </td>
+      </tr><tr>
+        <td>
+          15
+        </td>
+        <td>
+          90
+        </td>
+        <td>
+          538
+          -
+          563
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.util.Left.apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          scala.`package`.Left.apply[authentication.DuplicatedProjectId.type, Nothing](authentication.DuplicatedProjectId)
+        </td>
+      </tr><tr>
+        <td>
+          16
+        </td>
+        <td>
+          91
+        </td>
+        <td>
+          585
+          -
+          599
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.util.Right.apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          scala.`package`.Right.apply[Nothing, project.commands.CreateProjectCommand](command)
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>

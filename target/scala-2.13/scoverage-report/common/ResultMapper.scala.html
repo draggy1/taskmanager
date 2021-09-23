@@ -1,0 +1,369 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          common/ResultMapper.scala.html
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier, monospace;'>1 <span style=''>package common
+</span>2 <span style=''>
+</span>3 <span style=''>import authentication.Error
+</span>4 <span style=''>import play.api.http.Status
+</span>5 <span style=''>import play.api.mvc.Result
+</span>6 <span style=''>import play.api.mvc.Results.{BadRequest, InternalServerError, Unauthorized}
+</span>7 <span style=''>
+</span>8 <span style=''>case object ResultMapper{
+</span>9 <span style=''>  def mapErrorToResult(error: Error): Result =
+</span>10 <span style=''>    </span><span style='background: #AEF1AE'>error.statusToReturn</span><span style=''> match {
+</span>11 <span style=''>      case Status.BAD_REQUEST =&gt; </span><span style='background: #AEF1AE'>BadRequest(error.message)</span><span style=''>
+</span>12 <span style=''>      case Status.UNAUTHORIZED =&gt; </span><span style='background: #F0ADAD'>Unauthorized(error.message)</span><span style=''>
+</span>13 <span style=''>      case _=&gt; </span><span style='background: #F0ADAD'>InternalServerError(error.message)</span><span style=''>
+</span>14 <span style=''>    }
+</span>15 <span style=''>}
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Tests</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          10
+        </td>
+        <td>
+          15
+        </td>
+        <td>
+          253
+          -
+          273
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          authentication.Error.statusToReturn
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          error.statusToReturn
+        </td>
+      </tr><tr>
+        <td>
+          11
+        </td>
+        <td>
+          17
+        </td>
+        <td>
+          325
+          -
+          325
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.mvc.Codec.utf_8
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          mvc.this.Codec.utf_8
+        </td>
+      </tr><tr>
+        <td>
+          11
+        </td>
+        <td>
+          16
+        </td>
+        <td>
+          326
+          -
+          339
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          authentication.Error.message
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          error.message
+        </td>
+      </tr><tr>
+        <td>
+          11
+        </td>
+        <td>
+          19
+        </td>
+        <td>
+          315
+          -
+          340
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.mvc.Results.Status.apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          play.api.mvc.Results.BadRequest.apply[String](error.message)(http.this.Writeable.wString(mvc.this.Codec.utf_8))
+        </td>
+      </tr><tr>
+        <td>
+          11
+        </td>
+        <td>
+          18
+        </td>
+        <td>
+          325
+          -
+          325
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.http.DefaultWriteables.wString
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          http.this.Writeable.wString(mvc.this.Codec.utf_8)
+        </td>
+      </tr><tr>
+        <td>
+          12
+        </td>
+        <td>
+          23
+        </td>
+        <td>
+          375
+          -
+          402
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.mvc.Results.Status.apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          play.api.mvc.Results.Unauthorized.apply[String](error.message)(http.this.Writeable.wString(mvc.this.Codec.utf_8))
+        </td>
+      </tr><tr>
+        <td>
+          12
+        </td>
+        <td>
+          20
+        </td>
+        <td>
+          388
+          -
+          401
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          authentication.Error.message
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          error.message
+        </td>
+      </tr><tr>
+        <td>
+          12
+        </td>
+        <td>
+          22
+        </td>
+        <td>
+          387
+          -
+          387
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.http.DefaultWriteables.wString
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          http.this.Writeable.wString(mvc.this.Codec.utf_8)
+        </td>
+      </tr><tr>
+        <td>
+          12
+        </td>
+        <td>
+          21
+        </td>
+        <td>
+          387
+          -
+          387
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.mvc.Codec.utf_8
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          mvc.this.Codec.utf_8
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          26
+        </td>
+        <td>
+          437
+          -
+          437
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.http.DefaultWriteables.wString
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          http.this.Writeable.wString(mvc.this.Codec.utf_8)
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          25
+        </td>
+        <td>
+          437
+          -
+          437
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          play.api.mvc.Codec.utf_8
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          mvc.this.Codec.utf_8
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          27
+        </td>
+        <td>
+          418
+          -
+          452
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.api.mvc.Results.Status.apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          play.api.mvc.Results.InternalServerError.apply[String](error.message)(http.this.Writeable.wString(mvc.this.Codec.utf_8))
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          24
+        </td>
+        <td>
+          438
+          -
+          451
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          authentication.Error.message
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          error.message
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>

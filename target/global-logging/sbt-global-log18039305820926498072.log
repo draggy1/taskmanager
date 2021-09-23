@@ -1,0 +1,14 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(coverage, Some(478679f0-b44b-4512-a0be-9aad56178f5a), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(;set ThisBuild / coverageEnabled := true, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(set ThisBuild / coverageEnabled := true, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0minfo[0m] [0m[0mDefining ThisBuild / coverageEnabled[0m
+[0m[[0m[0minfo[0m] [0m[0mThe new value will be used by Compile / compile / scalacOptions, libraryDependencies[0m
+[0m[[0m[0mdebug[0m] [0m[0mDefining [0m
+[0m[[0m[0mdebug[0m] [0m[0m	ThisBuild / coverageEnabled[0m
+[0m[[0m[0mdebug[0m] [0m[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mThe new value will be used by [0m
+[0m[[0m[0mdebug[0m] [0m[0m	Compile / compile / scalacOptions[0m
+[0m[[0m[0mdebug[0m] [0m[0m	libraryDependencies[0m
+[0m[[0m[0minfo[0m] [0m[0mReapplying settings...[0m
+[0m[[0m[0minfo[0m] [0m[0mset current project to TaskManager (in build file:/home/kamil/Pulpit/Iterators/taskmanager/)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m

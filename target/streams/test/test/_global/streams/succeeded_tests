@@ -1,0 +1,6 @@
+#Successful Tests
+#Wed Sep 22 20:42:18 CEST 2021
+project.ProjectAggregateTest=1632336138110
+authentication.AuthenticationHandlerTest=1632336137596
+project.ProjectValidatorTest=1632336136997
+controllers.ProjectControllerTest=1632336138038

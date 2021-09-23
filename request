@@ -1,0 +1,160 @@
+docker run --name local-mongodb -d -p 27017:27017 -v ~/data:/data/db mongo
+docker rm -f $(docker ps -a -q)
+
+Create project with:
+{
+  "project_id": "some_project_id"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoiSm9obl9Eb2UifQ.SpDmrxXN9E4UjJAX7bio8ZcpiKEPU8mFj9cA6ZNQaYE" -X POST http://localhost:8080/project/create
+
+
+Create project with:
+{
+  "user_id": "e54e5692-60d3-4c84-a251-66aa998d7cb1"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IxIn0.YZ9Aww3V4qAL9ND7vJqmDN7Qm9DO45-AOKda0QQ50J0" -X POST http://localhost:8080/project/create
+
+Create project with:
+{
+  "user_id": "e54e5692-60d3-4c84-a251-66aa998d7cb1",
+  "project_id": ""
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IxIiwicHJvamVjdF9pZCI6IiJ9.oYsMYwtP7fV5VLWGPMieSGxa-vgNeUz9FszUCSuFF_s" -X POST http://localhost:8080/project/create
+
+Create project with:
+{
+  "user_id": "John Doe",
+  "project_id": "some_project_id"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiSm9obiBEb2UiLCJwcm9qZWN0X2lkIjoic29tZV9wcm9qZWN0X2lkIn0.xvDatlSI24SJFLFhFJ7fy9iKPGYFh6huPYTTdPjFp28" -X POST http://localhost:8080/project/create
+
+Create project with:
+{
+  "user_id": "e54e5692-60d3-4c84-a251-66aa998d7cb1",
+  "project_id": "unique_project_id_1"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IxIiwicHJvamVjdF9pZCI6InVuaXF1ZV9wcm9qZWN0X2lkXzEifQ.M-8tT9Wwl-_hFy67E2CkTQSzXqZDdBYRftmzwDO6sMc" -X POST http://localhost:8080/project/create
+
+Create project with:
+{
+  "user_id": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
+  "project_id": "unique_project_id_2"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IxIiwicHJvamVjdF9pZCI6InVuaXF1ZV9wcm9qZWN0X2lkXzIifQ.kN-Oc6lVQPFj2nDLXL4KSj2zaJHc53kvnge8aECHpIo" -X POST http://localhost:8080/project/create
+
+Create project with:
+{
+  "user_id": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
+  "project_id": "kulo"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwicHJvamVjdF9pZCI6Imt1bG8ifQ.fDy5g-hM2ynzwwcHXDAjjl4B4wmEMRxzEjsgYvxvA5A" -X POST http://localhost:8080/project/create
+
+Update project:
+{
+  "user_id": "e54e5692-60d3-4c84-a251-66aa998d7cb1",
+  "old_project_id": "unique_project_id_to_update",
+  "new_project_id": "new_project_id" 
+}
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IxIiwib2xkX3Byb2plY3RfaWQiOiJ1bmlxdWVfcHJvamVjdF9pZF90b191cGRhdGUiLCJuZXdfcHJvamVjdF9pZCI6Im5ld19wcm9qZWN0X2lkIn0.ZSgy8TT_siP1LpRKytUDfjwRHC33A6Ecv8Gqer7Ne_8" -X PUT http://localhost:8080/project/edit
+
+Update project:
+{
+  "user_id": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
+  "old_project_id": "new_project_id",
+  "new_project_id": "new_project_id2" 
+}
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwib2xkX3Byb2plY3RfaWQiOiJuZXdfcHJvamVjdF9pZCIsIm5ld19wcm9qZWN0X2lkIjoibmV3X3Byb2plY3RfaWQyIn0.8mLq9AbtgBQQS_abiGrhPW6j-iUhN0voHyD2RWdw1dI" -X PUT http://localhost:8080/project/edit
+
+Create task:
+{
+  "user_id": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
+  "project_id": "new_project_id",
+  "start": "20-06-2021 08:03",
+  "period": {
+    "value": 30,
+    "time_unit": "minutes"	 	
+  },
+  "volume": 12,
+  "comment": "Example comment"		
+}
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwicHJvamVjdF9pZCI6Im5ld19wcm9qZWN0X2lkIiwic3RhcnQiOiIxMS4xNS4yMDIxIDA4OjAwOjAwIiwicGVyaW9kIjp7InZhbHVlIjozMCwidGltZV91bml0IjoibWludXRlcyJ9LCJ2b2x1bWUiOjEyLCJjb21tZW50IjoiRXhhbXBsZSBjb21tZW50In0.VYMxrLfZbG850tkMk5Qa35Y1wCODZQx4pUwW4UBCVfw" -X POST http://localhost:8080/tasks/create
+
+Create task:
+{
+  "user_id": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
+  "project_id": "new_project_id",
+  "start": "11.15.2021 08:15:00",
+  "period": {
+    "value": 30,
+    "time_unit": "minutes"
+  },
+  "volume": 12,
+  "comment": "Example comment"
+}
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwicHJvamVjdF9pZCI6Im5ld19wcm9qZWN0X2lkIiwic3RhcnQiOiIxMS4xNS4yMDIxIDA4OjE1OjAwIiwicGVyaW9kIjp7InZhbHVlIjozMCwidGltZV91bml0IjoibWludXRlcyJ9LCJ2b2x1bWUiOjEyLCJjb21tZW50IjoiRXhhbXBsZSBjb21tZW50In0.9cxNAvoJ6ZCnLOU1-JnpIyHd8KFfk1PtB7Ec1PUGv80" -X POST http://localhost:8080/tasks/create
+
+Create task:
+{
+  "user_id": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
+  "project_id": "new_project_id",
+  "start": "11.15.2021 07:45:00",
+  "period": {
+    "value": 30,
+    "time_unit": "minutes"
+  },
+  "volume": 12,
+  "comment": "Example comment"
+}
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwicHJvamVjdF9pZCI6Im5ld19wcm9qZWN0X2lkIiwic3RhcnQiOiIxMS4xNS4yMDIxIDA3OjQ1OjAwIiwicGVyaW9kIjp7InZhbHVlIjozMCwidGltZV91bml0IjoibWludXRlcyJ9LCJ2b2x1bWUiOjEyLCJjb21tZW50IjoiRXhhbXBsZSBjb21tZW50In0.GSoFQhuaLsUMjBQdg6X6YQAecxFQT9PyYZdW49Baryg" -X POST http://localhost:8080/tasks/create
+
+Create task:
+{
+  "user_id": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
+  "project_id": "new_project_id",
+  "start": "11.15.2021 07:00:00",
+  "period": {
+    "value": 30,
+    "time_unit": "minutes"
+  },
+  "volume": 12,
+  "comment": "Example comment"
+}
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwicHJvamVjdF9pZCI6Im5ld19wcm9qZWN0X2lkIiwic3RhcnQiOiIxMS4xNS4yMDIxIDA3OjAwOjAwIiwicGVyaW9kIjp7InZhbHVlIjozMCwidGltZV91bml0IjoibWludXRlcyJ9LCJ2b2x1bWUiOjEyLCJjb21tZW50IjoiRXhhbXBsZSBjb21tZW50In0.NDkau92J6sZobUwn1gO4GkeMIpp0WYSGZn52TuAyXRE" -X POST http://localhost:8080/tasks/create
+
+Create task:
+{
+  "user_id": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
+  "project_id": "new_project_id",
+  "start": "11.15.2021 07:00:00",
+  "period": {
+    "value": 30,
+    "time_unit": "minutes"
+  },
+  "volume": 12,
+  "comment": "Example comment"
+}
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwicHJvamVjdF9pZCI6Im5ld19wcm9qZWN0X2lkIiwic3RhcnQiOiIxMS4xNS4yMDIxIDA5OjAwOjAwIiwicGVyaW9kIjp7InZhbHVlIjozMCwidGltZV91bml0IjoibWludXRlcyJ9LCJ2b2x1bWUiOjEyLCJjb21tZW50IjoiRXhhbXBsZSBjb21tZW50In0.Kyf3Z-513NYluExQ9XoiPoQ05-u0q5c51snftosrMM8" -X POST http://localhost:8080/tasks/create
+
+Create task:
+
+{
+  "user_id": "e54e5692-60d3-4c84-a251-66aa998d7cb3",
+  "project_id": "new_project_id",
+  "start": "11.15.2021 07:45:00",
+  "period": {
+    "value": 30,
+    "time_unit": "minutes"
+  },
+  "volume": 12,
+  "comment": "Example comment"
+}
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IzIiwicHJvamVjdF9pZCI6Im5ld19wcm9qZWN0X2lkIiwic3RhcnQiOiIxMS4xNS4yMDIxIDA3OjQ1OjAwIiwicGVyaW9kIjp7InZhbHVlIjozMCwidGltZV91bml0IjoibWludXRlcyJ9LCJ2b2x1bWUiOjEyLCJjb21tZW50IjoiRXhhbXBsZSBjb21tZW50In0.sBG20hTAFcVlWd_TLgZcss7awPMArZkZ2lS6SN_JM9o" -X POST http://localhost:8080/tasks/create
+
+

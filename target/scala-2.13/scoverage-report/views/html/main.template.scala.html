@@ -1,0 +1,736 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          views/html/main.template.scala.html
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier, monospace;'>1 <span style=''>
+</span>2 <span style=''>package views.html
+</span>3 <span style=''>
+</span>4 <span style=''>import _root_.play.twirl.api.TwirlFeatureImports._
+</span>5 <span style=''>import _root_.play.twirl.api.TwirlHelperImports._
+</span>6 <span style=''>import _root_.play.twirl.api.Html
+</span>7 <span style=''>import _root_.play.twirl.api.JavaScript
+</span>8 <span style=''>import _root_.play.twirl.api.Txt
+</span>9 <span style=''>import _root_.play.twirl.api.Xml
+</span>10 <span style=''>import models._
+</span>11 <span style=''>import controllers._
+</span>12 <span style=''>import play.api.i18n._
+</span>13 <span style=''>import views.html._
+</span>14 <span style=''>import play.api.templates.PlayMagic._
+</span>15 <span style=''>import play.api.mvc._
+</span>16 <span style=''>import play.api.data._
+</span>17 <span style=''>
+</span>18 <span style=''>object main extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[String,Html,play.twirl.api.HtmlFormat.Appendable] {
+</span>19 <span style=''>
+</span>20 <span style=''>  /*
+</span>21 <span style=''> * This template is called from the `index` template. This template
+</span>22 <span style=''> * handles the rendering of the page header and body tags. It takes
+</span>23 <span style=''> * two arguments, a `String` for the title of the page and an `Html`
+</span>24 <span style=''> * object to insert into the body of the page.
+</span>25 <span style=''> */
+</span>26 <span style=''>  def apply/*7.2*/(title: String)(content: Html):play.twirl.api.HtmlFormat.Appendable = {
+</span>27 <span style=''>    </span><span style='background: #F0ADAD'>_display_ {
+</span>28 <span style=''></span><span style='background: #F0ADAD'>      {
+</span>29 <span style=''></span><span style='background: #F0ADAD'>
+</span>30 <span style=''></span><span style='background: #F0ADAD'>
+</span>31 <span style=''></span><span style='background: #F0ADAD'>Seq[Any](format.raw/*8.1*/(&quot;&quot;&quot;
+</span>32 <span style=''></span><span style='background: #F0ADAD'>&quot;&quot;&quot;),format.raw/*9.1*/(&quot;&quot;&quot;&lt;!DOCTYPE html&gt;
+</span>33 <span style=''></span><span style='background: #F0ADAD'>&lt;html lang=&quot;en&quot;&gt;
+</span>34 <span style=''></span><span style='background: #F0ADAD'>    &lt;head&gt;
+</span>35 <span style=''></span><span style='background: #F0ADAD'>        &quot;&quot;&quot;),format.raw/*12.62*/(&quot;&quot;&quot;
+</span>36 <span style=''></span><span style='background: #F0ADAD'>        &quot;&quot;&quot;),format.raw/*13.9*/(&quot;&quot;&quot;&lt;title&gt;&quot;&quot;&quot;),_display_(/*13.17*/title),format.raw/*13.22*/(&quot;&quot;&quot;&lt;/title&gt;
+</span>37 <span style=''></span><span style='background: #F0ADAD'>        &lt;link rel=&quot;stylesheet&quot; media=&quot;screen&quot; href=&quot;&quot;&quot;&quot;),_display_(/*14.54*/routes/*14.60*/.Assets.versioned(&quot;stylesheets/main.css&quot;)),format.raw/*14.101*/(&quot;&quot;&quot;&quot;&gt;
+</span>38 <span style=''></span><span style='background: #F0ADAD'>        &lt;link rel=&quot;shortcut icon&quot; type=&quot;image/png&quot; href=&quot;&quot;&quot;&quot;),_display_(/*15.59*/routes/*15.65*/.Assets.versioned(&quot;images/favicon.png&quot;)),format.raw/*15.104*/(&quot;&quot;&quot;&quot;&gt;
+</span>39 <span style=''></span><span style='background: #F0ADAD'>
+</span>40 <span style=''></span><span style='background: #F0ADAD'>    &lt;/head&gt;
+</span>41 <span style=''></span><span style='background: #F0ADAD'>    &lt;body&gt;
+</span>42 <span style=''></span><span style='background: #F0ADAD'>        &quot;&quot;&quot;),format.raw/*20.32*/(&quot;&quot;&quot;
+</span>43 <span style=''></span><span style='background: #F0ADAD'>        &quot;&quot;&quot;),_display_(/*21.10*/content),format.raw/*21.17*/(&quot;&quot;&quot;
+</span>44 <span style=''></span><span style='background: #F0ADAD'>
+</span>45 <span style=''></span><span style='background: #F0ADAD'>      &quot;&quot;&quot;),format.raw/*23.7*/(&quot;&quot;&quot;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*23.21*/routes/*23.27*/.Assets.versioned(&quot;javascripts/main.js&quot;)),format.raw/*23.67*/(&quot;&quot;&quot;&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+</span>46 <span style=''></span><span style='background: #F0ADAD'>    &lt;/body&gt;
+</span>47 <span style=''></span><span style='background: #F0ADAD'>&lt;/html&gt;
+</span>48 <span style=''></span><span style='background: #F0ADAD'>&quot;&quot;&quot;))
+</span>49 <span style=''></span><span style='background: #F0ADAD'>      }
+</span>50 <span style=''></span><span style='background: #F0ADAD'>    }</span><span style=''>
+</span>51 <span style=''>  }
+</span>52 <span style=''>
+</span>53 <span style=''>  def render(title:String,content:Html): play.twirl.api.HtmlFormat.Appendable = </span><span style='background: #F0ADAD'>apply(title)(content)</span><span style=''>
+</span>54 <span style=''>
+</span>55 <span style=''>  def f:((String) =&gt; (Html) =&gt; play.twirl.api.HtmlFormat.Appendable) = (title) =&gt; (content) =&gt; </span><span style='background: #F0ADAD'>apply(title)(content)</span><span style=''>
+</span>56 <span style=''>
+</span>57 <span style=''>  def ref: this.type = this
+</span>58 <span style=''>
+</span>59 <span style=''>}
+</span>60 <span style=''>
+</span>61 <span style=''>
+</span>62 <span style=''>              /*
+</span>63 <span style=''>                  -- GENERATED --
+</span>64 <span style=''>                  SOURCE: app/views/main.scala.html
+</span>65 <span style=''>                  HASH: 52352176f1a784d96e62964e439264b508b87d6f
+</span>66 <span style=''>                  MATRIX: 987-&gt;260|1111-&gt;291|1138-&gt;292|1218-&gt;397|1254-&gt;406|1289-&gt;414|1315-&gt;419|1404-&gt;481|1419-&gt;487|1482-&gt;528|1570-&gt;589|1585-&gt;595|1646-&gt;634|1709-&gt;759|1746-&gt;769|1774-&gt;776|1809-&gt;784|1850-&gt;798|1865-&gt;804|1926-&gt;844
+</span>67 <span style=''>                  LINES: 26-&gt;7|31-&gt;8|32-&gt;9|35-&gt;12|36-&gt;13|36-&gt;13|36-&gt;13|37-&gt;14|37-&gt;14|37-&gt;14|38-&gt;15|38-&gt;15|38-&gt;15|42-&gt;20|43-&gt;21|43-&gt;21|45-&gt;23|45-&gt;23|45-&gt;23|45-&gt;23
+</span>68 <span style=''>                  -- GENERATED --
+</span>69 <span style=''>              */
+</span>70 <span style=''>          
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Tests</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          27
+        </td>
+        <td>
+          245
+        </td>
+        <td>
+          1063
+          -
+          2004
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this._display_(scala.`package`.Seq.apply[Any](main.this.format.raw(&quot;\n&quot;), main.this.format.raw(&quot;&lt;!DOCTYPE html&gt;\n&lt;html lang=\&quot;en\&quot;&gt;\n    &lt;head&gt;\n        &quot;), main.this.format.raw(&quot;\n        &quot;), main.this.format.raw(&quot;&lt;title&gt;&quot;), main.this._display_(title), main.this.format.raw(&quot;&lt;/title&gt;\n        &lt;link rel=\&quot;stylesheet\&quot; media=\&quot;screen\&quot; href=\&quot;&quot;), main.this._display_(controllers.routes.Assets.versioned(Assets.this.Asset.string2Asset(&quot;stylesheets/main.css&quot;)))((ClassTag.apply[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]): scala.reflect.ClassTag[play.twirl.api.HtmlFormat.Appendable])), main.this.format.raw(&quot;\&quot;&gt;\n        &lt;link rel=\&quot;shortcut icon\&quot; type=\&quot;image/png\&quot; href=\&quot;&quot;), main.this._display_(controllers.routes.Assets.versioned(Assets.this.Asset.string2Asset(&quot;images/favicon.png&quot;)))((ClassTag.apply[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]): scala.reflect.ClassTag[play.twirl.api.HtmlFormat.Appendable])), main.this.format.raw(&quot;\&quot;&gt;\n\n    &lt;/head&gt;\n    &lt;body&gt;\n        &quot;), main.this.format.raw(&quot;\n        &quot;), main.this._display_(content), main.this.format.raw(&quot;\n\n      &quot;), main.this.format.raw(&quot;&lt;script src=\&quot;&quot;), main.this._display_(controllers.routes.Assets.versioned(Assets.this.Asset.string2Asset(&quot;javascripts/main.js&quot;)))((ClassTag.apply[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]): scala.reflect.ClassTag[play.twirl.api.HtmlFormat.Appendable])), main.this.format.raw(&quot;\&quot; type=\&quot;text/javascript\&quot;&gt;&lt;/script&gt;\n    &lt;/body&gt;\n&lt;/html&gt;\n&quot;)))((ClassTag.apply[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]): scala.reflect.ClassTag[play.twirl.api.HtmlFormat.Appendable]))
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          244
+        </td>
+        <td>
+          1085
+          -
+          1990
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.collection.SeqFactory.Delegate.apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          scala.`package`.Seq.apply[Any](main.this.format.raw(&quot;\n&quot;), main.this.format.raw(&quot;&lt;!DOCTYPE html&gt;\n&lt;html lang=\&quot;en\&quot;&gt;\n    &lt;head&gt;\n        &quot;), main.this.format.raw(&quot;\n        &quot;), main.this.format.raw(&quot;&lt;title&gt;&quot;), main.this._display_(title), main.this.format.raw(&quot;&lt;/title&gt;\n        &lt;link rel=\&quot;stylesheet\&quot; media=\&quot;screen\&quot; href=\&quot;&quot;), main.this._display_(controllers.routes.Assets.versioned(Assets.this.Asset.string2Asset(&quot;stylesheets/main.css&quot;)))((ClassTag.apply[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]): scala.reflect.ClassTag[play.twirl.api.HtmlFormat.Appendable])), main.this.format.raw(&quot;\&quot;&gt;\n        &lt;link rel=\&quot;shortcut icon\&quot; type=\&quot;image/png\&quot; href=\&quot;&quot;), main.this._display_(controllers.routes.Assets.versioned(Assets.this.Asset.string2Asset(&quot;images/favicon.png&quot;)))((ClassTag.apply[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]): scala.reflect.ClassTag[play.twirl.api.HtmlFormat.Appendable])), main.this.format.raw(&quot;\&quot;&gt;\n\n    &lt;/head&gt;\n    &lt;body&gt;\n        &quot;), main.this.format.raw(&quot;\n        &quot;), main.this._display_(content), main.this.format.raw(&quot;\n\n      &quot;), main.this.format.raw(&quot;&lt;script src=\&quot;&quot;), main.this._display_(controllers.routes.Assets.versioned(Assets.this.Asset.string2Asset(&quot;javascripts/main.js&quot;)))((ClassTag.apply[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]): scala.reflect.ClassTag[play.twirl.api.HtmlFormat.Appendable])), main.this.format.raw(&quot;\&quot; type=\&quot;text/javascript\&quot;&gt;&lt;/script&gt;\n    &lt;/body&gt;\n&lt;/html&gt;\n&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          222
+        </td>
+        <td>
+          1094
+          -
+          1120
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this.format.raw(&quot;\n&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          223
+        </td>
+        <td>
+          1121
+          -
+          1198
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this.format.raw(&quot;&lt;!DOCTYPE html&gt;\n&lt;html lang=\&quot;en\&quot;&gt;\n    &lt;head&gt;\n        &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          35
+        </td>
+        <td>
+          224
+        </td>
+        <td>
+          1199
+          -
+          1235
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this.format.raw(&quot;\n        &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          36
+        </td>
+        <td>
+          227
+        </td>
+        <td>
+          1296
+          -
+          1384
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this.format.raw(&quot;&lt;/title&gt;\n        &lt;link rel=\&quot;stylesheet\&quot; media=\&quot;screen\&quot; href=\&quot;&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          36
+        </td>
+        <td>
+          226
+        </td>
+        <td>
+          1270
+          -
+          1295
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this._display_(title)
+        </td>
+      </tr><tr>
+        <td>
+          36
+        </td>
+        <td>
+          225
+        </td>
+        <td>
+          1236
+          -
+          1269
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this.format.raw(&quot;&lt;title&gt;&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          229
+        </td>
+        <td>
+          1404
+          -
+          1460
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          controllers.ReverseAssets.versioned
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          controllers.routes.Assets.versioned(Assets.this.Asset.string2Asset(&quot;stylesheets/main.css&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          228
+        </td>
+        <td>
+          1437
+          -
+          1459
+        </td>
+        <td>
+          ApplyImplicitView
+        </td>
+        <td>
+          controllers.Assets.Asset.string2Asset
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          Assets.this.Asset.string2Asset(&quot;stylesheets/main.css&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          231
+        </td>
+        <td>
+          1462
+          -
+          1550
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this.format.raw(&quot;\&quot;&gt;\n        &lt;link rel=\&quot;shortcut icon\&quot; type=\&quot;image/png\&quot; href=\&quot;&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          230
+        </td>
+        <td>
+          1385
+          -
+          1461
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this._display_(controllers.routes.Assets.versioned(Assets.this.Asset.string2Asset(&quot;stylesheets/main.css&quot;)))((ClassTag.apply[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]): scala.reflect.ClassTag[play.twirl.api.HtmlFormat.Appendable]))
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          235
+        </td>
+        <td>
+          1626
+          -
+          1689
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this.format.raw(&quot;\&quot;&gt;\n\n    &lt;/head&gt;\n    &lt;body&gt;\n        &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          232
+        </td>
+        <td>
+          1603
+          -
+          1623
+        </td>
+        <td>
+          ApplyImplicitView
+        </td>
+        <td>
+          controllers.Assets.Asset.string2Asset
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          Assets.this.Asset.string2Asset(&quot;images/favicon.png&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          234
+        </td>
+        <td>
+          1551
+          -
+          1625
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this._display_(controllers.routes.Assets.versioned(Assets.this.Asset.string2Asset(&quot;images/favicon.png&quot;)))((ClassTag.apply[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]): scala.reflect.ClassTag[play.twirl.api.HtmlFormat.Appendable]))
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          233
+        </td>
+        <td>
+          1570
+          -
+          1624
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          controllers.ReverseAssets.versioned
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          controllers.routes.Assets.versioned(Assets.this.Asset.string2Asset(&quot;images/favicon.png&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          42
+        </td>
+        <td>
+          236
+        </td>
+        <td>
+          1690
+          -
+          1726
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this.format.raw(&quot;\n        &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          43
+        </td>
+        <td>
+          238
+        </td>
+        <td>
+          1755
+          -
+          1790
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this.format.raw(&quot;\n\n      &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          43
+        </td>
+        <td>
+          237
+        </td>
+        <td>
+          1727
+          -
+          1754
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this._display_(content)
+        </td>
+      </tr><tr>
+        <td>
+          45
+        </td>
+        <td>
+          241
+        </td>
+        <td>
+          1850
+          -
+          1905
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          controllers.ReverseAssets.versioned
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          controllers.routes.Assets.versioned(Assets.this.Asset.string2Asset(&quot;javascripts/main.js&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          45
+        </td>
+        <td>
+          240
+        </td>
+        <td>
+          1883
+          -
+          1904
+        </td>
+        <td>
+          ApplyImplicitView
+        </td>
+        <td>
+          controllers.Assets.Asset.string2Asset
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          Assets.this.Asset.string2Asset(&quot;javascripts/main.js&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          45
+        </td>
+        <td>
+          243
+        </td>
+        <td>
+          1907
+          -
+          1989
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this.format.raw(&quot;\&quot; type=\&quot;text/javascript\&quot;&gt;&lt;/script&gt;\n    &lt;/body&gt;\n&lt;/html&gt;\n&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          45
+        </td>
+        <td>
+          239
+        </td>
+        <td>
+          1791
+          -
+          1830
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          play.twirl.api.Format.raw
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this.format.raw(&quot;&lt;script src=\&quot;&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          45
+        </td>
+        <td>
+          242
+        </td>
+        <td>
+          1831
+          -
+          1906
+        </td>
+        <td>
+          ApplyToImplicitArgs
+        </td>
+        <td>
+          play.twirl.api.BaseScalaTemplate._display_
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this._display_(controllers.routes.Assets.versioned(Assets.this.Asset.string2Asset(&quot;javascripts/main.js&quot;)))((ClassTag.apply[play.twirl.api.HtmlFormat.Appendable](classOf[play.twirl.api.Html]): scala.reflect.ClassTag[play.twirl.api.HtmlFormat.Appendable]))
+        </td>
+      </tr><tr>
+        <td>
+          53
+        </td>
+        <td>
+          246
+        </td>
+        <td>
+          2090
+          -
+          2111
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          views.html.main.apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this.apply(title)(content)
+        </td>
+      </tr><tr>
+        <td>
+          55
+        </td>
+        <td>
+          247
+        </td>
+        <td>
+          2208
+          -
+          2229
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          views.html.main.apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          main.this.apply(title)(content)
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>

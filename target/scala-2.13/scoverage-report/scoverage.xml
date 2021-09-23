@@ -1,0 +1,1075 @@
+<scoverage 
+statement-count="247" statements-invoked="78" statement-rate="31.58" branch-rate="0.00" version="1.0" timestamp="1632336166686">
+    <packages>
+        <package name="authentication" statement-count="14" statements-invoked="14" statement-rate="100.00">
+            <classes>
+                <class 
+                name="authentication.AuthenticationHandler" filename="authentication/AuthenticationHandler.scala" statement-count="14" statements-invoked="14" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="authentication/AuthenticationHandler/&lt;none&gt;" statement-count="10" statements-invoked="10" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="authentication" class="AuthenticationHandler" class-type="Class" full-class-name="authentication.AuthenticationHandler" source="/home/kamil/Pulpit/Iterators/taskmanager/app/authentication/AuthenticationHandler.scala" method="&lt;none&gt;" start="711" end="730" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="authentication" class="AuthenticationHandler" class-type="Class" full-class-name="authentication.AuthenticationHandler" source="/home/kamil/Pulpit/Iterators/taskmanager/app/authentication/AuthenticationHandler.scala" method="&lt;none&gt;" start="901" end="910" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="authentication" class="AuthenticationHandler" class-type="Class" full-class-name="authentication.AuthenticationHandler" source="/home/kamil/Pulpit/Iterators/taskmanager/app/authentication/AuthenticationHandler.scala" method="&lt;none&gt;" start="573" end="598" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="authentication" class="AuthenticationHandler" class-type="Class" full-class-name="authentication.AuthenticationHandler" source="/home/kamil/Pulpit/Iterators/taskmanager/app/authentication/AuthenticationHandler.scala" method="&lt;none&gt;" start="883" end="1004" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="authentication" class="AuthenticationHandler" class-type="Class" full-class-name="authentication.AuthenticationHandler" source="/home/kamil/Pulpit/Iterators/taskmanager/app/authentication/AuthenticationHandler.scala" method="&lt;none&gt;" start="912" end="935" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="authentication" class="AuthenticationHandler" class-type="Class" full-class-name="authentication.AuthenticationHandler" source="/home/kamil/Pulpit/Iterators/taskmanager/app/authentication/AuthenticationHandler.scala" method="&lt;none&gt;" start="670" end="694" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="authentication" class="AuthenticationHandler" class-type="Class" full-class-name="authentication.AuthenticationHandler" source="/home/kamil/Pulpit/Iterators/taskmanager/app/authentication/AuthenticationHandler.scala" method="&lt;none&gt;" start="843" end="855" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="authentication" class="AuthenticationHandler" class-type="Class" full-class-name="authentication.AuthenticationHandler" source="/home/kamil/Pulpit/Iterators/taskmanager/app/authentication/AuthenticationHandler.scala" method="&lt;none&gt;" start="553" end="731" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="authentication" class="AuthenticationHandler" class-type="Class" full-class-name="authentication.AuthenticationHandler" source="/home/kamil/Pulpit/Iterators/taskmanager/app/authentication/AuthenticationHandler.scala" method="&lt;none&gt;" start="916" end="934" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="authentication" class="AuthenticationHandler" class-type="Class" full-class-name="authentication.AuthenticationHandler" source="/home/kamil/Pulpit/Iterators/taskmanager/app/authentication/AuthenticationHandler.scala" method="&lt;none&gt;" start="641" end="653" line="19" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="authentication/AuthenticationHandler/secretKey" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="authentication" class="AuthenticationHandler" class-type="Class" full-class-name="authentication.AuthenticationHandler" source="/home/kamil/Pulpit/Iterators/taskmanager/app/authentication/AuthenticationHandler.scala" method="secretKey" start="315" end="315" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="authentication" class="AuthenticationHandler" class-type="Class" full-class-name="authentication.AuthenticationHandler" source="/home/kamil/Pulpit/Iterators/taskmanager/app/authentication/AuthenticationHandler.scala" method="secretKey" start="316" end="328" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="authentication" class="AuthenticationHandler" class-type="Class" full-class-name="authentication.AuthenticationHandler" source="/home/kamil/Pulpit/Iterators/taskmanager/app/authentication/AuthenticationHandler.scala" method="secretKey" start="297" end="329" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="authentication/AuthenticationHandler/performWithAuthentication" statement-count="1" statements-invoked="1" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="authentication" class="AuthenticationHandler" class-type="Class" full-class-name="authentication.AuthenticationHandler" source="/home/kamil/Pulpit/Iterators/taskmanager/app/authentication/AuthenticationHandler.scala" method="performWithAuthentication" start="423" end="484" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+        <package name="common" statement-count="13" statements-invoked="5" statement-rate="38.46">
+            <classes>
+                <class 
+                name="common.ResultMapper" filename="common/ResultMapper.scala" statement-count="13" statements-invoked="5" statement-rate="38.46" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="common/ResultMapper/mapErrorToResult" statement-count="13" statements-invoked="5" statement-rate="38.46" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="common" class="ResultMapper" class-type="Object" full-class-name="common.ResultMapper" source="/home/kamil/Pulpit/Iterators/taskmanager/app/common/ResultMapper.scala" method="mapErrorToResult" start="375" end="402" line="12" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="common" class="ResultMapper" class-type="Object" full-class-name="common.ResultMapper" source="/home/kamil/Pulpit/Iterators/taskmanager/app/common/ResultMapper.scala" method="mapErrorToResult" start="325" end="325" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="common" class="ResultMapper" class-type="Object" full-class-name="common.ResultMapper" source="/home/kamil/Pulpit/Iterators/taskmanager/app/common/ResultMapper.scala" method="mapErrorToResult" start="437" end="437" line="13" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="common" class="ResultMapper" class-type="Object" full-class-name="common.ResultMapper" source="/home/kamil/Pulpit/Iterators/taskmanager/app/common/ResultMapper.scala" method="mapErrorToResult" start="388" end="401" line="12" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="common" class="ResultMapper" class-type="Object" full-class-name="common.ResultMapper" source="/home/kamil/Pulpit/Iterators/taskmanager/app/common/ResultMapper.scala" method="mapErrorToResult" start="387" end="387" line="12" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="common" class="ResultMapper" class-type="Object" full-class-name="common.ResultMapper" source="/home/kamil/Pulpit/Iterators/taskmanager/app/common/ResultMapper.scala" method="mapErrorToResult" start="326" end="339" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="common" class="ResultMapper" class-type="Object" full-class-name="common.ResultMapper" source="/home/kamil/Pulpit/Iterators/taskmanager/app/common/ResultMapper.scala" method="mapErrorToResult" start="437" end="437" line="13" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="common" class="ResultMapper" class-type="Object" full-class-name="common.ResultMapper" source="/home/kamil/Pulpit/Iterators/taskmanager/app/common/ResultMapper.scala" method="mapErrorToResult" start="315" end="340" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="common" class="ResultMapper" class-type="Object" full-class-name="common.ResultMapper" source="/home/kamil/Pulpit/Iterators/taskmanager/app/common/ResultMapper.scala" method="mapErrorToResult" start="418" end="452" line="13" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="common" class="ResultMapper" class-type="Object" full-class-name="common.ResultMapper" source="/home/kamil/Pulpit/Iterators/taskmanager/app/common/ResultMapper.scala" method="mapErrorToResult" start="325" end="325" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="common" class="ResultMapper" class-type="Object" full-class-name="common.ResultMapper" source="/home/kamil/Pulpit/Iterators/taskmanager/app/common/ResultMapper.scala" method="mapErrorToResult" start="387" end="387" line="12" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="common" class="ResultMapper" class-type="Object" full-class-name="common.ResultMapper" source="/home/kamil/Pulpit/Iterators/taskmanager/app/common/ResultMapper.scala" method="mapErrorToResult" start="253" end="273" line="10" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="common" class="ResultMapper" class-type="Object" full-class-name="common.ResultMapper" source="/home/kamil/Pulpit/Iterators/taskmanager/app/common/ResultMapper.scala" method="mapErrorToResult" start="438" end="451" line="13" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+        <package name="configuration" statement-count="2" statements-invoked="0" statement-rate="0.00">
+            <classes>
+                <class 
+                name="configuration.MongoDbManager" filename="configuration/MongoDbManager.scala" statement-count="2" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="configuration/MongoDbManager/&lt;none&gt;" statement-count="2" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="configuration" class="MongoDbManager" class-type="Class" full-class-name="configuration.MongoDbManager" source="/home/kamil/Pulpit/Iterators/taskmanager/app/configuration/MongoDbManager.scala" method="&lt;none&gt;" start="248" end="289" line="10" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="configuration" class="MongoDbManager" class-type="Class" full-class-name="configuration.MongoDbManager" source="/home/kamil/Pulpit/Iterators/taskmanager/app/configuration/MongoDbManager.scala" method="&lt;none&gt;" start="202" end="215" line="9" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+        <package name="controllers" statement-count="47" statements-invoked="19" statement-rate="40.43">
+            <classes>
+                <class 
+                name="controllers.ReverseAssets" filename="controllers/ReverseRoutes.scala" statement-count="12" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="controllers/ReverseAssets/versioned" statement-count="7" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="controllers" class="ReverseAssets" class-type="Class" full-class-name="controllers.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="versioned" start="776" end="781" line="37" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ReverseAssets" class-type="Class" full-class-name="controllers.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="versioned" start="826" end="891" line="37" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ReverseAssets" class-type="Class" full-class-name="controllers.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="versioned" start="771" end="771" line="37" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ReverseAssets" class-type="Class" full-class-name="controllers.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="versioned" start="814" end="823" line="37" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ReverseAssets" class-type="Class" full-class-name="controllers.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="versioned" start="795" end="809" line="37" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ReverseAssets" class-type="Class" full-class-name="controllers.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="versioned" start="783" end="891" line="37" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ReverseAssets" class-type="Class" full-class-name="controllers.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="versioned" start="771" end="892" line="37" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="controllers/ReverseAssets/_defaultPrefix" statement-count="5" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="controllers" class="ReverseAssets" class-type="Class" full-class-name="controllers.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="_defaultPrefix" start="582" end="584" line="30" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ReverseAssets" class-type="Class" full-class-name="controllers.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="_defaultPrefix" start="582" end="584" line="30" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ReverseAssets" class-type="Class" full-class-name="controllers.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="_defaultPrefix" start="590" end="593" line="30" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ReverseAssets" class-type="Class" full-class-name="controllers.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="_defaultPrefix" start="559" end="580" line="30" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ReverseAssets" class-type="Class" full-class-name="controllers.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="_defaultPrefix" start="590" end="593" line="30" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="controllers.ReverseProjectController" filename="controllers/ReverseRoutes.scala" statement-count="9" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="controllers/ReverseProjectController/createProject" statement-count="4" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="controllers" class="ReverseProjectController" class-type="Class" full-class-name="controllers.ReverseProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="createProject" start="385" end="391" line="22" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ReverseProjectController" class-type="Class" full-class-name="controllers.ReverseProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="createProject" start="380" end="441" line="22" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ReverseProjectController" class-type="Class" full-class-name="controllers.ReverseProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="createProject" start="380" end="380" line="22" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ReverseProjectController" class-type="Class" full-class-name="controllers.ReverseProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="createProject" start="393" end="440" line="22" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="controllers/ReverseProjectController/_defaultPrefix" statement-count="5" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="controllers" class="ReverseProjectController" class-type="Class" full-class-name="controllers.ReverseProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="_defaultPrefix" start="296" end="298" line="15" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ReverseProjectController" class-type="Class" full-class-name="controllers.ReverseProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="_defaultPrefix" start="296" end="298" line="15" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ReverseProjectController" class-type="Class" full-class-name="controllers.ReverseProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="_defaultPrefix" start="304" end="307" line="15" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ReverseProjectController" class-type="Class" full-class-name="controllers.ReverseProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="_defaultPrefix" start="273" end="294" line="15" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ReverseProjectController" class-type="Class" full-class-name="controllers.ReverseProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/ReverseRoutes.scala" method="_defaultPrefix" start="304" end="307" line="15" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="controllers.ProjectController" filename="controllers/ProjectController.scala" statement-count="19" statements-invoked="19" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="controllers/ProjectController/&lt;none&gt;" statement-count="11" statements-invoked="11" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="&lt;none&gt;" start="1682" end="1709" line="46" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="&lt;none&gt;" start="1898" end="1937" line="52" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="&lt;none&gt;" start="1426" end="1471" line="41" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="&lt;none&gt;" start="1382" end="1394" line="40" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="&lt;none&gt;" start="1816" end="1941" line="50" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="&lt;none&gt;" start="1616" end="1647" line="45" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="&lt;none&gt;" start="1904" end="1936" line="52" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="&lt;none&gt;" start="1222" end="1268" line="36" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="&lt;none&gt;" start="1827" end="1827" line="50" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="&lt;none&gt;" start="1634" end="1646" line="45" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="&lt;none&gt;" start="1856" end="1868" line="51" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="controllers/ProjectController/createProject" statement-count="8" statements-invoked="8" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="createProject" start="1066" end="1108" line="31" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="createProject" start="833" end="1157" line="24" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="createProject" start="950" end="958" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="createProject" start="1084" end="1107" line="31" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="createProject" start="893" end="1153" line="30" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="createProject" start="921" end="933" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="createProject" start="975" end="997" line="28" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="ProjectController" class-type="Class" full-class-name="controllers.ProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/ProjectController.scala" method="createProject" start="1036" end="1036" line="30" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="controllers.HomeController" filename="controllers/HomeController.scala" statement-count="7" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="controllers/HomeController/index" statement-count="7" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="controllers" class="HomeController" class-type="Class" full-class-name="controllers.HomeController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/HomeController.scala" method="index" start="582" end="582" line="22" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="HomeController" class-type="Class" full-class-name="controllers.HomeController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/HomeController.scala" method="index" start="580" end="602" line="22" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="HomeController" class-type="Class" full-class-name="controllers.HomeController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/HomeController.scala" method="index" start="582" end="582" line="22" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="HomeController" class-type="Class" full-class-name="controllers.HomeController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/HomeController.scala" method="index" start="582" end="582" line="22" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="HomeController" class-type="Class" full-class-name="controllers.HomeController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/HomeController.scala" method="index" start="526" end="606" line="21" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="HomeController" class-type="Class" full-class-name="controllers.HomeController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/HomeController.scala" method="index" start="583" end="601" line="22" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers" class="HomeController" class-type="Class" full-class-name="controllers.HomeController" source="/home/kamil/Pulpit/Iterators/taskmanager/app/controllers/HomeController.scala" method="index" start="582" end="582" line="22" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+        <package name="controllers.javascript" statement-count="16" statements-invoked="0" statement-rate="0.00">
+            <classes>
+                <class 
+                name="controllers.javascript.ReverseProjectController" filename="controllers/javascript/JavaScriptReverseRoutes.scala" statement-count="8" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="controllers.javascript/ReverseProjectController/_defaultPrefix" statement-count="5" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="controllers.javascript" class="ReverseProjectController" class-type="Class" full-class-name="controllers.javascript.ReverseProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/javascript/JavaScriptReverseRoutes.scala" method="_defaultPrefix" start="330" end="332" line="16" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers.javascript" class="ReverseProjectController" class-type="Class" full-class-name="controllers.javascript.ReverseProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/javascript/JavaScriptReverseRoutes.scala" method="_defaultPrefix" start="330" end="332" line="16" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers.javascript" class="ReverseProjectController" class-type="Class" full-class-name="controllers.javascript.ReverseProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/javascript/JavaScriptReverseRoutes.scala" method="_defaultPrefix" start="338" end="341" line="16" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers.javascript" class="ReverseProjectController" class-type="Class" full-class-name="controllers.javascript.ReverseProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/javascript/JavaScriptReverseRoutes.scala" method="_defaultPrefix" start="338" end="341" line="16" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers.javascript" class="ReverseProjectController" class-type="Class" full-class-name="controllers.javascript.ReverseProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/javascript/JavaScriptReverseRoutes.scala" method="_defaultPrefix" start="307" end="328" line="16" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="controllers.javascript/ReverseProjectController/createProject" statement-count="3" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="controllers.javascript" class="ReverseProjectController" class-type="Class" full-class-name="controllers.javascript.ReverseProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/javascript/JavaScriptReverseRoutes.scala" method="createProject" start="445" end="490" line="22" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers.javascript" class="ReverseProjectController" class-type="Class" full-class-name="controllers.javascript.ReverseProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/javascript/JavaScriptReverseRoutes.scala" method="createProject" start="415" end="653" line="21" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers.javascript" class="ReverseProjectController" class-type="Class" full-class-name="controllers.javascript.ReverseProjectController" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/javascript/JavaScriptReverseRoutes.scala" method="createProject" start="498" end="647" line="25" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="controllers.javascript.ReverseAssets" filename="controllers/javascript/JavaScriptReverseRoutes.scala" statement-count="8" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="controllers.javascript/ReverseAssets/_defaultPrefix" statement-count="5" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="controllers.javascript" class="ReverseAssets" class-type="Class" full-class-name="controllers.javascript.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/javascript/JavaScriptReverseRoutes.scala" method="_defaultPrefix" start="797" end="800" line="36" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers.javascript" class="ReverseAssets" class-type="Class" full-class-name="controllers.javascript.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/javascript/JavaScriptReverseRoutes.scala" method="_defaultPrefix" start="789" end="791" line="36" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers.javascript" class="ReverseAssets" class-type="Class" full-class-name="controllers.javascript.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/javascript/JavaScriptReverseRoutes.scala" method="_defaultPrefix" start="797" end="800" line="36" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers.javascript" class="ReverseAssets" class-type="Class" full-class-name="controllers.javascript.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/javascript/JavaScriptReverseRoutes.scala" method="_defaultPrefix" start="789" end="791" line="36" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers.javascript" class="ReverseAssets" class-type="Class" full-class-name="controllers.javascript.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/javascript/JavaScriptReverseRoutes.scala" method="_defaultPrefix" start="766" end="787" line="36" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="controllers.javascript/ReverseAssets/versioned" statement-count="3" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="controllers.javascript" class="ReverseAssets" class-type="Class" full-class-name="controllers.javascript.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/javascript/JavaScriptReverseRoutes.scala" method="versioned" start="939" end="1178" line="45" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers.javascript" class="ReverseAssets" class-type="Class" full-class-name="controllers.javascript.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/javascript/JavaScriptReverseRoutes.scala" method="versioned" start="901" end="931" line="42" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="controllers.javascript" class="ReverseAssets" class-type="Class" full-class-name="controllers.javascript.ReverseAssets" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/controllers/javascript/JavaScriptReverseRoutes.scala" method="versioned" start="871" end="1184" line="41" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+        <package name="project" statement-count="38" statements-invoked="14" statement-rate="36.84">
+            <classes>
+                <class 
+                name="project.ProjectValidator" filename="project/ProjectValidator.scala" statement-count="7" statements-invoked="7" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="project/ProjectValidator/validate" statement-count="7" statements-invoked="7" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="project" class="ProjectValidator" class-type="Class" full-class-name="project.ProjectValidator" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectValidator.scala" method="validate" start="512" end="512" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectValidator" class-type="Class" full-class-name="project.ProjectValidator" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectValidator.scala" method="validate" start="543" end="562" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectValidator" class-type="Class" full-class-name="project.ProjectValidator" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectValidator.scala" method="validate" start="585" end="599" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectValidator" class-type="Class" full-class-name="project.ProjectValidator" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectValidator.scala" method="validate" start="461" end="499" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectValidator" class-type="Class" full-class-name="project.ProjectValidator" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectValidator.scala" method="validate" start="481" end="498" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectValidator" class-type="Class" full-class-name="project.ProjectValidator" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectValidator.scala" method="validate" start="538" end="563" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectValidator" class-type="Class" full-class-name="project.ProjectValidator" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectValidator.scala" method="validate" start="440" end="607" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="project.ProjectRepository" filename="project/ProjectRepository.scala" statement-count="22" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="project/ProjectRepository/create" statement-count="13" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="create" start="1199" end="1199" line="30" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="create" start="1156" end="1182" line="29" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="create" start="1230" end="1230" line="30" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="create" start="1164" end="1181" line="29" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="create" start="1211" end="1248" line="30" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="create" start="1092" end="1121" line="27" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="create" start="1092" end="1251" line="30" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="create" start="1163" end="1163" line="29" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="create" start="1231" end="1247" line="30" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="create" start="1150" end="1150" line="29" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="create" start="1230" end="1230" line="30" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="create" start="1198" end="1198" line="30" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="create" start="1163" end="1163" line="29" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="project/ProjectRepository/find" statement-count="1" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="find" start="1314" end="1399" line="35" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="project/ProjectRepository/&lt;none&gt;" statement-count="8" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="&lt;none&gt;" start="825" end="900" line="21" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="&lt;none&gt;" start="1026" end="1026" line="24" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="&lt;none&gt;" start="854" end="874" line="21" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="&lt;none&gt;" start="877" end="899" line="21" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="&lt;none&gt;" start="1027" end="1036" line="24" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="&lt;none&gt;" start="993" end="1006" line="23" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="&lt;none&gt;" start="954" end="1037" line="24" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectRepository" class-type="Class" full-class-name="project.ProjectRepository" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectRepository.scala" method="&lt;none&gt;" start="840" end="875" line="21" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="project.ProjectAggregate" filename="project/ProjectAggregate.scala" statement-count="7" statements-invoked="5" statement-rate="71.43" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="project/ProjectAggregate/createProject" statement-count="5" statements-invoked="5" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="project" class="ProjectAggregate" class-type="Class" full-class-name="project.ProjectAggregate" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectAggregate.scala" method="createProject" start="413" end="427" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectAggregate" class-type="Class" full-class-name="project.ProjectAggregate" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectAggregate.scala" method="createProject" start="452" end="478" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectAggregate" class-type="Class" full-class-name="project.ProjectAggregate" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectAggregate.scala" method="createProject" start="397" end="411" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectAggregate" class-type="Class" full-class-name="project.ProjectAggregate" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectAggregate.scala" method="createProject" start="389" end="447" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectAggregate" class-type="Class" full-class-name="project.ProjectAggregate" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectAggregate.scala" method="createProject" start="429" end="446" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="project/ProjectAggregate/getProject" statement-count="2" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="project" class="ProjectAggregate" class-type="Class" full-class-name="project.ProjectAggregate" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectAggregate.scala" method="getProject" start="560" end="592" line="18" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="ProjectAggregate" class-type="Class" full-class-name="project.ProjectAggregate" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/ProjectAggregate.scala" method="getProject" start="576" end="591" line="18" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="project.Project" filename="project/Project.scala" statement-count="2" statements-invoked="2" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="project/Project/apply" statement-count="2" statements-invoked="2" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="project" class="Project" class-type="Object" full-class-name="project.Project" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/Project.scala" method="apply" start="166" end="180" line="8" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project" class="Project" class-type="Object" full-class-name="project.Project" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/Project.scala" method="apply" start="158" end="200" line="8" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+        <package name="project.commands" statement-count="29" statements-invoked="26" statement-rate="89.66">
+            <classes>
+                <class 
+                name="project.commands.CreateProjectCommand" filename="project/commands/CreateProjectCommand.scala" statement-count="29" statements-invoked="26" statement-rate="89.66" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="project.commands/CreateProjectCommand/projectReads" statement-count="14" statements-invoked="14" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="projectReads" start="482" end="498" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="projectReads" start="418" end="433" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="projectReads" start="505" end="505" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="projectReads" start="417" end="417" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="projectReads" start="380" end="573" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="projectReads" start="505" end="505" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="projectReads" start="455" end="467" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="projectReads" start="396" end="405" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="projectReads" start="531" end="572" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="projectReads" start="417" end="417" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="projectReads" start="387" end="434" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="projectReads" start="505" end="505" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="projectReads" start="417" end="417" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="projectReads" start="446" end="499" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="project.commands/CreateProjectCommand/&lt;none&gt;" statement-count="6" statements-invoked="6" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="&lt;none&gt;" start="619" end="728" line="19" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="&lt;none&gt;" start="771" end="872" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="&lt;none&gt;" start="710" end="727" line="19" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="&lt;none&gt;" start="850" end="871" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="&lt;none&gt;" start="647" end="695" line="19" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="&lt;none&gt;" start="797" end="840" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="project.commands/CreateProjectCommand/mapEventualErrorToResult" statement-count="4" statements-invoked="1" statement-rate="25.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="mapEventualErrorToResult" start="1325" end="1359" line="34" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="mapEventualErrorToResult" start="1258" end="1381" line="34" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="mapEventualErrorToResult" start="1315" end="1380" line="34" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="mapEventualErrorToResult" start="1361" end="1379" line="34" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="project.commands/CreateProjectCommand/mapIfPossible" statement-count="5" statements-invoked="5" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="mapIfPossible" start="1086" end="1086" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="mapIfPossible" start="976" end="1001" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="mapIfPossible" start="1098" end="1130" line="28" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="mapIfPossible" start="987" end="1000" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="project.commands" class="CreateProjectCommand" class-type="Object" full-class-name="project.commands.CreateProjectCommand" source="/home/kamil/Pulpit/Iterators/taskmanager/app/project/commands/CreateProjectCommand.scala" method="mapIfPossible" start="1051" end="1092" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+        <package name="router" statement-count="49" statements-invoked="0" statement-rate="0.00">
+            <classes>
+                <class 
+                name="router.Routes" filename="router/Routes.scala" statement-count="45" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="router/Routes/&lt;init&gt;" statement-count="2" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="&lt;init&gt;" start="664" end="718" line="28" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="&lt;init&gt;" start="664" end="664" line="28" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="router/Routes/documentation" statement-count="16" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="documentation" start="1432" end="1435" line="43" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="documentation" start="1186" end="1237" line="41" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="documentation" start="1553" end="1591" line="45" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="documentation" start="1496" end="1515" line="44" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="documentation" start="1104" end="1184" line="41" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="documentation" start="1245" end="1254" line="42" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="documentation" start="1611" end="1655" line="46" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="documentation" start="1244" end="1426" line="42" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="documentation" start="1081" end="1660" line="44" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="documentation" start="1354" end="1425" line="42" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="documentation" start="1092" end="1102" line="41" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="documentation" start="1449" end="1483" line="44" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="documentation" start="1548" end="1591" line="45" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="documentation" start="1091" end="1238" line="41" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="documentation" start="1256" end="1352" line="42" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="documentation" start="1606" end="1655" line="46" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="router/Routes/&lt;none&gt;" statement-count="5" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="&lt;none&gt;" start="1050" end="1053" line="37" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="&lt;none&gt;" start="1015" end="1040" line="37" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="&lt;none&gt;" start="1050" end="1053" line="37" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="&lt;none&gt;" start="1042" end="1044" line="37" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="&lt;none&gt;" start="1042" end="1044" line="37" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="router/Routes/withPrefix" statement-count="7" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="withPrefix" start="850" end="887" line="32" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="withPrefix" start="938" end="946" line="33" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="withPrefix" start="917" end="936" line="33" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="withPrefix" start="785" end="845" line="31" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="withPrefix" start="903" end="915" line="33" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="withPrefix" start="892" end="955" line="33" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="withPrefix" start="833" end="844" line="31" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="router/Routes/routes" statement-count="15" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="routes" start="3446" end="3482" line="97" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="routes" start="3214" end="3308" line="92" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="routes" start="3427" end="3443" line="97" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="routes" start="3419" end="3425" line="97" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="routes" start="3510" end="3584" line="98" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="routes" start="3469" end="3475" line="97" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="routes" start="3468" end="3468" line="97" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="routes" start="3272" end="3307" line="92" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="routes" start="3468" end="3468" line="97" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="routes" start="3198" end="3316" line="91" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="routes" start="3553" end="3583" line="98" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="routes" start="3405" end="3444" line="97" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="routes" start="3099" end="3099" line="87" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="routes" start="3400" end="3592" line="97" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="Routes" class-type="Class" full-class-name="router.Routes" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/Routes.scala" method="routes" start="3477" end="3481" line="97" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="router.RoutesPrefix" filename="router/RoutesPrefix.scala" statement-count="4" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="router/RoutesPrefix/&lt;none&gt;" statement-count="2" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="router" class="RoutesPrefix" class-type="Object" full-class-name="router.RoutesPrefix" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/RoutesPrefix.scala" method="&lt;none&gt;" start="135" end="138" line="7" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="router" class="RoutesPrefix" class-type="Object" full-class-name="router.RoutesPrefix" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/RoutesPrefix.scala" method="&lt;none&gt;" start="285" end="291" line="12" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="router/RoutesPrefix/prefix" statement-count="1" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="router" class="RoutesPrefix" class-type="Object" full-class-name="router.RoutesPrefix" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/RoutesPrefix.scala" method="prefix" start="227" end="234" line="11" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="router/RoutesPrefix/setPrefix" statement-count="1" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="router" class="RoutesPrefix" class-type="Object" full-class-name="router.RoutesPrefix" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/routes/main/router/RoutesPrefix.scala" method="setPrefix" start="184" end="195" line="9" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+        <package name="views.html" statement-count="39" statements-invoked="0" statement-rate="0.00">
+            <classes>
+                <class 
+                name="views.html.index" filename="views/html/index.template.scala" statement-count="13" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="views.html/index/apply" statement-count="11" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="views.html" class="index" class-type="Object" full-class-name="views.html.index" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/index.template.scala" method="apply" start="792" end="1010" line="26" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="index" class-type="Object" full-class-name="views.html.index" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/index.template.scala" method="apply" start="801" end="827" line="26" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="index" class-type="Object" full-class-name="views.html.index" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/index.template.scala" method="apply" start="897" end="926" line="27" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="index" class-type="Object" full-class-name="views.html.index" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/index.template.scala" method="apply" start="878" end="980" line="27" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="index" class-type="Object" full-class-name="views.html.index" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/index.template.scala" method="apply" start="983" end="1009" line="29" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="index" class-type="Object" full-class-name="views.html.index" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/index.template.scala" method="apply" start="828" end="982" line="27" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="index" class-type="Object" full-class-name="views.html.index" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/index.template.scala" method="apply" start="850" end="867" line="27" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="index" class-type="Object" full-class-name="views.html.index" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/index.template.scala" method="apply" start="770" end="1024" line="22" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="index" class-type="Object" full-class-name="views.html.index" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/index.template.scala" method="apply" start="888" end="979" line="27" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="index" class-type="Object" full-class-name="views.html.index" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/index.template.scala" method="apply" start="927" end="978" line="28" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="index" class-type="Object" full-class-name="views.html.index" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/index.template.scala" method="apply" start="845" end="981" line="27" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="views.html/index/render" statement-count="1" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="views.html" class="index" class-type="Object" full-class-name="views.html.index" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/index.template.scala" method="render" start="1085" end="1092" line="35" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method name="views.html/index/f" statement-count="1" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="views.html" class="index" class-type="Object" full-class-name="views.html.index" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/index.template.scala" method="f" start="1155" end="1162" line="37" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+                        </method>
+                    </methods>
+</class>
+                <class 
+                name="views.html.main" filename="views/html/main.template.scala" statement-count="26" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="views.html/main/apply" statement-count="24" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1296" end="1384" line="36" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1063" end="2004" line="27" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1690" end="1726" line="42" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1085" end="1990" line="31" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1270" end="1295" line="36" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1626" end="1689" line="38" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1404" end="1460" line="37" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1755" end="1790" line="43" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1121" end="1198" line="32" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1603" end="1623" line="38" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1850" end="1905" line="45" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1883" end="1904" line="45" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1236" end="1269" line="36" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1551" end="1625" line="38" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1907" end="1989" line="45" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1437" end="1459" line="37" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1727" end="1754" line="43" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1094" end="1120" line="31" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1462" end="1550" line="37" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1385" end="1461" line="37" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1791" end="1830" line="45" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1831" end="1906" line="45" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1199" end="1235" line="35" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="apply" start="1570" end="1624" line="38" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method name="views.html/main/f" statement-count="1" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="f" start="2208" end="2229" line="55" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+                        </method>
+                        <method 
+                        name="views.html/main/render" statement-count="1" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="views.html" class="main" class-type="Object" full-class-name="views.html.main" source="/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/twirl/main/views/html/main.template.scala" method="render" start="2090" end="2111" line="53" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+    </packages>
+</scoverage>

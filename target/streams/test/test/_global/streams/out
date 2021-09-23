@@ -1,0 +1,76 @@
+[0m[[0m[0mdebug[0m] [0m[0mjavaOptions: Vector()[0m
+[0m[[0m[0mdebug[0m] [0m[0mForking tests - parallelism = false[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreate a single-thread test executor[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunner for org.scalatest.tools.Framework produced 4 initial tasks for 4 tests.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(project.ProjectValidatorTest, sbt.ForkMain$SubclassFingerscan@475530b9, false, [SuiteSelector])[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mProjectValidatorTest:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mProject validator[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should returns error[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Given UUID and id of project, command and aggregate [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + When validation is performed [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Then result is duplicated project error [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mProject validator[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should has successful result[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Given UUID and id of project, command and aggregate [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + When validation is performed [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Then result is the command which will be needed to create project [0m[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 2 events.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(authentication.AuthenticationHandlerTest, sbt.ForkMain$SubclassFingerscan@1d057a39, false, [SuiteSelector])[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mAuthenticationHandlerTest:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mAuthentication[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should be performed successfully[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Given configuration which returns jwt secret key and prepared request [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + When authentication is performed [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Then result is proper Jwt claim [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mAuthentication[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should be failed on request without authorization header[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Given configuration which returns jwt secret key and prepared request without authorization header [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + When authentication is performed [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Then result is "Request not contains authorization header" [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mAuthentication[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should be failed on request with "Basic" authorization header[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Given configuration which returns jwt secret key and prepared request with "Basic" authorization header [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + When authentication is performed [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Then result is "Request not contains authorization header" [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mAuthentication[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should be failed on request with incorrect JWT token[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Given configuration which returns jwt secret key and prepared request with incorrect JWT token [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + When authentication is performed [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Then result is "Could not decode JWT token" [0m[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 4 events.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(controllers.ProjectControllerTest, sbt.ForkMain$SubclassFingerscan@26be92ad, false, [SuiteSelector])[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mProjectControllerTest:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mProjectController#createProject[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should be valid[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Given Project aggregate, authentication handler, validator and request [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + When ProjectController#createProject method is performed [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Then Result should be Created with message: "Project created" [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mProjectController#createProject[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should be failed because of authorization[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Given Project aggregate, authentication handler, validator, request, command and config [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + When ProjectController#createProject method is performed [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Then Result should be Created with message: "Project created" [0m[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 2 events.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(project.ProjectAggregateTest, sbt.ForkMain$SubclassFingerscan@4c70fda8, false, [SuiteSelector])[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mProjectAggregateTest:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mProjectAggregate#createProject[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should be valid[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Given Project repository, create project command [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + When is performed ProjectAggregate#createProject [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Then Result should be Created with message: "Project created" [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mProjectAggregate#createProject[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should be failed[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Given Project repository, create project command [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + When is performed ProjectAggregate#createProject [0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  + Then Result should be InternalServerError with message: "Database error" [0m[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 2 events.[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 3 seconds, 971 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 10[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 4, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 10, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mAll tests passed.[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	project.ProjectAggregateTest[0m
+[0m[[0m[0mdebug[0m] [0m[0m	controllers.ProjectControllerTest[0m
+[0m[[0m[0mdebug[0m] [0m[0m	authentication.AuthenticationHandlerTest[0m
+[0m[[0m[0mdebug[0m] [0m[0m	project.ProjectValidatorTest[0m
