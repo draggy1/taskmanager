@@ -1,25 +1,23 @@
 package project.commands
 
 import authentication.Error
+import common.StringUtils.EMPTY
+import common.UUIDUtils.UUID_NIL
 import io.jvm.uuid.UUID
 import pdi.jwt.JwtClaim
 import play.api.http.Status
-import play.api.libs.functional.syntax.toFunctionalBuilderOps
+import play.api.libs.functional.syntax.{toAlternativeOps, toFunctionalBuilderOps}
 import play.api.libs.json._
+
+import scala.language.postfixOps
 
 case class CreateProjectCommand(userId: UUID, projectId: String)
 
 case object CreateProjectCommand{
-  implicit def projectReads: Reads[CreateProjectCommand] = (
-    (JsPath \ "user_id").read[UUID](userIdValidator) and
-      (JsPath \ "project_id").read[String](projectIdIsBlank)
-    )((user_id, project_id) => CreateProjectCommand(user_id, project_id))
-
-  val projectIdIsBlank: Reads[String] =
-    Reads.StringReads.filterNot(JsonValidationError("Empty project id provided"))(projectId => projectId.isBlank)
-
-  val userIdValidator: Reads[UUID] =
-    Reads.uuidReads.filterNot(JsonValidationError("Problem with user id"))(uuid => uuid.toString.isBlank)
+  implicit def projectReads: Reads[CreateProjectCommand] =
+    ((JsPath \ "user_id").read[UUID] or Reads.pure(UUID_NIL) and
+    ((JsPath \ "project_id").read[String] or Reads.pure(EMPTY))
+  )((user_id, project_id) => CreateProjectCommand(user_id, project_id))
 
   def mapIfPossible(claim: JwtClaim): Either[Error, CreateProjectCommand] = {
     val json: JsValue = Json.parse(claim.content)

@@ -43,7 +43,7 @@ class ProjectController @Inject()(val controllerComponents: ControllerComponents
 
   private val validate:  Either[Error, CreateProjectCommand] => Future[Either[Error, CreateProjectCommand]] = {
     case Left(result) => Future.successful(Left(result))
-    case result@Right(command) => validator.validate(command)
+    case Right(command) => validator.validate(command)
   }
 
   private val performCreationProject = (result: Future[Either[Error, CreateProjectCommand]]) =>
