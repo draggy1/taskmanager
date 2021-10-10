@@ -1,7 +1,7 @@
 package controllers
 
 import authentication.{AuthenticationHandler, Error}
-import common.ResultMapper.mapErrorToResult
+import common.Response.mapErrorToResult
 import pdi.jwt.JwtClaim
 import play.api.mvc._
 import project.commands.CreateProjectCommand

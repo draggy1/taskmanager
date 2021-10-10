@@ -33,12 +33,12 @@ case class ProjectRepository @Inject()(config: MongoDbManager) {
 
   implicit val successWrites: Writes[Response[Project]] = Json.writes[Response[Project]]
 
-  def create(project: Project): Future[Result] = {
+  def create(project: Project): Future[Result] =
     collection.insertOne(project)
       .toFuture()
       .map(_ => prepareSuccessResult(project))
       .recover { case _ => prepareErrorResult() }
-  }
+
 
   private def prepareSuccessResult(project: Project): Result = {
     val json = Json.toJson(Response[Project](success = true, "Project created", project))
