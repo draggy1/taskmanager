@@ -11,6 +11,7 @@ import org.scalatestplus.play.PlaySpec
 import project.commands.CreateProjectCommand
 import project.queries.GetProjectByIdQuery
 
+import java.time.LocalDateTime
 import scala.concurrent.Future
 
 class ProjectValidatorTest extends PlaySpec with MockitoSugar with GivenWhenThen with ScalaFutures with EitherValues {
@@ -39,10 +40,11 @@ class ProjectValidatorTest extends PlaySpec with MockitoSugar with GivenWhenThen
       Given("UUID, id of project, command and aggregate")
       val uuid = UUID("11e2c7f8-1244-5d23-b6c0-86f1b4f565ed")
       val projectId = "test_project_id"
+      val timestamp = LocalDateTime.of(2021, 12, 13, 0,0)
       val command = CreateProjectCommand(uuid, projectId)
       val aggregate = mock[ProjectAggregate]
       when(aggregate.getProject(GetProjectByIdQuery(command.projectId)))
-        .thenReturn(Future.successful(Option(Project(uuid, projectId))))
+        .thenReturn(Future.successful(Option(Project(uuid, projectId, timestamp))))
 
       When("validation is performed")
 
@@ -61,8 +63,9 @@ class ProjectValidatorTest extends PlaySpec with MockitoSugar with GivenWhenThen
       val projectId = "test_project_id"
       val command = CreateProjectCommand(uuid, projectId)
       val aggregate = mock[ProjectAggregate]
+      val timestamp = LocalDateTime.of(2021, 12, 13, 0,0)
       when(aggregate.getProject(GetProjectByIdQuery(command.projectId)))
-        .thenReturn(Future.successful(Option(Project(uuid, projectId))))
+        .thenReturn(Future.successful(Option(Project(uuid, projectId, timestamp))))
 
       When("validation is performed")
 

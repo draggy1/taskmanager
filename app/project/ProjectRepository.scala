@@ -37,7 +37,7 @@ case class ProjectRepository @Inject()(config: MongoDbManager) {
     collection.insertOne(project)
       .toFuture()
       .map(_ => prepareSuccessResult(project))
-      .recover { case _ => prepareErrorResult() }
+      //.recover { case _ => prepareErrorResult() }
 
 
   private def prepareSuccessResult(project: Project): Result = {

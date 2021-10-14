@@ -5,12 +5,13 @@ import play.api.mvc.Result
 import project.commands.CreateProjectCommand
 import project.queries.GetProjectByIdQuery
 
+import java.time.LocalDateTime
 import javax.inject.Inject
 import scala.concurrent.Future
 
 class ProjectAggregate @Inject()(val repository: ProjectRepository){
   def createProject(command: CreateProjectCommand): Future[Result] = {
-    val project = Project(new ObjectId(), command.userId, command.projectId)
+    val project = Project(new ObjectId(), command.userId, command.projectId, LocalDateTime.now())
     repository.create(project)
   }
 
