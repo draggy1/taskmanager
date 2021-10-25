@@ -1,11 +1,10 @@
 package controllers
 
-import authentication.{AuthenticationHandler, Error}
-import common.Response.mapErrorToResult
-import pdi.jwt.JwtClaim
+import authentication.AuthenticationHandler
+import common.responses.Response.mapErrorToResult
+import controllers.actions.{CreateProjectActions, UpdateProjectActions}
 import play.api.mvc._
-import project.commands.CreateProjectCommand
-import project.{ProjectAggregate, ProjectValidator}
+import project.ProjectAggregate
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -14,42 +13,36 @@ import scala.concurrent.Future
 @Singleton
 class ProjectController @Inject()(val controllerComponents: ControllerComponents,
                                   aggregate: ProjectAggregate,
-                                  authHandler: AuthenticationHandler,
-                                  validator: ProjectValidator) extends BaseController {
+                                  authHandler: AuthenticationHandler) extends BaseController {
   /**
    * Create an endpoint for setting up a new project
    *
    * @return
    */
-  def createProject(): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
-    authenticate
-      .andThen(mapToCommand)
-      .andThen(validate)
-      .andThen(performCreationProject)
+  def createProject(): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] => {
+    CreateProjectActions(aggregate, authHandler)
+      .prepare()
       .apply(request)
       .flatMap {
         case Left(error) => Future.successful(mapErrorToResult(error))
         case Right(result) => result
       }
-  }
-
-  private val authenticate = (request: Request[AnyContent]) => authHandler.performWithAuthentication(request)
-
-  private val mapToCommand = (result: Either[Error, JwtClaim]) =>
-    result match {
-      case Left(result) => Left(result)
-      case Right(jwtClaims) => CreateProjectCommand.mapIfPossible(jwtClaims)
     }
-
-  private val validate:  Either[Error, CreateProjectCommand] => Future[Either[Error, CreateProjectCommand]] = {
-    case Left(result) => Future.successful(Left(result))
-    case Right(command) => validator.validate(command)
   }
 
-  private val performCreationProject = (result: Future[Either[Error, CreateProjectCommand]]) =>
-     result.map {
-      case Left(result) => Left(result)
-      case Right(command) => Right(aggregate.createProject(command))
+  /**
+   * Create an endpoint for update the project id
+   *
+   * @return
+   */
+  def updateProjectId(): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
+    UpdateProjectActions(aggregate, authHandler)
+      .prepare()
+      .apply(request)
+      .flatMap {
+        case Left(error) => Future.successful(mapErrorToResult(error))
+        case Right(result) => result
+      }
   }
 }
 

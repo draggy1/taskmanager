@@ -1,0 +1,8 @@
+Update project with:
+{
+  "author_id": "844cd360-9256-4ee5-b17c-8d99aa6651a2",
+  "project_id_old": "unique_project_id_1",
+  "project_id_new": "new_unique_project_id_1"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JfaWQiOiI4NDRjZDM2MC05MjU2LTRlZTUtYjE3Yy04ZDk5YWE2NjUxYTIiLCJwcm9qZWN0X2lkX29sZCI6InVuaXF1ZV9wcm9qZWN0X2lkXzEiLCJwcm9qZWN0X2lkX25ldyI6Im5ld191bmlxdWVfcHJvamVjdF9pZF8xIn0.w5l3lvjJkODf8SheQGudfnUC29KBuun1t6Ls-k2ekdI" -X POST http://localhost:8080/project/update

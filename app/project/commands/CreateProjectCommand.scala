@@ -13,13 +13,13 @@ import scala.language.postfixOps
 
 case class CreateProjectCommand(userId: UUID, projectId: String)
 
-case object CreateProjectCommand{
+case object CreateProjectCommand {
   implicit def projectReads: Reads[CreateProjectCommand] =
     ((JsPath \ "user_id").read[UUID] or Reads.pure(UUID_NIL) and
     ((JsPath \ "project_id").read[String] or Reads.pure(EMPTY))
   )((user_id, project_id) => CreateProjectCommand(user_id, project_id))
 
-  def mapIfPossible(claim: JwtClaim): Either[Error, CreateProjectCommand] = {
+  def mapJwtToCommand(claim: JwtClaim): Either[Error, CreateProjectCommand] = {
     val json: JsValue = Json.parse(claim.content)
     val result: JsResult[CreateProjectCommand] = Json.fromJson[CreateProjectCommand](json)
 

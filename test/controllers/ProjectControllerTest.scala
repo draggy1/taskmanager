@@ -13,10 +13,11 @@ import play.api.http.Status.{BAD_REQUEST, CREATED}
 import play.api.libs.json.Json
 import play.api.mvc.Result
 import play.api.mvc.Results.Created
-import play.api.test.Helpers.{AUTHORIZATION, POST, contentAsJson, contentAsString, defaultAwaitTimeout, status}
+import play.api.test.Helpers.{AUTHORIZATION, POST, contentAsJson, defaultAwaitTimeout, status}
 import play.api.test.{FakeRequest, Helpers}
 import project.commands.CreateProjectCommand
-import project.{ProjectAggregate, ProjectValidator}
+import project.ProjectAggregate
+import project.validators.CreateProjectValidator
 
 import scala.concurrent.Future
 
@@ -36,22 +37,21 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
         "data" : ""
       }
       """
-
       when(projectAggregate.createProject(createCommand)).thenReturn(Future.successful(Created(expectedJson)))
+      val validator = mock[CreateProjectValidator]
 
-      val validator = mock[ProjectValidator]
       when(validator.validate(createCommand)).thenReturn(Future.successful(Right(createCommand)))
-
       val config = mock[Configuration]
-      when(config.get[String]("secret.key")).thenReturn("Test secret key")
 
+      when(config.get[String]("secret.key")).thenReturn("Test secret key")
       val authHandler = AuthenticationHandler(config)
+
       val givenRequest = FakeRequest()
         .withMethod(POST)
         .withHeaders((AUTHORIZATION, "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IxIiwicHJvamVjdF9pZCI6InVuaXF1ZV9wcm9qZWN0X2lkXzEifQ.PNDMAcOVUQXLaVR1Tp2wyAQhNUOBi7Luq5MOrlINJTg"))
 
       When("ProjectController#createProject method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler, validator)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
       val result: Future[Result] = controller.createProject().apply(givenRequest)
 
       Then("Result should be Created with expected json as body")
@@ -65,7 +65,7 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       Given("Project aggregate, authentication handler, validator, request, command and config")
       val projectAggregate = mock[ProjectAggregate]
 
-      val validator = mock[ProjectValidator]
+      val validator = mock[CreateProjectValidator]
 
       val config = mock[Configuration]
       when(config.get[String]("secret.key")).thenReturn("Test secret key")
@@ -75,7 +75,7 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
         .withMethod(POST)
 
       When("ProjectController#createProject method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler, validator)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
       val result: Future[Result] = controller.createProject().apply(givenRequest)
 
       Then("Result should be Created with message: \"Project created\"")

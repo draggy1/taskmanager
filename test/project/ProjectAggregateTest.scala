@@ -1,8 +1,6 @@
 package project
 
-import akka.http.scaladsl.model.DateTime
 import io.jvm.uuid.UUID
-import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.when
 import org.scalatest.GivenWhenThen
 import org.scalatest.concurrent.ScalaFutures
@@ -12,7 +10,6 @@ import org.scalatestplus.play.PlaySpec
 import play.api.mvc.Results.{Created, InternalServerError}
 import project.commands.CreateProjectCommand
 
-import java.time.LocalDateTime
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
@@ -27,8 +24,7 @@ class ProjectAggregateTest extends PlaySpec with MockitoSugar with GivenWhenThen
       val projectId = "test_project_id"
       val command = CreateProjectCommand(uuid, projectId)
       val projectRepository = mock[ProjectRepository]
-      val timestamp = LocalDateTime.of(2021, 12, 13, 0,0)
-      when(projectRepository.create(new Project(any, uuid, projectId, timestamp))).thenReturn(Future(Created("Project created")))
+      when(projectRepository.create(command)).thenReturn(Future(Created("Project created")))
 
       When("is performed ProjectAggregate#createProject")
       val result = new ProjectAggregate(projectRepository).createProject(command)
@@ -46,8 +42,7 @@ class ProjectAggregateTest extends PlaySpec with MockitoSugar with GivenWhenThen
       val projectId = "test_project_id"
       val command = CreateProjectCommand(uuid, projectId)
       val projectRepository = mock[ProjectRepository]
-      val timestamp = LocalDateTime.of(2021, 12, 13, 0,0)
-      when(projectRepository.create(new Project(any, uuid, projectId, timestamp))).thenReturn(Future(InternalServerError("Database error")))
+      when(projectRepository.create(command)).thenReturn(Future(InternalServerError("Database error")))
 
       When("is performed ProjectAggregate#createProject")
       val result = new ProjectAggregate(projectRepository).createProject(command)

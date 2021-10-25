@@ -10,6 +10,7 @@ import org.scalatestplus.mockito.MockitoSugar
 import org.scalatestplus.play.PlaySpec
 import project.commands.CreateProjectCommand
 import project.queries.GetProjectByIdQuery
+import project.validators.CreateProjectValidator
 
 import java.time.LocalDateTime
 import scala.concurrent.Future
@@ -27,7 +28,7 @@ class ProjectValidatorTest extends PlaySpec with MockitoSugar with GivenWhenThen
 
       When("validation is performed")
 
-      val validator = ProjectValidator(aggregate)
+      val validator = CreateProjectValidator(aggregate)
       val result = validator.validate(command)
 
       Then("result is the command which will be needed to create project")
@@ -48,7 +49,7 @@ class ProjectValidatorTest extends PlaySpec with MockitoSugar with GivenWhenThen
 
       When("validation is performed")
 
-      val validator = ProjectValidator(aggregate)
+      val validator = validators.CreateProjectValidator(aggregate)
       val result = validator.validate(command)
 
       Then("result is duplicated project error")
@@ -69,7 +70,7 @@ class ProjectValidatorTest extends PlaySpec with MockitoSugar with GivenWhenThen
 
       When("validation is performed")
 
-      val validator = ProjectValidator(aggregate)
+      val validator = validators.CreateProjectValidator(aggregate)
       val result = validator.validate(command)
 
       Then("result is empty user id error")
@@ -88,7 +89,7 @@ class ProjectValidatorTest extends PlaySpec with MockitoSugar with GivenWhenThen
 
       When("validation is performed")
 
-      val validator = ProjectValidator(aggregate)
+      val validator = validators.CreateProjectValidator(aggregate)
       val result = validator.validate(command)
 
       Then("result is empty project id error")

@@ -29,3 +29,5 @@ case class AuthenticationHandler @Inject()(config: Configuration) {
         .map(_=> IncorrectJwtToken)
     }
 }
+
+

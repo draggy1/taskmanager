@@ -1,10 +1,10 @@
-package common
+package common.responses
 
 import akka.util.ByteString
 import authentication.Error
 import common.StringUtils.EMPTY
 import play.api.http.{ContentTypes, HttpEntity}
-import play.api.libs.json.{JsBoolean, JsObject, JsString, JsValue, Json, Writes}
+import play.api.libs.json._
 import play.api.mvc.{ResponseHeader, Result}
 
 case object Response {
