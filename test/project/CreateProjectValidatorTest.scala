@@ -15,7 +15,7 @@ import project.validators.CreateProjectValidator
 import java.time.LocalDateTime
 import scala.concurrent.Future
 
-class ProjectValidatorTest extends PlaySpec with MockitoSugar with GivenWhenThen with ScalaFutures with EitherValues {
+class CreateProjectValidatorTest extends PlaySpec with MockitoSugar with GivenWhenThen with ScalaFutures with EitherValues {
   "Project validator" should {
     "has successful result" in {
       Given("UUID, id of project, command and aggregate")
@@ -49,7 +49,7 @@ class ProjectValidatorTest extends PlaySpec with MockitoSugar with GivenWhenThen
 
       When("validation is performed")
 
-      val validator = validators.CreateProjectValidator(aggregate)
+      val validator = CreateProjectValidator(aggregate)
       val result = validator.validate(command)
 
       Then("result is duplicated project error")
@@ -70,7 +70,7 @@ class ProjectValidatorTest extends PlaySpec with MockitoSugar with GivenWhenThen
 
       When("validation is performed")
 
-      val validator = validators.CreateProjectValidator(aggregate)
+      val validator = CreateProjectValidator(aggregate)
       val result = validator.validate(command)
 
       Then("result is empty user id error")
@@ -89,8 +89,8 @@ class ProjectValidatorTest extends PlaySpec with MockitoSugar with GivenWhenThen
 
       When("validation is performed")
 
-      val validator = validators.CreateProjectValidator(aggregate)
-      val result = validator.validate(command)
+
+      val result = CreateProjectValidator(aggregate).validate(command)
 
       Then("result is empty project id error")
       whenReady(result) { value => value.left.value mustBe EmptyProjectId }

@@ -28,10 +28,10 @@ class CreateProjectValidator(aggregate: ProjectAggregate) {
 
   val isDuplicated: Either[Error, CreateProjectCommand] => Future[Either[Error, CreateProjectCommand]] = {
     case Left(error) => Future.successful(Left(error))
-    case Right(command) => getProject(command)
+    case Right(command) => isDuplicated(command)
   }
 
-  private def getProject(command: CreateProjectCommand) = {
+  private def isDuplicated(command: CreateProjectCommand) = {
     val eventualMaybeProject = aggregate.getProject(GetProjectByIdQuery(command.projectId))
     eventualMaybeProject
       .map {

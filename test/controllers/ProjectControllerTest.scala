@@ -17,6 +17,7 @@ import play.api.test.Helpers.{AUTHORIZATION, POST, contentAsJson, defaultAwaitTi
 import play.api.test.{FakeRequest, Helpers}
 import project.commands.CreateProjectCommand
 import project.ProjectAggregate
+import project.queries.GetProjectByIdQuery
 import project.validators.CreateProjectValidator
 
 import scala.concurrent.Future
@@ -28,22 +29,28 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
   "ProjectController#createProject" should {
     "be valid" in {
       Given("Project aggregate, authentication handler, validator and request")
-      val projectAggregate = mock[ProjectAggregate]
       val createCommand = CreateProjectCommand(UUID("e54e5692-60d3-4c84-a251-66aa998d7cb1"), "unique_project_id_1")
       val expectedJson = """
       {
-        "success" : false,
-        "message" : "Request not contains authorization header",
-        "data" : ""
+        "success": true,
+        "message": "Project created",
+        "data": {
+          "user_id": "e54e5692-60d3-4c84-a251-66aa998d7cb1",
+          "project_id": "unique_project_id_1"
+        }
       }
       """
+      val projectAggregate = mock[ProjectAggregate]
       when(projectAggregate.createProject(createCommand)).thenReturn(Future.successful(Created(expectedJson)))
+      when(projectAggregate.getProject(GetProjectByIdQuery("unique_project_id_1")))
+        .thenReturn(Future.successful(Option.empty))
+
       val validator = mock[CreateProjectValidator]
-
       when(validator.validate(createCommand)).thenReturn(Future.successful(Right(createCommand)))
-      val config = mock[Configuration]
 
+      val config = mock[Configuration]
       when(config.get[String]("secret.key")).thenReturn("Test secret key")
+
       val authHandler = AuthenticationHandler(config)
 
       val givenRequest = FakeRequest()
@@ -64,8 +71,6 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
     "be failed because of authorization" in {
       Given("Project aggregate, authentication handler, validator, request, command and config")
       val projectAggregate = mock[ProjectAggregate]
-
-      val validator = mock[CreateProjectValidator]
 
       val config = mock[Configuration]
       when(config.get[String]("secret.key")).thenReturn("Test secret key")
