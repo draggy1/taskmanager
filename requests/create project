@@ -1,0 +1,54 @@
+Create project with:
+{
+  "project_id": "some_project_id"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoic29tZV9wcm9qZWN0X2lkIn0.UXDuv7qZD61bAWzMibflXixHwHqUi6_61BTPtibS8_Q" -X POST http://localhost:8080/project/create
+
+
+Create project with:
+{
+  "author_id": "e54e5692-60d3-4c84-a251-66aa998d7cb1"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JfaWQiOiJlNTRlNTY5Mi02MGQzLTRjODQtYTI1MS02NmFhOTk4ZDdjYjEifQ.0g5lweGbwZ1jKKkaV4XouJUpOaVANmWIiIaoaU8W5tI" -X POST http://localhost:8080/project/create
+
+Create project with:
+{
+  "author_id": "e54e5692-60d3-4c84-a251-66aa998d7cb1",
+  "project_id": ""
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JfaWQiOiJlNTRlNTY5Mi02MGQzLTRjODQtYTI1MS02NmFhOTk4ZDdjYjEiLCJwcm9qZWN0X2lkIjoiIn0.XnDcplvMTPTauxipmT30VNXlo_LqNiey6SGFLIlhCEo" -X POST http://localhost:8080/project/create
+
+Create project with:
+{
+  "author_id": "John Doe",
+  "project_id": "some_project_id"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JfaWQiOiJKb2huIERvZSIsInByb2plY3RfaWQiOiJzb21lX3Byb2plY3RfaWQifQ.7yk-ndfimkq6ABUOlsEqVl1_mk7ZPQG7PlOS8tczoUU" -X POST http://localhost:8080/project/create
+
+Create project with:
+{
+  "author_id": "e54e5692-60d3-4c84-a251-66aa998d7cb1",
+  "project_id": "unique_project_id_1"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JfaWQiOiJlNTRlNTY5Mi02MGQzLTRjODQtYTI1MS02NmFhOTk4ZDdjYjEiLCJwcm9qZWN0X2lkIjoidW5pcXVlX3Byb2plY3RfaWRfMSJ9.Fx2dhlIBPiixI559uO1H73g5YOuYcyEk1lvfpDQk8y4" -X POST http://localhost:8080/project/create
+
+Create project with:
+{
+  "author_id": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
+  "project_id": "unique_project_id_2"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JfaWQiOiJlNTRlNTY5Mi02MGQzLTRjODQtYTI1MS02NmFhOTk4ZDdjYjIiLCJwcm9qZWN0X2lkIjoidW5pcXVlX3Byb2plY3RfaWRfMiJ9.HTSdg90sjeOhr4iaNQgSkMCXShtzXEYsNqWqk1eGZww" -X POST http://localhost:8080/project/create
+
+Create project with:
+{
+  "author_id": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
+  "project_id": "kulo"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JfaWQiOiJlNTRlNTY5Mi02MGQzLTRjODQtYTI1MS02NmFhOTk4ZDdjYjIiLCJwcm9qZWN0X2lkIjoia3VsbyJ9.RmG8F4O6uvE1LD50JK7JeBLVlzWOw0GV9UEs3zuPwtc" -X POST http://localhost:8080/project/create

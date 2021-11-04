@@ -1,6 +1,6 @@
 package project.validators
 
-import authentication.{DuplicatedProjectId, EmptyProjectId, EmptyUserId, Error}
+import authentication.{DuplicatedProjectId, EmptyProjectId, EmptyAuthorId, Error}
 import common.UUIDUtils.UUID_NIL
 import project.ProjectAggregate
 import project.commands.CreateProjectCommand
@@ -12,7 +12,7 @@ import scala.concurrent.Future
 class CreateProjectValidator(aggregate: ProjectAggregate) {
   def validate(command: CreateProjectCommand): Future[Either[Error, CreateProjectCommand]] =
     isProjectEmpty
-      .andThen(notValidUserId)
+      .andThen(notValidAuthorId)
       .andThen(isDuplicated)
       .apply(command)
 
@@ -21,9 +21,9 @@ class CreateProjectValidator(aggregate: ProjectAggregate) {
       if (command.projectId.isBlank) Left(EmptyProjectId) else Right(command)
     }
 
-  val notValidUserId: Either[Error, CreateProjectCommand] => Either[Error, CreateProjectCommand] = {
+  val notValidAuthorId: Either[Error, CreateProjectCommand] => Either[Error, CreateProjectCommand] = {
     case Left(error) => Left(error)
-    case Right(command) => if (UUID_NIL.equals(command.userId)) Left(EmptyUserId) else Right(command)
+    case Right(command) => if (UUID_NIL.equals(command.authorId)) Left(EmptyAuthorId) else Right(command)
   }
 
   val isDuplicated: Either[Error, CreateProjectCommand] => Future[Either[Error, CreateProjectCommand]] = {
@@ -31,14 +31,12 @@ class CreateProjectValidator(aggregate: ProjectAggregate) {
     case Right(command) => isDuplicated(command)
   }
 
-  private def isDuplicated(command: CreateProjectCommand) = {
-    val eventualMaybeProject = aggregate.getProject(GetProjectByIdQuery(command.projectId))
-    eventualMaybeProject
+  private def isDuplicated(command: CreateProjectCommand) =
+    aggregate.getProject(GetProjectByIdQuery(command.projectId))
       .map {
         case Some(_) => Left(DuplicatedProjectId)
         case None => Right(command)
       }
-  }
 }
 
 object CreateProjectValidator {

@@ -1,16 +1,20 @@
 package project
 
 import com.mongodb.client.model.Filters
+import com.mongodb.client.model.Filters.and
 import common.StringUtils.EMPTY
 import common.responses.Response.getResult
 import common.responses.{ProjectUpdatedResponse, Response}
 import configuration.MongoDbManager
+import io.jvm.uuid.UUID
+import org.bson.UuidRepresentation
+import org.bson.codecs.UuidCodec
 import org.bson.codecs.configuration.CodecRegistries.{fromProviders, fromRegistries}
-import org.bson.codecs.configuration.{CodecProvider, CodecRegistry}
+import org.bson.codecs.configuration.{CodecProvider, CodecRegistries, CodecRegistry}
 import org.mongodb.scala.MongoClient.DEFAULT_CODEC_REGISTRY
 import org.mongodb.scala.MongoCollection
+import org.mongodb.scala.bson.ObjectId
 import org.mongodb.scala.bson.codecs.Macros
-import org.mongodb.scala.bson.{BsonDocument, BsonString, ObjectId}
 import org.mongodb.scala.model.Filters.equal
 import org.mongodb.scala.model.Updates.{combine, set}
 import play.api.http.Status.{CREATED, INTERNAL_SERVER_ERROR}
@@ -26,15 +30,17 @@ import scala.concurrent.Future
 @Singleton
 case class ProjectRepository @Inject()(config: MongoDbManager) {
   private val projectCodecProvider: CodecProvider = Macros.createCodecProvider[Project]()
+  private val uuidCodec = new UuidCodec(UuidRepresentation.STANDARD)
+  private val uuidRegistry: CodecRegistry = CodecRegistries.fromCodecs(uuidCodec)
 
-  private val codecRegistry: CodecRegistry = fromRegistries(fromProviders(projectCodecProvider), DEFAULT_CODEC_REGISTRY)
+  private val codecRegistry: CodecRegistry = fromRegistries(fromProviders(projectCodecProvider), uuidRegistry, DEFAULT_CODEC_REGISTRY)
 
   private val collection: MongoCollection[Project] = config.database
     .withCodecRegistry(codecRegistry)
     .getCollection("project")
 
   implicit val projectWrites: Writes[Project] = (data: Project) => Json.obj(
-    "user_id" -> data.userId,
+    "author_id" -> data.authorId,
     "project_id" -> data.projectId)
 
   implicit val updateResponseWrites: Writes[ProjectUpdatedResponse] = (data: ProjectUpdatedResponse) => Json.obj(
@@ -44,7 +50,7 @@ case class ProjectRepository @Inject()(config: MongoDbManager) {
   implicit val successWrites: Writes[Response[Project]] = Json.writes[Response[Project]]
 
   def create(command: CreateProjectCommand): Future[Result] = {
-    val project = Project(new ObjectId(), command.userId, command.projectId, LocalDateTime.now())
+    val project = Project(new ObjectId(), command.authorId, command.projectId, LocalDateTime.now())
 
     collection.insertOne(project)
       .toFuture()
@@ -52,19 +58,34 @@ case class ProjectRepository @Inject()(config: MongoDbManager) {
       .recover { case _ => prepareErrorResult() }
   }
 
-
   def find(projectId: String): Future[Option[Project]] =
     collection.find(equal("projectId", projectId))
       .first()
       .toFutureOption()
 
-  def updateProjectId(command: UpdateProjectCommand): Future[Result] = {
-    val newProjectId = new BsonDocument("projectId", BsonString(command.projectIdNew))
+  def find(projectId: String, authorId: UUID): Future[Option[Project]] = {
+    val equalProjectId = equal("projectId", projectId)
+    val equalAuthorId = equal("authorId", authorId)
 
-    collection.findOneAndUpdate(Filters.eq("projectId", command.projectIdOld), combine(set("projectId", command.projectIdNew)))
+    val eventualMaybeProject = collection.find(and(equalProjectId, equalAuthorId))
+      .first()
+      .toFutureOption()
+
+    eventualMaybeProject.map(value => {
+      val value1 = value
+      value1
+    })
+
+    eventualMaybeProject
+  }
+
+  def updateProjectId(command: UpdateProjectCommand): Future[Result] = {
+    val equalsProjectId = Filters.eq("projectId", command.projectIdOld)
+
+    collection.findOneAndUpdate(equalsProjectId, combine(set("projectId", command.projectIdNew)))
       .toFuture()
       .map(_ => prepareSuccessUpdateResult(command))
-      //.recover { case _ => prepareErrorResult() }
+      .recover { case _ => prepareErrorResult() }
   }
 
   private def prepareSuccessResult(project: Project): Result = {

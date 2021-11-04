@@ -20,13 +20,13 @@ class AuthenticationHandlerTest extends PlaySpec with MockitoSugar with GivenWhe
 
       val givenRequest = FakeRequest()
         .withMethod(POST)
-        .withHeaders((AUTHORIZATION, "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IxIiwicHJvamVjdF9pZCI6InVuaXF1ZV9wcm9qZWN0X2lkXzEifQ.PNDMAcOVUQXLaVR1Tp2wyAQhNUOBi7Luq5MOrlINJTg"))
+        .withHeaders((AUTHORIZATION, "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JfaWQiOiJlNTRlNTY5Mi02MGQzLTRjODQtYTI1MS02NmFhOTk4ZDdjYjEiLCJwcm9qZWN0X2lkIjoidW5pcXVlX3Byb2plY3RfaWRfMSJ9.zoHqtGCKmUekm_96wNXHY2VexdxeYOnUOuoc0H22Z34"))
 
       When("authentication is performed")
       val result = AuthenticationHandler(config).performWithAuthentication(givenRequest)
 
       Then("result is proper Jwt claim")
-      val expected = Right(JwtClaim("{\"user_id\":\"e54e5692-60d3-4c84-a251-66aa998d7cb1\",\"project_id\":\"unique_project_id_1\"}", None, None, None, None, None, None, None))
+      val expected = Right(JwtClaim("{\"author_id\":\"e54e5692-60d3-4c84-a251-66aa998d7cb1\",\"project_id\":\"unique_project_id_1\"}", None, None, None, None, None, None, None))
       result mustBe expected
     }
   }

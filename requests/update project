@@ -1,8 +1,26 @@
-Update project with:
+Successful update project with:
 {
-  "author_id": "844cd360-9256-4ee5-b17c-8d99aa6651a2",
+  "author_id": "e54e5692-60d3-4c84-a251-66aa998d7cb1",
   "project_id_old": "unique_project_id_1",
   "project_id_new": "new_unique_project_id_1"
 }
 
-curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JfaWQiOiI4NDRjZDM2MC05MjU2LTRlZTUtYjE3Yy04ZDk5YWE2NjUxYTIiLCJwcm9qZWN0X2lkX29sZCI6InVuaXF1ZV9wcm9qZWN0X2lkXzEiLCJwcm9qZWN0X2lkX25ldyI6Im5ld191bmlxdWVfcHJvamVjdF9pZF8xIn0.w5l3lvjJkODf8SheQGudfnUC29KBuun1t6Ls-k2ekdI" -X POST http://localhost:8080/project/update
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JfaWQiOiJlNTRlNTY5Mi02MGQzLTRjODQtYTI1MS02NmFhOTk4ZDdjYjEiLCJwcm9qZWN0X2lkX29sZCI6InVuaXF1ZV9wcm9qZWN0X2lkXzEiLCJwcm9qZWN0X2lkX25ldyI6Im5ld191bmlxdWVfcHJvamVjdF9pZF8xIn0.pGZsxk8Qq_y2ZzcMrTUn3lK-kpwITWRx6cwPkz_GdFU" -X POST http://localhost:8080/project/update
+
+Failed update project - not the same author:
+{
+  "author_id": "07ca636d-fe08-476d-bbb5-39309dc25dc8",
+  "project_id_old": "unique_project_id_1",
+  "project_id_new": "new_unique_project_id_1"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JfaWQiOiI0YTU4ZDQ5ZC1iYmQ4LTQ0ZjEtOWQ3Yi1kODVlM2EzMTc0N2YiLCJwcm9qZWN0X2lkX29sZCI6InVuaXF1ZV9wcm9qZWN0X2lkXzEiLCJwcm9qZWN0X2lkX25ldyI6Im5ld191bmlxdWVfcHJvamVjdF9pZF8xIn0.GKbr6KxgCwgcy0WCvH9H8D9tNvgdAFHwu9h7hZlN014" -X POST http://localhost:8080/project/update
+
+Failed update project - not the same author:
+{
+  "author_id": "07ca636d-fe08-476d-bbb5-39309dc25dc8",
+  "project_id_old": "unique_project_id_1",
+  "project_id_new": "new_unique_project_id_1"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JfaWQiOiI0YTU4ZDQ5ZC1iYmQ4LTQ0ZjEtOWQ3Yi1kODVlM2EzMTc0N2YiLCJwcm9qZWN0X2lkX29sZCI6InVuaXF1ZV9wcm9qZWN0X2lkXzEiLCJwcm9qZWN0X2lkX25ldyI6Im5ld191bmlxdWVfcHJvamVjdF9pZF8xIn0.GKbr6KxgCwgcy0WCvH9H8D9tNvgdAFHwu9h7hZlN014" -X POST http://localhost:8080/project/update

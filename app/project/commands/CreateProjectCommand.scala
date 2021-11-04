@@ -11,13 +11,13 @@ import play.api.libs.json._
 
 import scala.language.postfixOps
 
-case class CreateProjectCommand(userId: UUID, projectId: String)
+case class CreateProjectCommand(authorId: UUID, projectId: String)
 
 case object CreateProjectCommand {
   implicit def projectReads: Reads[CreateProjectCommand] =
-    ((JsPath \ "user_id").read[UUID] or Reads.pure(UUID_NIL) and
+    ((JsPath \ "author_id").read[UUID] or Reads.pure(UUID_NIL) and
     ((JsPath \ "project_id").read[String] or Reads.pure(EMPTY))
-  )((user_id, project_id) => CreateProjectCommand(user_id, project_id))
+  )((author_id, project_id) => CreateProjectCommand(author_id, project_id))
 
   def mapJwtToCommand(claim: JwtClaim): Either[Error, CreateProjectCommand] = {
     val json: JsValue = Json.parse(claim.content)

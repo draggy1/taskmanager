@@ -1,6 +1,6 @@
 package project
 
-import authentication.{DuplicatedProjectId, EmptyProjectId, EmptyUserId}
+import authentication.{DuplicatedProjectId, EmptyProjectId, EmptyAuthorId}
 import common.StringUtils.EMPTY
 import io.jvm.uuid.UUID
 import org.mockito.Mockito.when
@@ -74,7 +74,7 @@ class CreateProjectValidatorTest extends PlaySpec with MockitoSugar with GivenWh
       val result = validator.validate(command)
 
       Then("result is empty user id error")
-      whenReady(result) { value => value.left.value mustBe EmptyUserId }
+      whenReady(result) { value => value.left.value mustBe EmptyAuthorId }
     }
   }
 
@@ -88,7 +88,6 @@ class CreateProjectValidatorTest extends PlaySpec with MockitoSugar with GivenWh
         .thenReturn(Future.successful(Option.empty))
 
       When("validation is performed")
-
 
       val result = CreateProjectValidator(aggregate).validate(command)
 
