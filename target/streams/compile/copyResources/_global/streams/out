@@ -1,5 +1,0 @@
-[debug] Copy resource mappings: 
-[debug] 	(/home/kamil/Pulpit/Iterators/taskmanager/conf/application.conf,/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/classes/application.conf)
-[debug] 	(/home/kamil/Pulpit/Iterators/taskmanager/conf/logback.xml,/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/classes/logback.xml)
-[debug] 	(/home/kamil/Pulpit/Iterators/taskmanager/conf/routes,/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/classes/routes)
-[debug] 	(/home/kamil/Pulpit/Iterators/taskmanager/conf/messages,/home/kamil/Pulpit/Iterators/taskmanager/target/scala-2.13/classes/messages)

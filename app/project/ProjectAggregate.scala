@@ -12,7 +12,7 @@ class ProjectAggregate @Inject()(val repository: ProjectRepository){
     repository.create(command)
 
   def updateProject(command: UpdateProjectCommand): Future[Result] =
-    repository.updateProjectId(command)
+    repository.update(command)
 
   def getProject(query: GetProjectByIdQuery): Future[Option[Project]] =
     repository.find(query.projectId)

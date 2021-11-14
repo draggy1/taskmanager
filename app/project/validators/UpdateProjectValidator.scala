@@ -73,7 +73,7 @@ class UpdateProjectValidator(aggregate: ProjectAggregate) {
     getProject(command.projectIdOld)
       .map {
         case None => Left(ProjectIdNotFound)
-        case None => Right(command)
+        case Some(_) => Right(command)
       }
   }
 

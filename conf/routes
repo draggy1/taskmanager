@@ -5,7 +5,7 @@
 
 # An example controller showing a sample home page
 +nocsrf
-POST     /project/create            controllers.ProjectController.createProject()
+POST     /project/create            controllers.ProjectController.create()
 
 +nocsrf
-POST     /project/update            controllers.ProjectController.updateProjectId()
+POST     /project/update            controllers.ProjectController.update()

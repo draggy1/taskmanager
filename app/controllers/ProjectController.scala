@@ -19,7 +19,7 @@ class ProjectController @Inject()(val controllerComponents: ControllerComponents
    *
    * @return
    */
-  def createProject(): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] => {
+  def create(): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] => {
     CreateProjectActions(aggregate, authHandler)
       .prepare()
       .apply(request)
@@ -35,7 +35,7 @@ class ProjectController @Inject()(val controllerComponents: ControllerComponents
    *
    * @return
    */
-  def updateProjectId(): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
+  def update(): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
     UpdateProjectActions(aggregate, authHandler)
       .prepare()
       .apply(request)

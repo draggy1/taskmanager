@@ -3,8 +3,8 @@ package project
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Filters.and
 import common.StringUtils.EMPTY
+import common.responses.Response
 import common.responses.Response.getResult
-import common.responses.{ProjectUpdatedResponse, Response}
 import configuration.MongoDbManager
 import io.jvm.uuid.UUID
 import org.bson.UuidRepresentation
@@ -17,7 +17,7 @@ import org.mongodb.scala.bson.ObjectId
 import org.mongodb.scala.bson.codecs.Macros
 import org.mongodb.scala.model.Filters.equal
 import org.mongodb.scala.model.Updates.{combine, set}
-import play.api.http.Status.{CREATED, INTERNAL_SERVER_ERROR}
+import play.api.http.Status.{CREATED, INTERNAL_SERVER_ERROR, OK}
 import play.api.libs.json.{Json, Writes}
 import play.api.mvc.{ResponseHeader, Result}
 import project.commands.{CreateProjectCommand, UpdateProjectCommand}
@@ -39,22 +39,23 @@ case class ProjectRepository @Inject()(config: MongoDbManager) {
     .withCodecRegistry(codecRegistry)
     .getCollection("project")
 
-  implicit val projectWrites: Writes[Project] = (data: Project) => Json.obj(
+  implicit val projectWrites: Writes[CreateProjectCommand] = (data: CreateProjectCommand) => Json.obj(
     "author_id" -> data.authorId,
     "project_id" -> data.projectId)
 
-  implicit val updateResponseWrites: Writes[ProjectUpdatedResponse] = (data: ProjectUpdatedResponse) => Json.obj(
-    "project_id_old" -> data.oldProjectId,
-    "project_id_new" -> data.newProjectId)
+  implicit val updateResponseWrites: Writes[UpdateProjectCommand] = (data: UpdateProjectCommand) => Json.obj(
+    "author_id" -> data.authorId,
+    "project_id_old" -> data.projectIdOld,
+    "project_id_new" -> data.projectIdNew)
 
-  implicit val successWrites: Writes[Response[Project]] = Json.writes[Response[Project]]
+  implicit val successWrites: Writes[Response[CreateProjectCommand]] = Json.writes[Response[CreateProjectCommand]]
 
   def create(command: CreateProjectCommand): Future[Result] = {
     val project = Project(new ObjectId(), command.authorId, command.projectId, LocalDateTime.now())
 
     collection.insertOne(project)
       .toFuture()
-      .map(_ => prepareSuccessResult(project))
+      .map(_ => prepareSuccessResult(command))
       .recover { case _ => prepareErrorResult() }
   }
 
@@ -67,19 +68,12 @@ case class ProjectRepository @Inject()(config: MongoDbManager) {
     val equalProjectId = equal("projectId", projectId)
     val equalAuthorId = equal("authorId", authorId)
 
-    val eventualMaybeProject = collection.find(and(equalProjectId, equalAuthorId))
+    collection.find(and(equalProjectId, equalAuthorId))
       .first()
       .toFutureOption()
-
-    eventualMaybeProject.map(value => {
-      val value1 = value
-      value1
-    })
-
-    eventualMaybeProject
   }
 
-  def updateProjectId(command: UpdateProjectCommand): Future[Result] = {
+  def update(command: UpdateProjectCommand): Future[Result] = {
     val equalsProjectId = Filters.eq("projectId", command.projectIdOld)
 
     collection.findOneAndUpdate(equalsProjectId, combine(set("projectId", command.projectIdNew)))
@@ -88,14 +82,14 @@ case class ProjectRepository @Inject()(config: MongoDbManager) {
       .recover { case _ => prepareErrorResult() }
   }
 
-  private def prepareSuccessResult(project: Project): Result = {
-    val json = Json.toJson(Response[Project](success = true, "Project created", project))
+  private def prepareSuccessResult(command: CreateProjectCommand): Result = {
+    val json = Json.toJson(Response[CreateProjectCommand](success = true, "Project created", command))
     getResult(ResponseHeader(CREATED), json)
   }
 
   def prepareSuccessUpdateResult(command: UpdateProjectCommand): Result = {
-    val json = Json.toJson(Response[ProjectUpdatedResponse](success = true, "Project updated", ProjectUpdatedResponse(command.projectIdOld, command.projectIdNew)))
-    getResult(ResponseHeader(CREATED), json)
+    val json = Json.toJson(Response[UpdateProjectCommand](success = true, "Project updated", command))
+    getResult(ResponseHeader(OK), json)
   }
 
   private def prepareErrorResult(): Result = {
