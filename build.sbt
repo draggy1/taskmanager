@@ -14,6 +14,8 @@ libraryDependencies ++= Seq( jdbc , ehcache , ws , specs2 % Test , guice ,
   "org.mongodb.scala" %% "mongo-scala-driver" % "2.9.0",
   "org.scalatestplus" %% "mockito-3-4" % "3.2.9.0" % Test )
 
+coverageExcludedPackages := "controllers\\..*Reverse.*;configuration*;router*;.*Repository.*;controllers.javascript*;main.controllers.*"
+
 
 
 
