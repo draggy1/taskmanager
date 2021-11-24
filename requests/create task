@@ -1,0 +1,10 @@
+Create task with:
+{
+   "project_id": "new_project_id",
+   "start_date": "20-06-2021 08:03",
+   "duration": "1 hour 1 minute",
+   "volume": 12,
+   "comment": "Example comment"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoibmV3X3Rhc2tfaWQiLCJzdGFydF9kYXRlIjoiMjAtMDYtMjAyMSAwODowMyIsImR1cmF0aW9uIjoiNCBob3VycyAzNCBtaW51dGVzIiwidm9sdW1lIjoxMiwiY29tbWVudCI6IkV4YW1wbGUgY29tbWVudCJ9.Gxp63fUMR6c1StME77nxUvAhfvg1vrz4bXmFzWrvqcM" -X POST http://localhost:8080/task/create

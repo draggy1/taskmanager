@@ -5,7 +5,10 @@
 
 # An example controller showing a sample home page
 +nocsrf
-POST     /project/create            controllers.ProjectController.create()
+POST     /project/create            controllers.ProjectController.create
 
 +nocsrf
-POST     /project/update            controllers.ProjectController.update()
+POST     /project/update            controllers.ProjectController.update
+
++nocsrf
+POST     /task/create               controllers.TaskController.create

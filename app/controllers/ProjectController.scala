@@ -2,7 +2,7 @@ package controllers
 
 import authentication.AuthenticationHandler
 import common.responses.Response.mapErrorToResult
-import controllers.actions.{CreateProjectActions, UpdateProjectActions}
+import controllers.steps.project.{CreateProjectSteps, UpdateProjectSteps}
 import play.api.mvc._
 import project.ProjectAggregate
 
@@ -20,7 +20,7 @@ class ProjectController @Inject()(val controllerComponents: ControllerComponents
    * @return
    */
   def create(): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] => {
-    CreateProjectActions(aggregate, authHandler)
+    CreateProjectSteps(aggregate, authHandler)
       .prepare()
       .apply(request)
       .flatMap {
@@ -36,7 +36,7 @@ class ProjectController @Inject()(val controllerComponents: ControllerComponents
    * @return
    */
   def update(): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
-    UpdateProjectActions(aggregate, authHandler)
+    UpdateProjectSteps(aggregate, authHandler)
       .prepare()
       .apply(request)
       .flatMap {

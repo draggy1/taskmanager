@@ -1,4 +1,4 @@
-package controllers.actions
+package controllers.steps.project
 
 import authentication.{AuthenticationHandler, Error}
 import pdi.jwt.JwtClaim
@@ -10,8 +10,8 @@ import project.validators.CreateProjectValidator
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class CreateProjectActions (aggregate: ProjectAggregate,
-                            authHandler: AuthenticationHandler){
+class CreateProjectSteps(aggregate: ProjectAggregate,
+                         authHandler: AuthenticationHandler){
   def prepare(): Request[AnyContent] => Future[Either[Error, Future[Result]]] = {
     authenticate
       .andThen(mapToCommand)
@@ -39,6 +39,6 @@ class CreateProjectActions (aggregate: ProjectAggregate,
     }
 }
 
-case object CreateProjectActions {
-  def apply(aggregate: ProjectAggregate, authHandler: AuthenticationHandler): CreateProjectActions = new CreateProjectActions(aggregate, authHandler)
+case object CreateProjectSteps {
+  def apply(aggregate: ProjectAggregate, authHandler: AuthenticationHandler): CreateProjectSteps = new CreateProjectSteps(aggregate, authHandler)
 }

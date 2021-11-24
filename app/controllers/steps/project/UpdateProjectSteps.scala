@@ -1,4 +1,4 @@
-package controllers.actions
+package controllers.steps.project
 
 import authentication.{AuthenticationHandler, Error}
 import pdi.jwt.JwtClaim
@@ -10,15 +10,14 @@ import project.validators.UpdateProjectValidator
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class UpdateProjectActions (aggregate: ProjectAggregate,
-                            authHandler: AuthenticationHandler) {
+class UpdateProjectSteps(aggregate: ProjectAggregate,
+                         authHandler: AuthenticationHandler) {
 
-  def prepare(): Request[AnyContent] => Future[Either[Error, Future[Result]]] = {
+  def prepare(): Request[AnyContent] => Future[Either[Error, Future[Result]]] =
     authenticate
-      .andThen(mapToCommand)
-      .andThen(validate)
-      .andThen(performUpdateProject)
-  }
+    .andThen(mapToCommand)
+    .andThen(validate)
+    .andThen(performUpdateProject)
 
   private val authenticate = (request: Request[AnyContent]) => authHandler.performWithAuthentication(request)
 
@@ -40,6 +39,6 @@ class UpdateProjectActions (aggregate: ProjectAggregate,
     }
 }
 
-case object UpdateProjectActions {
-  def apply(aggregate: ProjectAggregate, authHandler: AuthenticationHandler): UpdateProjectActions = new UpdateProjectActions(aggregate, authHandler)
+case object UpdateProjectSteps {
+  def apply(aggregate: ProjectAggregate, authHandler: AuthenticationHandler): UpdateProjectSteps = new UpdateProjectSteps(aggregate, authHandler)
 }
