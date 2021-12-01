@@ -1,6 +1,7 @@
 package task.commands
 
 import authentication.Error
+import common.LocalDateTimeUtil.NIL_LOCAL_DATE_TIME
 import common.StringUtils.EMPTY
 import pdi.jwt.JwtClaim
 import play.api.http.Status
@@ -8,10 +9,12 @@ import play.api.libs.functional.syntax.{toAlternativeOps, toFunctionalBuilderOps
 import play.api.libs.json.Format.GenericFormat
 import play.api.libs.json._
 import task.TaskDuration.TASK_DURATION_EMPTY
+import task.TaskTimeDetails.getTaskEnd
 import task.{TaskDuration, TaskTimeDetails}
 
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import scala.util.Try
 
 case class CreateTaskCommand(projectId: String, taskTimeDetails: TaskTimeDetails, volume: Option[Int], comment: Option[String])
 
@@ -19,16 +22,26 @@ object CreateTaskCommand {
 
   implicit def taskReads: Reads[CreateTaskCommand] = {
     (((JsPath \ "project_id").read[String] or Reads.pure(EMPTY)) and
-      ((JsPath \ "start_date").read[String] or Reads.pure(EMPTY )) and
+      ((JsPath \ "start_date").read[String] or Reads.pure(EMPTY)) and
       (JsPath \ "duration").readNullable[String] and
       (JsPath \ "volume").readNullable[Int] and
       (JsPath \ "comment").readNullable[String]
-      )((project_id, start_date, duration, volume, comment) => CreateTaskCommand(project_id,  TaskTimeDetails(mapToLocalDateTime(start_date), mapToDuration(duration)), volume, comment))
+      )((project_id, start_date, duration, volume, comment) =>
+        CreateTaskCommand(project_id, prepareTaskTimeDetails(start_date, duration), volume, comment))
+  }
+
+  private def prepareTaskTimeDetails(start_date: String, durationOpt: Option[String]) = {
+    val startDate = mapToLocalDateTime(start_date)
+    val duration = mapToDuration(durationOpt)
+    TaskTimeDetails(startDate, getTaskEnd(startDate, duration), duration)
   }
 
   def mapToLocalDateTime(startDate: String): LocalDateTime = {
     val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
-    LocalDateTime.parse(startDate, formatter)
+    Try(LocalDateTime.parse(startDate, formatter)).toOption match {
+      case None => NIL_LOCAL_DATE_TIME
+      case Some(startDate) => startDate
+    }
   }
 
   def mapToDuration(duration: Option[String]): TaskDuration = {

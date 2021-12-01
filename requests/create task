@@ -1,10 +1,107 @@
 Create task with:
 {
-   "project_id": "new_project_id",
+   "project_id": "new_task_id",
    "start_date": "20-06-2021 08:03",
-   "duration": "1 hour 1 minute",
+   "duration": "4 hours 34 minutes",
    "volume": 12,
    "comment": "Example comment"
 }
 
 curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoibmV3X3Rhc2tfaWQiLCJzdGFydF9kYXRlIjoiMjAtMDYtMjAyMSAwODowMyIsImR1cmF0aW9uIjoiNCBob3VycyAzNCBtaW51dGVzIiwidm9sdW1lIjoxMiwiY29tbWVudCI6IkV4YW1wbGUgY29tbWVudCJ9.Gxp63fUMR6c1StME77nxUvAhfvg1vrz4bXmFzWrvqcM" -X POST http://localhost:8080/task/create
+
+Create task with (empty project id)
+{
+   "start_date": "20-06-2021 08:03",
+   "duration": "4 hours 34 minutes",
+   "volume": 12,
+   "comment": "Example comment"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFydF9kYXRlIjoiMjAtMDYtMjAyMSAwODowMyIsImR1cmF0aW9uIjoiNCBob3VycyAzNCBtaW51dGVzIiwidm9sdW1lIjoxMiwiY29tbWVudCI6IkV4YW1wbGUgY29tbWVudCJ9.gaHSGwbLp9-xOJGiElseUmThC7wG4aMJk4L1zlpkiiU" -X POST http://localhost:8080/task/create
+
+Create task with (not proper start date)
+{
+   "project_id": "new_task_id",
+   "start_date": "skdgjk",
+   "duration": "4 hours 34 minutes",
+   "volume": 12,
+   "comment": "Example comment"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoibmV3X3Rhc2tfaWQiLCJzdGFydF9kYXRlIjoic2tkZ2prIiwiZHVyYXRpb24iOiI0IGhvdXJzIDM0IG1pbnV0ZXMiLCJ2b2x1bWUiOjEyLCJjb21tZW50IjoiRXhhbXBsZSBjb21tZW50In0.L89bjlC1cYjkmXdN1cljPWN9lqvdWXup7d-gTlTxQWg" -X POST http://localhost:8080/task/create
+
+Create task with (not proper duration):
+{
+   "project_id": "new_task_id",
+   "start_date": "20-06-2021 08:03",
+   "duration": "dfgkdjf dfjgdfjkdfgd dfgi dfig",
+   "volume": 12,
+   "comment": "Example comment"
+}
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoibmV3X3Rhc2tfaWQiLCJzdGFydF9kYXRlIjoiMjAtMDYtMjAyMSAwODowMyIsImR1cmF0aW9uIjoiZGZna2RqZiBkZmpnZGZqa2RmZ2QgZGZnaSBkZmlnIiwidm9sdW1lIjoxMiwiY29tbWVudCI6IkV4YW1wbGUgY29tbWVudCJ9.muQJIdN8qwXuqD1ZSW-Ay79TfwMK2nL6-51wOXdpdS0" -X POST http://localhost:8080/task/create
+
+Create task with (project id not exist):
+{
+   "project_id": "task_id",
+   "start_date": "22-06-2021 07:56",
+   "duration": "2 hours 12 minutes",
+   "volume": 12,
+   "comment": "Example comment"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoidGFza19pZCIsInN0YXJ0X2RhdGUiOiIyMi0wNi0yMDIxIDA3OjU2IiwiZHVyYXRpb24iOiIyIGhvdXJzIDEyIG1pbnV0ZXMiLCJ2b2x1bWUiOjEyLCJjb21tZW50IjoiRXhhbXBsZSBjb21tZW50In0.QH90fFCxoOfsX_F38wfD-UE5mkEWO40Uewv44ZmsgZo" -X POST http://localhost:8080/task/create
+
+Create task with (is in conflict in right side)
+{
+   "project_id": "new_task_id",
+   "start_date": "20-06-2021 10:00",
+   "duration": "7 hours 34 minutes",
+   "volume": 12,
+   "comment": "Example comment"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoibmV3X3Rhc2tfaWQiLCJzdGFydF9kYXRlIjoiMjAtMDYtMjAyMSAxMDowMCIsImR1cmF0aW9uIjoiNyBob3VycyAzNCBtaW51dGVzIiwidm9sdW1lIjoxMiwiY29tbWVudCI6IkV4YW1wbGUgY29tbWVudCJ9.u4XOZfPygyn9lZTavJscTBf0BAI5DfOtS97wyoYbnGo" -X POST http://localhost:8080/task/create
+
+Create task with (is in conflict in left side)
+{
+   "project_id": "new_task_id",
+   "start_date": "20-06-2021 05:00",
+   "duration": "4 hours 12 minutes",
+   "volume": 12,
+   "comment": "Example comment"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoibmV3X3Rhc2tfaWQiLCJzdGFydF9kYXRlIjoiMjAtMDYtMjAyMSAwNTowMCIsImR1cmF0aW9uIjoiNCBob3VycyAxMiBtaW51dGVzIiwidm9sdW1lIjoxMiwiY29tbWVudCI6IkV4YW1wbGUgY29tbWVudCJ9.gai9fIhM6AJeSdk1vhBEfffI5MNfGLhpEDhqkXD3Tv4" -X POST http://localhost:8080/task/create
+
+Create task with (new task inside the old)
+{
+   "project_id": "new_task_id",
+   "start_date": "20-06-2021 09:00",
+   "duration": "1 hour",
+   "volume": 12,
+   "comment": "Example comment"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoibmV3X3Rhc2tfaWQiLCJzdGFydF9kYXRlIjoiMjAtMDYtMjAyMSAwOTowMCIsImR1cmF0aW9uIjoiMSBob3VyIiwidm9sdW1lIjoxMiwiY29tbWVudCI6IkV4YW1wbGUgY29tbWVudCJ9.8DYC1F1bb4u2e4vjGzaRkak4YOG4dokDhcWxmUWh7DA" -X POST http://localhost:8080/task/create
+
+Create task with (new task fully on the left side)
+{
+   "project_id": "new_task_id",
+   "start_date": "20-06-2021 04:00",
+   "duration": "1 hour",
+   "volume": 12,
+   "comment": "Example comment"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoibmV3X3Rhc2tfaWQiLCJzdGFydF9kYXRlIjoiMjAtMDYtMjAyMSAwNDowMCIsImR1cmF0aW9uIjoiMSBob3VyIiwidm9sdW1lIjoxMiwiY29tbWVudCI6IkV4YW1wbGUgY29tbWVudCJ9.6jFmUViBR78Qots819WeHGcnF2HYNbTIOw0j_-NVn4U" -X POST http://localhost:8080/task/create
+
+Create task with (new task fully on the left side)
+{
+      "project_id": "new_task_id",
+      "start_date": "20-06-2021 13:00",
+      "duration": "1 hour",
+      "volume": 12,
+      "comment": "Example comment"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJwcm9qZWN0X2lkIjoibmV3X3Rhc2tfaWQiLCJzdGFydF9kYXRlIjoiMjAtMDYtMjAyMSAxMzowMCIsImR1cmF0aW9uIjoiMSBob3VyIiwidm9sdW1lIjoxMiwiY29tbWVudCI6IkV4YW1wbGUgY29tbWVudCJ9.tGXj4P2Pde7q3zU2K95D2MyNo56knQ9wW8WY0B3s73U" -X POST http://localhost:8080/task/create

@@ -13,3 +13,6 @@ case object EmptyAuthorId extends Error("Provided author id is not valid", Statu
 case object NotValidUUID extends Error("Provided author id is not valid UUID", Status.BAD_REQUEST)
 case object UserIsNotAuthor extends Error("Provided author is not author of the project", Status.BAD_REQUEST)
 case object ProjectIdNotFound extends Error("Provided project could not be found", Status.BAD_REQUEST)
+case object IncorrectDate extends Error("Provided date is incorrect", Status.BAD_REQUEST)
+case object IncorrectDuration extends Error("Provided duration is incorrect", Status.BAD_REQUEST)
+case object TaskInConflictWithAnother extends Error("Provided task is in conflict with another task", Status.BAD_REQUEST)

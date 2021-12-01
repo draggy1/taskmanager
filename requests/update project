@@ -24,3 +24,12 @@ Failed update project - not the same author:
 }
 
 curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JfaWQiOiI0YTU4ZDQ5ZC1iYmQ4LTQ0ZjEtOWQ3Yi1kODVlM2EzMTc0N2YiLCJwcm9qZWN0X2lkX29sZCI6InVuaXF1ZV9wcm9qZWN0X2lkXzEiLCJwcm9qZWN0X2lkX25ldyI6Im5ld191bmlxdWVfcHJvamVjdF9pZF8xIn0.GKbr6KxgCwgcy0WCvH9H8D9tNvgdAFHwu9h7hZlN014" -X POST http://localhost:8080/project/update
+
+Successful update project with:
+{
+  "author_id": "e54e5692-60d3-4c84-a251-66aa998d7cb1",
+  "project_id_old": "unique_project_id_1",
+  "project_id_new": "new_task_id"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JfaWQiOiJlNTRlNTY5Mi02MGQzLTRjODQtYTI1MS02NmFhOTk4ZDdjYjEiLCJwcm9qZWN0X2lkX29sZCI6InVuaXF1ZV9wcm9qZWN0X2lkXzEiLCJwcm9qZWN0X2lkX25ldyI6Im5ld190YXNrX2lkIn0.826xBc4jhuPCOkB37fRiw6bTnxOxN_nZJH0w4d8Qixc" -X POST http://localhost:8080/project/update
