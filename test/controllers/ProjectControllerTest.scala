@@ -2,6 +2,7 @@ package controllers
 
 import akka.util.ByteString
 import authentication.AuthenticationHandler
+import common.StringUtils
 import io.jvm.uuid.UUID
 import org.mockito.Mockito.when
 import org.scalatest.GivenWhenThen
@@ -27,6 +28,39 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
   }
 
   "ProjectController#create" should {
+    "be failed because of empty Bearer token" in {
+      Given("Data needed to prepare request, expected result")
+      val bearer = StringUtils.EMPTY
+
+      val expectedJson =
+        """
+      {
+        "success":false,
+        "message":"Request not contains bearer token",
+        "data": ""
+      }
+      """
+
+      val config = mock[Configuration]
+      when(config.get[String]("secret.key")).thenReturn("Test secret key")
+
+      val repository = mock[ProjectRepository]
+
+      val projectAggregate = new ProjectAggregate(repository)
+      val authHandler = AuthenticationHandler(config)
+      val givenRequest = FakeRequest()
+        .withMethod(POST)
+        .withHeaders((AUTHORIZATION, bearer))
+
+      When("Creation method is performed")
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val result: Future[Result] = controller.create().apply(givenRequest)
+
+      Then("Result should be with status Created with expected json as body")
+      status(result) mustBe BAD_REQUEST
+      contentAsJson(result) mustBe Json.parse(expectedJson)
+    }
+
     "be successful" in {
       Given("Data needed to prepare request, expected result")
       val authorId = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb1")
@@ -182,6 +216,37 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
   }
 
   "ProjectController#update" should {
+    "be failed because of empty Bearer token" in {
+      val bearer = StringUtils.EMPTY
+      val expectedJson =
+        """
+        {
+          "success":false,
+          "message":"Request not contains bearer token",
+          "data": ""
+        }
+        """
+
+        val config = mock[Configuration]
+        when(config.get[String]("secret.key")).thenReturn("Test secret key")
+
+        val repository = mock[ProjectRepository]
+
+        val projectAggregate = new ProjectAggregate(repository)
+        val authHandler = AuthenticationHandler(config)
+        val givenRequest = FakeRequest()
+          .withMethod(POST)
+          .withHeaders((AUTHORIZATION, bearer))
+
+        When("Update method is performed")
+        val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+        val result: Future[Result] = controller.update().apply(givenRequest)
+
+        Then("Result should be with status Ok with expected json as body")
+        status(result) mustBe BAD_REQUEST
+        contentAsJson(result) mustBe Json.parse(expectedJson)
+    }
+
     "be successful" in {
       Given("Data needed to prepare request, expected result")
       val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9" +

@@ -105,3 +105,14 @@ Create task with (new task fully on the left side)
 }
 
 curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJwcm9qZWN0X2lkIjoibmV3X3Rhc2tfaWQiLCJzdGFydF9kYXRlIjoiMjAtMDYtMjAyMSAxMzowMCIsImR1cmF0aW9uIjoiMSBob3VyIiwidm9sdW1lIjoxMiwiY29tbWVudCI6IkV4YW1wbGUgY29tbWVudCJ9.tGXj4P2Pde7q3zU2K95D2MyNo56knQ9wW8WY0B3s73U" -X POST http://localhost:8080/task/create
+
+Create task with (new successfully task)
+{
+      "project_id": "project_id_new",
+      "start_date": "23-12-2021 13:00",
+      "duration": "2 hours 32 minutes",
+      "volume": 43,
+      "comment": "Random comment"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoidW5pcXVlX3Byb2plY3RfaWRfMiIsInN0YXJ0X2RhdGUiOiIyMy0xMi0yMDIxIDEzOjAwIiwiZHVyYXRpb24iOiIyIGhvdXJzIDMyIG1pbnV0ZXMiLCJ2b2x1bWUiOjQzLCJjb21tZW50IjoiUmFuZG9tIGNvbW1lbnQifQ.lo9V4cDsaio49GEBuPCOF9U7R8UptYcUMo1aX3USEsE" -X POST http://localhost:8080/task/create

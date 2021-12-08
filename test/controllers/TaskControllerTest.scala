@@ -2,6 +2,7 @@ package controllers
 
 import akka.util.ByteString
 import authentication.AuthenticationHandler
+import common.StringUtils
 import io.jvm.uuid.UUID
 import org.bson.types.ObjectId
 import org.mockito.Mockito.when
@@ -31,6 +32,41 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
   }
 
   "TaskController#create" should {
+    "be failed because of empty Bearer token" in {
+      Given("Data needed to prepare request, expected result")
+      val bearer = StringUtils.EMPTY
+
+      val expectedJson =
+        """
+      {
+        "success":false,
+        "message":"Request not contains bearer token",
+        "data": ""
+      }
+      """
+
+      val config = mock[Configuration]
+      when(config.get[String]("secret.key")).thenReturn("Test secret key")
+
+      val taskRepository = mock[TaskRepository]
+      val projectRepository = mock[ProjectRepository]
+
+      val taskAggregate = new TaskAggregate(taskRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository)
+      val authHandler = AuthenticationHandler(config)
+      val givenRequest = FakeRequest()
+        .withMethod(POST)
+        .withHeaders((AUTHORIZATION, bearer))
+
+      When("Creation method is performed")
+      val controller = new TaskController(Helpers.stubControllerComponents(), taskAggregate, projectAggregate, authHandler)
+      val result: Future[Result] = controller.create().apply(givenRequest)
+
+      Then("Result should be with status Bad Request with expected json as body")
+      status(result) mustBe BAD_REQUEST
+      contentAsJson(result) mustBe Json.parse(expectedJson)
+    }
+
     "be successful" in {
       Given("Data needed to prepare request, expected result")
       val projectId = "unique_project_id_2"
@@ -92,9 +128,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       status(result) mustBe CREATED
       contentAsJson(result) mustBe Json.parse(expectedJson)
     }
-  }
 
-  "TaskController#create" should {
     "returns error response because of empty project id" in {
       Given("Data needed to prepare request, expected result")
 
@@ -132,9 +166,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       status(result) mustBe BAD_REQUEST
       contentAsJson(result) mustBe Json.parse(expectedJson)
     }
-  }
 
-  "TaskController#create" should {
     "returns error response because of not proper start date" in {
       Given("Data needed to prepare request, expected result")
       val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoidW5pcXVlX3Byb2plY3RfaWRfMiIsInN0" +
@@ -171,9 +203,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       status(result) mustBe BAD_REQUEST
       contentAsJson(result) mustBe Json.parse(expectedJson)
     }
-  }
 
-  "TaskController#create" should {
     "returns error response because of not proper duration" in {
       Given("Data needed to prepare request, expected result")
 
@@ -211,10 +241,8 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       status(result) mustBe BAD_REQUEST
       contentAsJson(result) mustBe Json.parse(expectedJson)
     }
-  }
 
-  "TaskController#create" should {
-    "returns error response because of existing time in conflict" in {
+    "returns error response because of existing task is in conflict" in {
       Given("Data needed to prepare request, expected result")
       val projectId = "unique_project_id_2"
       val start = LocalDateTime.of(2021, 12, 23, 13, 0, 0)
@@ -244,6 +272,56 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
 
       when(taskRepository.find(query))
         .thenReturn(Future.successful(Option(prepareGivenTask(projectId))))
+
+      val taskAggregate = new TaskAggregate(taskRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository)
+      val authHandler = AuthenticationHandler(config)
+      val givenRequest = FakeRequest()
+        .withMethod(POST)
+        .withHeaders((AUTHORIZATION, bearer))
+
+      When("Creation method is performed")
+      val controller = new TaskController(Helpers.stubControllerComponents(), taskAggregate, projectAggregate, authHandler)
+      val result: Future[Result] = controller.create().apply(givenRequest)
+
+      Then("Result should be with status Created with expected json as body")
+      status(result) mustBe BAD_REQUEST
+      contentAsJson(result) mustBe Json.parse(expectedJson)
+    }
+
+    "returns error response because provided project, to which task is created, is not exist" in {
+      Given("Data needed to prepare request, expected result")
+      val projectId = "unique_project_id_2"
+      val start = LocalDateTime.of(2021, 12, 23, 13, 0, 0)
+      val duration = TaskDuration(2, 32)
+      val end = LocalDateTime.of(2021, 12, 23, 15, 32, 0)
+      val timeDetails = TaskTimeDetails(start, end, duration)
+
+      val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoidW5pcXVlX3Byb2plY3RfaWRfMiIsInN0Y" +
+        "XJ0X2RhdGUiOiIyMy0xMi0yMDIxIDEzOjAwIiwiZHVyYXRpb24iOiIyIGhvdXJzIDMyIG1pbnV0ZXMiLCJ2b2x1bWUiOjQzLCJjb21tZW50I" +
+        "joiUmFuZG9tIGNvbW1lbnQifQ.VLBZBiTAMu-3WMEu6rSL0MpshGpuSVwSircoIs1iTqM"
+
+      val expectedJson =
+        """
+      {
+        "success":false,
+        "message":"Provided project could not be found",
+        "data": ""
+      }
+      """
+
+      val config = mock[Configuration]
+      when(config.get[String]("secret.key")).thenReturn("Test secret key")
+
+      val taskRepository = mock[TaskRepository]
+      val projectRepository = mock[ProjectRepository]
+      val body = HttpEntity.Strict(ByteString(expectedJson), Some(ContentTypes.JSON))
+      val response = Result(ResponseHeader(CREATED), body)
+      val query = GetTaskByProjectIdAndTimeDetailsQuery(projectId, timeDetails)
+
+      when(taskRepository.find(query)).thenReturn(Future.successful(Option.empty))
+      when(projectRepository.find(projectId))
+        .thenReturn(Future.successful(Option.empty))
 
       val taskAggregate = new TaskAggregate(taskRepository)
       val projectAggregate = new ProjectAggregate(projectRepository)

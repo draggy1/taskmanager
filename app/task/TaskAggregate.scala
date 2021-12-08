@@ -2,7 +2,7 @@ package task
 
 import play.api.mvc.Result
 import task.commands.CreateTaskCommand
-import task.queries.{GetTaskByProjectIdAndTimeDetailsQuery, GetTaskByProjectIdQuery}
+import task.queries.GetTaskByProjectIdAndTimeDetailsQuery
 
 import javax.inject.Inject
 import scala.concurrent.Future
@@ -12,6 +12,4 @@ class TaskAggregate @Inject()(val repository: TaskRepository){
 
   def getTask(query: GetTaskByProjectIdAndTimeDetailsQuery): Future[Option[Task]] =
     repository.find(query)
-
-  def getTask(query: GetTaskByProjectIdQuery): Future[Option[Task]] = repository.find(query)
 }

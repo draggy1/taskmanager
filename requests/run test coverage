@@ -1,0 +1,9 @@
+1. sbt
+2. compile
+3. test
+
+1. clean
+2. compile
+2. test
+3. coverage
+4. coverageReport
