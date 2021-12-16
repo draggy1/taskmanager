@@ -2,7 +2,7 @@ package project.validators
 
 import authentication.{DuplicatedProjectId, EmptyAuthorId, EmptyProjectId, Error, ProjectIdNotFound, UserIsNotAuthor}
 import common.UUIDUtils.UUID_NIL
-import project.{Project, ProjectAggregate}
+import project.ProjectAggregate
 import project.commands.UpdateProjectCommand
 import project.queries.{GetProjectByIdAndAuthorIdQuery, GetProjectByIdQuery}
 
@@ -59,10 +59,7 @@ class UpdateProjectValidator(aggregate: ProjectAggregate) {
     }
 
   private def isUserAuthorOfProject(command: UpdateProjectCommand): Future[Either[Error, UpdateProjectCommand]] = {
-    val project: Future[Option[Project]] =
-      aggregate.getProject(GetProjectByIdAndAuthorIdQuery(command.projectIdOld, command.authorId))
-
-    project
+    aggregate.getProject(GetProjectByIdAndAuthorIdQuery(command.projectIdOld, command.authorId))
       .map {
         case None => Left(UserIsNotAuthor)
         case Some(_) => Right(command)

@@ -74,10 +74,12 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val duration = TaskDuration(2, 32)
       val end = LocalDateTime.of(2021, 12, 23, 15, 32, 0)
       val timeDetails = TaskTimeDetails(start, end, duration)
+      val authorId = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb1")
 
-      val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoidW5pcXVlX3Byb2plY3RfaWRfMiIsInN0Y" +
-        "XJ0X2RhdGUiOiIyMy0xMi0yMDIxIDEzOjAwIiwiZHVyYXRpb24iOiIyIGhvdXJzIDMyIG1pbnV0ZXMiLCJ2b2x1bWUiOjQzLCJjb21tZW50I" +
-        "joiUmFuZG9tIGNvbW1lbnQifQ.VLBZBiTAMu-3WMEu6rSL0MpshGpuSVwSircoIs1iTqM"
+      val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoidW5pcXVlX3Byb2plY3RfaWRfMiIsImF" +
+        "1dGhvcl9pZCI6ImU1NGU1NjkyLTYwZDMtNGM4NC1hMjUxLTY2YWE5OThkN2NiMSIsInN0YXJ0X2RhdGUiOiIyMy0xMi0yMDIxIDEzOjAwI" +
+        "iwiZHVyYXRpb24iOiIyIGhvdXJzIDMyIG1pbnV0ZXMiLCJ2b2x1bWUiOjQzLCJjb21tZW50IjoiUmFuZG9tIGNvbW1lbnQifQ.1a4plTmN" +
+        "PjW2kQBOkuf2quvCpnHQg6HQ0uUctR1GqtI"
 
       val expectedJson =
         """
@@ -86,6 +88,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
         "message":"Task created",
         "data": {
           "project_id":"unique_project_id_2",
+          "author_id":"e54e5692-60d3-4c84-a251-66aa998d7cb1",
           "task_time_details": {
             "start_date":"2021-12-23T13:00:00",
             "duration": {
@@ -108,9 +111,9 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val query = GetTaskByProjectIdAndTimeDetailsQuery(projectId, timeDetails)
 
       when(taskRepository.find(query)).thenReturn(Future.successful(Option.empty))
-      when(projectRepository.find(projectId))
-        .thenReturn(Future.successful(Option(Project(UUID("e54e5692-60d3-4c84-a251-66aa998d7cb1"), projectId))))
-      when(taskRepository.create(CreateTaskCommand(projectId, timeDetails, Option(43), Option("Random comment"))))
+      when(projectRepository.find(projectId, authorId))
+        .thenReturn(Future.successful(Option(Project(authorId, projectId))))
+      when(taskRepository.create(CreateTaskCommand(projectId, authorId, timeDetails, Option(43), Option("Random comment"))))
         .thenReturn(Future.successful(response))
 
       val taskAggregate = new TaskAggregate(taskRepository)
@@ -289,17 +292,19 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       contentAsJson(result) mustBe Json.parse(expectedJson)
     }
 
-    "returns error response because provided project, to which task is created, is not exist" in {
+    "returns an error response because the specified project to which the task is created does not exist" in {
       Given("Data needed to prepare request, expected result")
       val projectId = "unique_project_id_2"
       val start = LocalDateTime.of(2021, 12, 23, 13, 0, 0)
       val duration = TaskDuration(2, 32)
       val end = LocalDateTime.of(2021, 12, 23, 15, 32, 0)
       val timeDetails = TaskTimeDetails(start, end, duration)
+      val authorId = UUID("ea2550d0-2272-470e-8265-00f2946dc817")
 
-      val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoidW5pcXVlX3Byb2plY3RfaWRfMiIsInN0Y" +
-        "XJ0X2RhdGUiOiIyMy0xMi0yMDIxIDEzOjAwIiwiZHVyYXRpb24iOiIyIGhvdXJzIDMyIG1pbnV0ZXMiLCJ2b2x1bWUiOjQzLCJjb21tZW50I" +
-        "joiUmFuZG9tIGNvbW1lbnQifQ.VLBZBiTAMu-3WMEu6rSL0MpshGpuSVwSircoIs1iTqM"
+      val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoidW5pcXVlX3Byb2plY3RfaWRfMiIsImF" +
+        "1dGhvcl9pZCI6ImVhMjU1MGQwLTIyNzItNDcwZS04MjY1LTAwZjI5NDZkYzgxNyIsInN0YXJ0X2RhdGUiOiIyMy0xMi0yMDIxIDEzOjAwIi" +
+        "wiZHVyYXRpb24iOiIyIGhvdXJzIDMyIG1pbnV0ZXMiLCJ2b2x1bWUiOjQzLCJjb21tZW50IjoiUmFuZG9tIGNvbW1lbnQifQ.3B4f9RCgJ" +
+        "RxnN-pGgc5Ecw2ow8d9StzLaLd5sCkvyZo"
 
       val expectedJson =
         """
@@ -315,12 +320,10 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
 
       val taskRepository = mock[TaskRepository]
       val projectRepository = mock[ProjectRepository]
-      val body = HttpEntity.Strict(ByteString(expectedJson), Some(ContentTypes.JSON))
-      val response = Result(ResponseHeader(CREATED), body)
       val query = GetTaskByProjectIdAndTimeDetailsQuery(projectId, timeDetails)
 
       when(taskRepository.find(query)).thenReturn(Future.successful(Option.empty))
-      when(projectRepository.find(projectId))
+      when(projectRepository.find(projectId, authorId))
         .thenReturn(Future.successful(Option.empty))
 
       val taskAggregate = new TaskAggregate(taskRepository)
@@ -345,6 +348,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
     val duration = TaskDuration(2, 0)
     val end = LocalDateTime.of(2021, 12, 23, 14, 0, 0)
     val details = TaskTimeDetails(start, end, duration)
-    Task(ObjectId.get(), projectId, details, Option.empty, Option.empty)
+    val authorId = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb1")
+    Task(ObjectId.get(), projectId, authorId, details, Option.empty, Option.empty)
   }
 }

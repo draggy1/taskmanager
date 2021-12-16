@@ -12,3 +12,6 @@ POST     /project/update            controllers.ProjectController.update
 
 +nocsrf
 POST     /task/create               controllers.TaskController.create
+
++nocsrf
+DELETE     /task/delete             controllers.TaskController.delete

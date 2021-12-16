@@ -1,13 +1,14 @@
 Create task with:
 {
-   "project_id": "new_task_id",
+   "project_id": "project_id",
+   "author_id": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
    "start_date": "20-06-2021 08:03",
    "duration": "4 hours 34 minutes",
    "volume": 12,
    "comment": "Example comment"
 }
 
-curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoibmV3X3Rhc2tfaWQiLCJzdGFydF9kYXRlIjoiMjAtMDYtMjAyMSAwODowMyIsImR1cmF0aW9uIjoiNCBob3VycyAzNCBtaW51dGVzIiwidm9sdW1lIjoxMiwiY29tbWVudCI6IkV4YW1wbGUgY29tbWVudCJ9.Gxp63fUMR6c1StME77nxUvAhfvg1vrz4bXmFzWrvqcM" -X POST http://localhost:8080/task/create
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoicHJvamVjdF9pZCIsImF1dGhvcl9pZCI6ImU1NGU1NjkyLTYwZDMtNGM4NC1hMjUxLTY2YWE5OThkN2NiMiIsInN0YXJ0X2RhdGUiOiIyMC0wNi0yMDIxIDA4OjAzIiwiZHVyYXRpb24iOiI0IGhvdXJzIDM0IG1pbnV0ZXMiLCJ2b2x1bWUiOjEyLCJjb21tZW50IjoiRXhhbXBsZSBjb21tZW50In0.IQD3rrOcn312NjkLMYbW9LgWb5p9hTKgaZBcf5of0Rk" -X POST http://localhost:8080/task/create
 
 Create task with (empty project id)
 {

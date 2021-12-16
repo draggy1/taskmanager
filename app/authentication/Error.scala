@@ -16,3 +16,4 @@ case object ProjectIdNotFound extends Error("Provided project could not be found
 case object IncorrectDate extends Error("Provided date is incorrect", Status.BAD_REQUEST)
 case object IncorrectDuration extends Error("Provided duration is incorrect", Status.BAD_REQUEST)
 case object TaskInConflictWithAnother extends Error("Provided task is in conflict with another task", Status.BAD_REQUEST)
+case object TaskToDeleteNotExist extends Error("Task not exist for provided project id and start", Status.BAD_REQUEST)

@@ -3,7 +3,7 @@ package task.validators
 import authentication.{EmptyProjectId, Error, IncorrectDate, IncorrectDuration, ProjectIdNotFound, TaskInConflictWithAnother}
 import common.LocalDateTimeUtil.NIL_LOCAL_DATE_TIME
 import project.ProjectAggregate
-import project.queries.GetProjectByIdQuery
+import project.queries.GetProjectByIdAndAuthorIdQuery
 import task.TaskAggregate
 import task.TaskDuration.TASK_DURATION_EMPTY
 import task.commands.CreateTaskCommand
@@ -55,7 +55,7 @@ class CreateTaskValidator(taskAggregate: TaskAggregate, projectAggregate: Projec
     }
 
   private def projectExist(command: CreateTaskCommand) = {
-    val query = GetProjectByIdQuery(command.projectId)
+    val query = GetProjectByIdAndAuthorIdQuery(command.projectId, command.authorId)
     projectAggregate.getProject(query)
       .map {
         case None => Left(ProjectIdNotFound)

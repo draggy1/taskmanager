@@ -1,0 +1,44 @@
+Delete task successful:
+{
+  "project_id": "project_id",
+  "author_id": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
+  "start_date": "20.06.2021 08:03:00"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoicHJvamVjdF9pZCIsImF1dGhvcl9pZCI6ImU1NGU1NjkyLTYwZDMtNGM4NC1hMjUxLTY2YWE5OThkN2NiMiIsInN0YXJ0X2RhdGUiOiIyMC0wNi0yMDIxIDA4OjAzIn0.DZlBPTk-2GxuaqYst14fe6tIzHjH1RMXvPD0Mpblm4A" -X DELETE http://localhost:8080/task/delete
+
+Delete task - empty project id:
+{
+  "project_id": "",
+  "author_id": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
+  "start_date": "20.06.2021 08:03:00"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoiIiwiYXV0aG9yX2lkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwic3RhcnRfZGF0ZSI6IjIwLTA2LTIwMjEgMDg6MDMifQ.GWZD5nJPUimGjpLRin8DmGDIQVCkKsx-dhiKSh-4uaw" -X DELETE http://localhost:8080/task/delete
+
+Delete task - not proper author id:
+{
+  "project_id": "project_id",
+  "author_id": "dnkjdsng",
+  "start_date": "20-06-2021 08:03"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoicHJvamVjdF9pZCIsImF1dGhvcl9pZCI6ImRua2pkc25nIiwic3RhcnRfZGF0ZSI6IjIwLTA2LTIwMjEgMDg6MDMifQ.CQHrBW_Ri4hNz4WYeEubJ_5i2HFxeZLGLoLwNYmqbz0" -X DELETE http://localhost:8080/task/delete
+
+Delete task - not proper author id:
+{
+  "project_id": "project_id",
+  "author_id": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
+  "start_date": "s;fgjdklfj"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoicHJvamVjdF9pZCIsImF1dGhvcl9pZCI6ImU1NGU1NjkyLTYwZDMtNGM4NC1hMjUxLTY2YWE5OThkN2NiMiIsInN0YXJ0X2RhdGUiOiJzO2ZnamRrbGZqIn0.pXhnBvEq-dbnbvtwfH_EDfD4-5_pudwYKXFML8JUgyU" -X DELETE http://localhost:8080/task/delete
+
+Delete task successful - :
+{
+  "project_id": "project_id",
+  "author_id": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
+  "start_date": "s;fgjdklfj"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoicHJvamVjdF8yIiwiYXV0aG9yX2lkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwic3RhcnRfZGF0ZSI6IjIwLTA2LTIwMjEgMDg6MDMifQ.WZ2B21Y3V6nFi8N8Xj_jWJmeAYX2N02y4wWTVyM9W50" -X DELETE http://localhost:8080/task/delete
