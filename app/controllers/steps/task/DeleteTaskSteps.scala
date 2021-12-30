@@ -39,8 +39,6 @@ class DeleteTaskSteps (taskAggregate: TaskAggregate,
       case Left(result) => Left(result)
       case Right(command) => Right(taskAggregate.deleteTask(command))
     }
-
-
 }
 
 object DeleteTaskSteps {

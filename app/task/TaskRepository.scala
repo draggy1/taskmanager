@@ -15,7 +15,7 @@ import org.mongodb.scala.bson.ObjectId
 import org.mongodb.scala.bson.codecs.Macros
 import org.mongodb.scala.model.Filters.{equal, gt, lt}
 import org.mongodb.scala.model.Updates.{combine, set}
-import play.api.http.Status.{CREATED, INTERNAL_SERVER_ERROR}
+import play.api.http.Status.{CREATED, INTERNAL_SERVER_ERROR, OK}
 import play.api.libs.json.{Json, Writes}
 import play.api.mvc.{ResponseHeader, Result}
 import task.commands.{CreateTaskCommand, DeleteTaskCommand}
@@ -28,10 +28,8 @@ import scala.concurrent.Future
 
 case class TaskRepository @Inject()(config: MongoDbManager){
   private val taskCodecProvider: CodecProvider = Macros.createCodecProvider[Task]()
-
-  private val timeDetailsCodecProvider: CodecProvider = Macros.createCodecProvider[TaskTimeDetails]()
-
   private val taskDurationCodecProvider: CodecProvider = Macros.createCodecProvider[TaskDuration]()
+  private val timeDetailsCodecProvider: CodecProvider = Macros.createCodecProvider[TaskTimeDetails]()
   private val uuidCodec = new UuidCodec(UuidRepresentation.STANDARD)
   private val uuidRegistry: CodecRegistry = CodecRegistries.fromCodecs(uuidCodec)
   private val codecRegistry: CodecRegistry =
@@ -41,7 +39,7 @@ case class TaskRepository @Inject()(config: MongoDbManager){
     .withCodecRegistry(codecRegistry)
     .getCollection("task")
   implicit val taskDuration: Writes[TaskDuration] = (taskDuration: TaskDuration) => Json.obj(
-    "hours" ->taskDuration.hoursValue,
+    "hours" -> taskDuration.hoursValue,
     "minutes" -> taskDuration.minutesValue)
 
   private implicit val timeDetailsWrites: Writes[TaskTimeDetails] = (taskTimeDetails: TaskTimeDetails) => Json.obj(
@@ -101,7 +99,7 @@ case class TaskRepository @Inject()(config: MongoDbManager){
       .toFutureOption()
   }
 
-  def deleteTask(command: DeleteTaskCommand): Future[Result] = {
+  def delete(command: DeleteTaskCommand): Future[Result] = {
     val equalsProjectId = equal("projectId", command.projectId)
     val equalsTaskStart = equal("taskTimeDetails.start", command.start)
     val andCondition = and(equalsProjectId, equalsTaskStart)
@@ -118,8 +116,8 @@ case class TaskRepository @Inject()(config: MongoDbManager){
   }
 
   private def prepareSuccessDeleteResult(command: DeleteTaskCommand): Result = {
-    val json = Json.toJson(Response[DeleteTaskCommand](success = true, "Task created", command))
-    getResult(ResponseHeader(CREATED), json)
+    val json = Json.toJson(Response[DeleteTaskCommand](success = true, "Task deleted", command))
+    getResult(ResponseHeader(OK), json)
   }
 
   private def prepareErrorResult(): Result = {

@@ -10,7 +10,6 @@ case object IncorrectJwtToken extends Error("Could not decode JWT token", Status
 case object DuplicatedProjectId extends Error("Provided project id already exist", Status.BAD_REQUEST)
 case object EmptyProjectId extends Error("Provided project id is empty", Status.BAD_REQUEST)
 case object EmptyAuthorId extends Error("Provided author id is not valid", Status.BAD_REQUEST)
-case object NotValidUUID extends Error("Provided author id is not valid UUID", Status.BAD_REQUEST)
 case object UserIsNotAuthor extends Error("Provided author is not author of the project", Status.BAD_REQUEST)
 case object ProjectIdNotFound extends Error("Provided project could not be found", Status.BAD_REQUEST)
 case object IncorrectDate extends Error("Provided date is incorrect", Status.BAD_REQUEST)

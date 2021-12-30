@@ -60,7 +60,8 @@ class DeleteTaskValidator(taskAggregate: TaskAggregate, projectAggregate: Projec
     }
 
   private def isUserAuthorOfProject(command: DeleteTaskCommand): Future[Either[Error, DeleteTaskCommand]] = {
-    projectAggregate.getProject(GetProjectByIdAndAuthorIdQuery(command.projectId, command.authorId))
+    val query = GetProjectByIdAndAuthorIdQuery(command.projectId, command.authorId)
+    projectAggregate.getProject(query)
       .map {
         case None => Left(UserIsNotAuthor)
         case Some(_) => Right(command)

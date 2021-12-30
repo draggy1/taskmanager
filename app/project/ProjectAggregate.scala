@@ -18,5 +18,5 @@ class ProjectAggregate @Inject()(val repository: ProjectRepository){
     repository.find(query.projectId)
 
   def getProject(query: GetProjectByIdAndAuthorIdQuery): Future[Option[Project]] =
-    repository.find(query.projectId, query.authorId)
+     repository.find(query.projectId, query.authorId)
 }

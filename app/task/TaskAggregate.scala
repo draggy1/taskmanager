@@ -14,5 +14,5 @@ class TaskAggregate @Inject()(val repository: TaskRepository){
 
   def getTask(query: GetTaskByProjectIdAndStartQuery): Future[Option[Task]] = repository.find(query)
 
-  def deleteTask(command: DeleteTaskCommand): Future[Result] = repository.deleteTask(command)
+  def deleteTask(command: DeleteTaskCommand): Future[Result] = repository.delete(command)
 }
