@@ -661,6 +661,58 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       status(result) mustBe BAD_REQUEST
       contentAsJson(result) mustBe Json.parse(expectedJson)
     }
+
+    "be failed because of task to delete is already deleted" in {
+      Given("Data needed to prepare request, expected result")
+      val projectId = "project_id"
+      val start = LocalDateTime.of(2021, 6, 20, 8, 3, 0)
+      val authorId = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb2")
+
+      val duration = TaskDuration(2, 0)
+      val end = LocalDateTime.of(2021, 6, 20, 10, 3, 0)
+      val delete = LocalDateTime.of(2021, 6, 21, 12, 3, 0)
+      val timeDetails = TaskTimeDetails(start, end, duration, Option(delete))
+
+      val givenTaskOption = Option(Task(projectId, authorId, timeDetails))
+
+      val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoicHJvamVjdF9pZCIsImF1dGhvcl9pZCI" +
+        "6ImU1NGU1NjkyLTYwZDMtNGM4NC1hMjUxLTY2YWE5OThkN2NiMiIsInN0YXJ0X2RhdGUiOiIyMC0wNi0yMDIxIDA4OjAzIn0.hUoWoKx7D" +
+        "GxDOA3I9Ub335wHiC6ZiR8z-gHBv1DTESM"
+
+      val expectedJson =
+        """
+      {
+        "success":false,
+        "message":"Task to delete is already deleted",
+        "data": ""
+      }
+      """
+      val config = mock[Configuration]
+      when(config.get[String]("secret.key")).thenReturn("Test secret key")
+
+      val taskRepository = mock[TaskRepository]
+      val projectRepository = mock[ProjectRepository]
+
+      val taskQuery = GetTaskByProjectIdAndStartQuery(projectId, start)
+
+      when(taskRepository.find(taskQuery))
+        .thenReturn(Future.successful(givenTaskOption))
+
+      val taskAggregate = new TaskAggregate(taskRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository)
+      val authHandler = AuthenticationHandler(config)
+      val givenRequest = FakeRequest()
+        .withMethod(DELETE)
+        .withHeaders((AUTHORIZATION, bearer))
+
+      When("Delete method is performed")
+      val controller = new TaskController(Helpers.stubControllerComponents(), taskAggregate, projectAggregate, authHandler)
+      val result: Future[Result] = controller.delete().apply(givenRequest)
+
+      Then("Result should be with status Bad request with expected json as body")
+      status(result) mustBe BAD_REQUEST
+      contentAsJson(result) mustBe Json.parse(expectedJson)
+    }
   }
 
   private def prepareGivenTask(projectId: String) = {

@@ -20,7 +20,7 @@ class DeleteTaskSteps (taskAggregate: TaskAggregate,
     authenticate
       .andThen(mapToCommand)
       .andThen(validate)
-      .andThen(performCreationTask)
+      .andThen(perform)
   }
 
   private val mapToCommand = (result: Either[Error, JwtClaim]) =>
@@ -34,7 +34,7 @@ class DeleteTaskSteps (taskAggregate: TaskAggregate,
     case Right(command) => DeleteTaskValidator(taskAggregate, projectAggregate).validate(command)
   }
 
-  private val performCreationTask = (result: Future[Either[Error, DeleteTaskCommand]]) =>
+  private val perform = (result: Future[Either[Error, DeleteTaskCommand]]) =>
     result.map {
       case Left(result) => Left(result)
       case Right(command) => Right(taskAggregate.deleteTask(command))
