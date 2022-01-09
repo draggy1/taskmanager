@@ -15,7 +15,6 @@ libraryDependencies ++= Seq( jdbc , ehcache , ws , specs2 % Test , guice ,
   "org.scalatestplus" %% "mockito-3-4" % "3.2.9.0" % Test )
 
 coverageExcludedPackages := "controllers\\..*Reverse.*;configuration*;router*;.*Repository.*;controllers.javascript*;main.controllers.*"
-coverageEnabled.in(Test, test) := true
 
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "com.controllers._"

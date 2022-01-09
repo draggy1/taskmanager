@@ -12,7 +12,7 @@ import org.scalatest.time.{Millis, Seconds, Span}
 import org.scalatestplus.mockito.MockitoSugar
 import org.scalatestplus.play.PlaySpec
 import play.api.Configuration
-import play.api.http.Status.{BAD_REQUEST, CREATED}
+import play.api.http.Status.{BAD_REQUEST, CREATED, OK}
 import play.api.http.{ContentTypes, HttpEntity}
 import play.api.libs.json.Json
 import play.api.mvc.{ResponseHeader, Result}
@@ -20,14 +20,13 @@ import play.api.test.Helpers.{AUTHORIZATION, DELETE, POST, contentAsJson, defaul
 import play.api.test.{FakeRequest, Helpers}
 import project.{Project, ProjectAggregate, ProjectRepository}
 import task._
-import task.commands.CreateTaskCommand
+import task.commands.{CreateTaskCommand, DeleteTaskCommand}
 import task.queries.{GetTaskByProjectIdAndStartQuery, GetTaskByProjectIdAndTimeDetailsQuery}
 
 import java.time.LocalDateTime
 import scala.concurrent.Future
 
 class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen with ScalaFutures {
-
   private implicit val defaultPatience: PatienceConfig = {
     PatienceConfig(timeout = Span(5, Seconds), interval = Span(500, Millis))
   }
@@ -347,6 +346,102 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
   "TaskController#delete" should {
     "be successful" in {
       Given("Data needed to prepare request, expected result")
+      val projectId = "project_2"
+      val start = LocalDateTime.of(2021, 12, 23, 13, 0, 0)
+      val authorId = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb2")
+
+      val duration = TaskDuration(2, 32)
+      val end = LocalDateTime.of(2021, 12, 23, 15, 32, 0)
+      val timeDetails = TaskTimeDetails(start, end, duration)
+
+      val givenTaskOption = Option(Task(projectId, authorId, timeDetails))
+
+      val givenDeleteCommand = DeleteTaskCommand(projectId, authorId, start)
+
+      val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoicHJvamVjdF8yIiwiYXV0aG9yX2lkI" +
+        "joiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwic3RhcnRfZGF0ZSI6IjIzLTEyLTIwMjEgMTM6MDAiLCJkdXJhd" +
+        "GlvbiI6IjIgaG91cnMgMzIgbWludXRlcyIsInZvbHVtZSI6NDMsImNvbW1lbnQiOiJSYW5kb20gY29tbWVudCJ9.03UbkBZgW9VT5LRQ" +
+        "dtoZoSYVm7gTw-34zp-skI1IMZs"
+
+      val givenBody =
+        """
+      {
+        "success":true,
+        "message":"Task created",
+        "data": {
+          "project_id":"unique_project_id_2",
+          "author_id":"e54e5692-60d3-4c84-a251-66aa998d7cb1",
+          "task_time_details": {
+            "start_date":"23-12-2021 13:00",
+            "duration": {
+              "hours":2,
+              "minutes":32
+             }
+          },
+        "volume":43,
+        "comment":"Random comment"}
+      }
+      """
+
+      val expectedResult =
+        """
+      {
+        "success":true,
+        "message":"Task created",
+        "data": {
+          "project_id":"unique_project_id_2",
+          "author_id":"e54e5692-60d3-4c84-a251-66aa998d7cb1",
+          "task_time_details": {
+            "start_date":"23-12-2021 13:00",
+            "duration": {
+              "hours":2,
+              "minutes":32
+             }
+          },
+        "volume":43,
+        "comment":"Random comment"}
+      }
+      """
+
+      val config = mock[Configuration]
+      when(config.get[String]("secret.key")).thenReturn("Test secret key")
+
+      val taskRepository = mock[TaskRepository]
+      val projectRepository = mock[ProjectRepository]
+
+      val taskQuery = GetTaskByProjectIdAndStartQuery(projectId, start)
+
+      val body = HttpEntity.Strict(ByteString(givenBody), Some(ContentTypes.JSON))
+      val response = Result(ResponseHeader(OK), body)
+
+      when(taskRepository.find(taskQuery))
+        .thenReturn(Future.successful(givenTaskOption))
+
+      when(projectRepository.find(projectId, authorId))
+        .thenReturn(Future.successful(Option(Project(authorId, projectId))))
+
+      when(taskRepository.delete(givenDeleteCommand))
+        .thenReturn(Future.successful(response))
+
+      val taskAggregate = new TaskAggregate(taskRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository)
+      val authHandler = AuthenticationHandler(config)
+      val givenRequest = FakeRequest()
+        .withMethod(DELETE)
+        .withHeaders((AUTHORIZATION, bearer))
+
+      When("Delete method is performed")
+      val controller = new TaskController(Helpers.stubControllerComponents(), taskAggregate, projectAggregate, authHandler)
+      val result: Future[Result] = controller.delete().apply(givenRequest)
+
+      Then("Result should be with status Ok with expected json as body")
+      //status(result) mustBe OK
+      val value1 = contentAsJson(result)
+      value1 mustBe Json.parse(expectedResult)
+    }
+
+    "be failed because of not valid author id" in {
+      Given("Data needed to prepare request, expected result")
       val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoicHJvamVjdF9pZCIsIn" +
         "N0YXJ0X2RhdGUiOiIyMC0wNi0yMDIxIDA4OjAzIn0.v5Qmp0rIxIqpwNkkq2p00lRYAwyZsmgrnGmd_46SYaM"
 
@@ -482,44 +577,6 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val result: Future[Result] = controller.delete().apply(givenRequest)
 
       Then("Result should be with status 'Bad request' with expected json as body")
-      status(result) mustBe BAD_REQUEST
-      contentAsJson(result) mustBe Json.parse(expectedJson)
-    }
-
-    "be failed because of not valid author id" in {
-      Given("Data needed to prepare request, expected result")
-
-      val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoicHJvamVjdF9pZCIsImF1dGhvcl9pZCI6InNsa2pk" +
-        "Z2pkc2Znc2hrZGpmaGtqZGdmaGtqZ2RmZGdmaGtqIiwic3RhcnRfZGF0ZSI6IjIwLTA2LTIwMjEgMDg6MDMifQ.WYhY5dvcYA5Kk65KCepMMj4gv_iQ" +
-        "gyW1-kNd0_gLJVk"
-
-      val expectedJson =
-        """
-      {
-        "success":false,
-        "message":"Provided author id is not valid",
-        "data": ""
-      }
-      """
-
-      val config = mock[Configuration]
-      when(config.get[String]("secret.key")).thenReturn("Test secret key")
-
-      val taskRepository = mock[TaskRepository]
-      val projectRepository = mock[ProjectRepository]
-
-      val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
-      val authHandler = AuthenticationHandler(config)
-      val givenRequest = FakeRequest()
-        .withMethod(DELETE)
-        .withHeaders((AUTHORIZATION, bearer))
-
-      When("Delete method is performed")
-      val controller = new TaskController(Helpers.stubControllerComponents(), taskAggregate, projectAggregate, authHandler)
-      val result: Future[Result] = controller.delete().apply(givenRequest)
-
-      Then("Result should be with status 'Bad Request' with expected json as body")
       status(result) mustBe BAD_REQUEST
       contentAsJson(result) mustBe Json.parse(expectedJson)
     }
