@@ -2,7 +2,7 @@ package controllers
 
 import authentication.AuthenticationHandler
 import common.responses.Response.mapErrorToResult
-import controllers.steps.task.{CreateTaskSteps, DeleteTaskSteps}
+import controllers.steps.task.{CreateTaskSteps, DeleteTaskSteps, UpdateTaskSteps}
 import play.api.mvc._
 import project.ProjectAggregate
 import task.TaskAggregate
@@ -29,6 +29,16 @@ class TaskController @Inject()(val controllerComponents: ControllerComponents,
 
   def delete(): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
     DeleteTaskSteps(taskAggregate, projectAggregate, authHandler)
+      .prepare()
+      .apply(request)
+      .flatMap {
+        case Left(error) => Future.successful(mapErrorToResult(error))
+        case Right(result) => result
+      }
+  }
+
+  def update(): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
+    UpdateTaskSteps(taskAggregate, projectAggregate, authHandler)
       .prepare()
       .apply(request)
       .flatMap {

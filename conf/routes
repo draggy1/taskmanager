@@ -5,13 +5,16 @@
 
 # An example controller showing a sample home page
 +nocsrf
-POST     /project/create            controllers.ProjectController.create
+POST     /project/create            controllers.ProjectController.create()
 
 +nocsrf
-POST     /project/update            controllers.ProjectController.update
+POST     /project/update            controllers.ProjectController.update()
 
 +nocsrf
-POST     /task/create               controllers.TaskController.create
+POST     /task/create               controllers.TaskController.create()
 
 +nocsrf
-DELETE     /task/delete             controllers.TaskController.delete
+DELETE   /task/delete               controllers.TaskController.delete()
+
++nocsrf
+PUT     /task/update                controllers.TaskController.update()

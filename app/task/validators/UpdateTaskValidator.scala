@@ -2,6 +2,7 @@ package task.validators
 
 import authentication.{EmptyAuthorId, EmptyProjectId, Error, IncorrectDate, IncorrectDuration, ProjectIdNotFound, TaskInConflictWithAnother}
 import common.LocalDateTimeUtil.NIL_LOCAL_DATE_TIME
+import common.UUIDUtils.UUID_NIL
 import project.ProjectAggregate
 import project.queries.GetProjectByIdAndAuthorIdQuery
 import task.TaskAggregate
@@ -30,11 +31,12 @@ class UpdateTaskValidator (taskAggregate: TaskAggregate, projectAggregate: Proje
 
   val areAuthorIdsEmpty: Either[Error, UpdateTaskCommand] => Either[Error, UpdateTaskCommand]  = {
     case Left(error) => Left(error)
-    case Right(command: UpdateTaskCommand) => if(isAnyAuthorIdBlank(command)) Left(EmptyAuthorId) else Right(command)
+    case Right(command: UpdateTaskCommand) =>
+      if(isAnyAuthorIdBlank(command)) Left(EmptyAuthorId) else Right(command)
   }
 
   private def isAnyAuthorIdBlank(command: UpdateTaskCommand) =
-    command.authorIdOld.toString.isBlank || command.authorIdNew.toString.isBlank
+    UUID_NIL.equals(command.authorIdOld) || UUID_NIL.equals(command.authorIdNew)
 
   val areStartDatesCorrect: Either[Error, UpdateTaskCommand] => Either[Error, UpdateTaskCommand] = {
     case Left(error) => Left(error)

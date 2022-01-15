@@ -8,7 +8,7 @@ Create task with:
    "comment": "Example comment"
 }
 
-curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoicHJvamVjdF9pZCIsImF1dGhvcl9pZCI6ImU1NGU1NjkyLTYwZDMtNGM4NC1hMjUxLTY2YWE5OThkN2NiMiIsInN0YXJ0X2RhdGUiOiIyMC0wNi0yMDIxIDA4OjAzIiwiZHVyYXRpb24iOiI0IGhvdXJzIDM0IG1pbnV0ZXMiLCJ2b2x1bWUiOjEyLCJjb21tZW50IjoiRXhhbXBsZSBjb21tZW50In0.IQD3rrOcn312NjkLMYbW9LgWb5p9hTKgaZBcf5of0Rk" -X POST http://localhost:8080/task/create
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoicHJvamVjdF9pZF9lbG8iLCJhdXRob3JfaWQiOiJlNTRlNTY5Mi02MGQzLTRjODQtYTI1MS02NmFhOTk4ZDdjYjIiLCJzdGFydF9kYXRlIjoiMjAtMDYtMjAyMSAwODowMyIsImR1cmF0aW9uIjoiNCBob3VycyAzNCBtaW51dGVzIiwidm9sdW1lIjoxNSwiY29tbWVudCI6IlNpZW1hbm8gc2llbWFubyJ9.f5uryhGybjDMKxtyzZqCrDNMZ934t2jV3uYWx7pwOLE" -X POST http://localhost:8080/task/create
 
 Create task with (empty project id)
 {

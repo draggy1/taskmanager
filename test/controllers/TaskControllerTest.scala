@@ -16,11 +16,11 @@ import play.api.http.Status.{BAD_REQUEST, CREATED, OK}
 import play.api.http.{ContentTypes, HttpEntity}
 import play.api.libs.json.Json
 import play.api.mvc.{ResponseHeader, Result}
-import play.api.test.Helpers.{AUTHORIZATION, DELETE, POST, contentAsJson, defaultAwaitTimeout, status}
+import play.api.test.Helpers.{AUTHORIZATION, DELETE, POST, PUT, contentAsJson, defaultAwaitTimeout, status}
 import play.api.test.{FakeRequest, Helpers}
 import project.{Project, ProjectAggregate, ProjectRepository}
 import task._
-import task.commands.{CreateTaskCommand, DeleteTaskCommand}
+import task.commands.{CreateTaskCommand, DeleteTaskCommand, UpdateTaskCommand}
 import task.queries.{GetTaskByProjectIdAndStartQuery, GetTaskByProjectIdAndTimeDetailsQuery}
 
 import java.time.LocalDateTime
@@ -345,16 +345,16 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
 
   "TaskController#delete" should {
     "be successful" in {
-      Given("Data needed to prepare request, expected result")
-      val projectId = "project_2"
-      val start = LocalDateTime.of(2021, 12, 23, 13, 0, 0)
-      val authorId = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb2")
+        Given("Data needed to prepare request, expected result")
+        val projectId = "project_2"
+        val start = LocalDateTime.of(2021, 12, 23, 13, 0, 0)
+        val authorId = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb2")
 
-      val duration = TaskDuration(2, 32)
-      val end = LocalDateTime.of(2021, 12, 23, 15, 32, 0)
-      val timeDetails = TaskTimeDetails(start, end, duration)
+        val duration = TaskDuration(2, 32)
+        val end = LocalDateTime.of(2021, 12, 23, 15, 32, 0)
+        val timeDetails = TaskTimeDetails(start, end, duration)
 
-      val givenTaskOption = Option(Task(projectId, authorId, timeDetails))
+        val givenTaskOption = Option(Task(projectId, authorId, timeDetails))
 
       val givenDeleteCommand = DeleteTaskCommand(projectId, authorId, start)
 
@@ -769,6 +769,455 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       Then("Result should be with status Bad request with expected json as body")
       status(result) mustBe BAD_REQUEST
       contentAsJson(result) mustBe Json.parse(expectedJson)
+    }
+  }
+
+  "TaskController#update" should {
+    "be successful" in {
+      Given("Data needed to prepare request, expected result")
+      val projectIdOld = "project_2"
+      val projectIdNew = "df"
+      val authorIdOld = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb2")
+      val authorIdNew = UUID("5c2a9bf6-89fe-4328-b90e-df0d0c4aa77a")
+      val startNew = LocalDateTime.of(2021, 12, 23, 15, 0, 0)
+      val end = LocalDateTime.of(2021, 12, 23, 17, 32, 0)
+
+      val duration = TaskDuration(2, 32)
+
+      val timeDetails = TaskTimeDetails(startNew, end, duration)
+      val givenDeleteCommand = UpdateTaskCommand(
+        projectIdOld,
+        projectIdNew,
+        authorIdOld,
+        authorIdNew,
+        LocalDateTime.of(2021, 12, 23, 13, 0),
+        timeDetails,
+        Option(56),
+        Option("Elo elo")
+      )
+
+      val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkX29sZCI6InByb2plY3RfMiIsInByb2plY3R" +
+        "faWRfbmV3IjoiZGYiLCJhdXRob3JfaWRfb2xkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwiYXV0aG9yX2lkX" +
+        "25ldyI6IjVjMmE5YmY2LTg5ZmUtNDMyOC1iOTBlLWRmMGQwYzRhYTc3YSIsInN0YXJ0X2RhdGVfb2xkIjoiMjMtMTItMjAyMSAxMzowMC" +
+        "IsInN0YXJ0X2RhdGVfbmV3IjoiMjMtMTItMjAyMSAxNTowMCIsImR1cmF0aW9uIjoiMiBob3VycyAzMiBtaW51dGVzIiwidm9sdW1lIjo1N" +
+        "iwiY29tbWVudCI6IkVsbyBlbG8ifQ.evFwSEuaUAkvROnTQSc2MPUofo-ISy-p-drSAVYQRlI"
+
+      val givenBody =
+        """
+      {
+        "success":true,
+        "message":"Task created",
+        "data": {
+          "project_id_old": "project_2",
+          "project_id_new": "df",
+          "author_id_old": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
+          "author_id_new": "5c2a9bf6-89fe-4328-b90e-df0d0c4aa77a",
+          "start_date_old": "23-12-2021 13:00",
+          "start_date_new": "23-12-2021 15:00",
+          "duration": {
+             "hours": 2,
+             "minutes": 32
+          },
+          "volume": 56,
+          "comment": "Elo elo"
+        }
+      }
+      """
+
+      val expectedResult =
+        """
+      {
+        "success":true,
+        "message":"Task created",
+        "data": {
+          "project_id_old":"project_2",
+          "project_id_new": "df",
+          "author_id_old": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
+          "author_id_new": "5c2a9bf6-89fe-4328-b90e-df0d0c4aa77a",
+          "start_date_old": "23-12-2021 13:00",
+          "start_date_new": "23-12-2021 15:00",
+          "duration": {
+             "hours": 2,
+             "minutes": 32
+          },
+          "volume": 56,
+          "comment": "Elo elo"
+        }
+      }
+      """
+
+      val config = mock[Configuration]
+      when(config.get[String]("secret.key")).thenReturn("Test secret key")
+
+      val taskRepository = mock[TaskRepository]
+      val projectRepository = mock[ProjectRepository]
+
+      val taskQuery = GetTaskByProjectIdAndTimeDetailsQuery(projectIdNew, timeDetails)
+
+      val body = HttpEntity.Strict(ByteString(givenBody), Some(ContentTypes.JSON))
+      val response = Result(ResponseHeader(OK), body)
+
+      when(taskRepository.find(taskQuery))
+        .thenReturn(Future.successful(Option.empty))
+
+      when(projectRepository.find(projectIdNew, authorIdNew))
+        .thenReturn(Future.successful(Option(Project(authorIdOld, projectIdOld))))
+
+      when(taskRepository.update(givenDeleteCommand))
+        .thenReturn(Future.successful(response))
+
+      val taskAggregate = new TaskAggregate(taskRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository)
+      val authHandler = AuthenticationHandler(config)
+      val givenRequest = FakeRequest()
+        .withMethod(PUT)
+        .withHeaders((AUTHORIZATION, bearer))
+
+      When("Update method is performed")
+      val controller = new TaskController(Helpers.stubControllerComponents(), taskAggregate, projectAggregate, authHandler)
+      val result: Future[Result] = controller.update().apply(givenRequest)
+
+      Then("Result should be with status Ok with expected json as body")
+      status(result) mustBe OK
+      contentAsJson(result) mustBe Json.parse(expectedResult)
+    }
+
+    "be failed because of incorrect Bearer token" in {
+      Given("Data needed to prepare request, expected result")
+      val bearer = StringUtils.EMPTY
+
+      val expectedResult =
+        """
+      {
+        "success":false,
+        "message":"Request not contains bearer token",
+        "data": ""
+      }
+      """
+
+      val config = mock[Configuration]
+      when(config.get[String]("secret.key")).thenReturn("Test secret key")
+
+      val taskRepository = mock[TaskRepository]
+      val projectRepository = mock[ProjectRepository]
+
+      val taskAggregate = new TaskAggregate(taskRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository)
+      val authHandler = AuthenticationHandler(config)
+      val givenRequest = FakeRequest()
+        .withMethod(PUT)
+        .withHeaders((AUTHORIZATION, bearer))
+
+      When("Update method is performed")
+      val controller = new TaskController(Helpers.stubControllerComponents(), taskAggregate, projectAggregate, authHandler)
+      val result: Future[Result] = controller.update().apply(givenRequest)
+
+      Then("Result should be with status Bad request with expected json as body")
+      status(result) mustBe BAD_REQUEST
+      contentAsJson(result) mustBe Json.parse(expectedResult)
+    }
+
+    "be failed, because of new project id is empty" in {
+      Given("Data needed to prepare request, expected result")
+
+      val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkX25ldyI6ImRmIiwiYXV0aG9yX2lkX29sZCI6" +
+        "ImU1NGU1NjkyLTYwZDMtNGM4NC1hMjUxLTY2YWE5OThkN2NiMiIsImF1dGhvcl9pZF9uZXciOiJlNTRlNTY5Mi02MGQzLTRjODQtYTI1MS0" +
+        "2NmFhOTk4ZDdjYjEiLCJzdGFydF9kYXRlX29sZCI6IjIzLTEyLTIwMjEgMTM6MDAiLCJzdGFydF9kYXRlX25ldyI6IjIzLTEyLTIwMjEgMT" +
+        "U6MzIiLCJkdXJhdGlvbiI6IjIgaG91cnMgMzIgbWludXRlcyIsInZvbHVtZSI6MTEsImNvbW1lbnQiOiJTaWVtYSBzaWVtYSJ9.gw_EVT2W" +
+        "lbvHZ8hX-HveYtxea3XbI3HEvdmPmwtRiYs"
+
+      val expectedResult =
+        """
+      {
+        "success":false,
+        "message":"Provided project id is empty",
+        "data": ""
+      }
+      """
+
+      val config = mock[Configuration]
+      when(config.get[String]("secret.key")).thenReturn("Test secret key")
+
+      val taskRepository = mock[TaskRepository]
+      val projectRepository = mock[ProjectRepository]
+
+      val taskAggregate = new TaskAggregate(taskRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository)
+      val authHandler = AuthenticationHandler(config)
+      val givenRequest = FakeRequest()
+        .withMethod(PUT)
+        .withHeaders((AUTHORIZATION, bearer))
+
+      When("Update method is performed")
+      val controller = new TaskController(Helpers.stubControllerComponents(), taskAggregate, projectAggregate, authHandler)
+      val result: Future[Result] = controller.update().apply(givenRequest)
+
+      Then("Result should be with status Bad request with expected json as body")
+      status(result) mustBe BAD_REQUEST
+      contentAsJson(result) mustBe Json.parse(expectedResult)
+    }
+
+    "be failed because of empty author id" in {
+      Given("Data needed to prepare request, expected result")
+
+      val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkX29sZCI6InByb2plY3RfMiIsInByb" +
+        "2plY3RfaWRfbmV3IjoiZGYiLCJhdXRob3JfaWRfb2xkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwic" +
+        "3RhcnRfZGF0ZV9vbGQiOiIyMy0xMi0yMDIxIDEzOjAwIiwic3RhcnRfZGF0ZV9uZXciOiIyMy0xMi0yMDIxIDE1OjMyIiwiZHVyY" +
+        "XRpb24iOiIyIGhvdXJzIDMyIG1pbnV0ZXMiLCJ2b2x1bWUiOjExLCJjb21tZW50IjoiU2llbWEgc2llbWEifQ.1h5HOJwKt6JzLw" +
+        "xaTGKFmGm1-bKz6jtl-LZC-p6jln0"
+
+      val expectedResult =
+        """
+      {
+        "success":false,
+        "message":"Provided author id is not valid",
+        "data": ""
+      }
+      """
+
+      val config = mock[Configuration]
+      when(config.get[String]("secret.key")).thenReturn("Test secret key")
+
+      val taskRepository = mock[TaskRepository]
+      val projectRepository = mock[ProjectRepository]
+
+      val taskAggregate = new TaskAggregate(taskRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository)
+      val authHandler = AuthenticationHandler(config)
+      val givenRequest = FakeRequest()
+        .withMethod(PUT)
+        .withHeaders((AUTHORIZATION, bearer))
+
+      When("Update method is performed")
+      val controller = new TaskController(Helpers.stubControllerComponents(), taskAggregate, projectAggregate, authHandler)
+      val result: Future[Result] = controller.update().apply(givenRequest)
+
+      Then("Result should be with status Bad request with expected json as body")
+      status(result) mustBe BAD_REQUEST
+      contentAsJson(result) mustBe Json.parse(expectedResult)
+    }
+
+    "be failed because of incorrect start date" in {
+      Given("Data needed to prepare request, expected result")
+
+      val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkX29sZCI6InByb2plY3RfMiIsInByb2plY3Rf" +
+        "aWRfbmV3IjoiZGYiLCJhdXRob3JfaWRfb2xkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwic3RhcnRfZGF0ZV9" +
+        "vbGQiOiIyMy0xMi0yMDIxIDEzOjAwIiwiYXV0aG9yX2lkX25ldyI6IjVjMmE5YmY2LTg5ZmUtNDMyOC1iOTBlLWRmMGQwYzRhYTc3YSIsIm" +
+        "R1cmF0aW9uIjoiMiBob3VycyAzMiBtaW51dGVzIiwidm9sdW1lIjoxMSwiY29tbWVudCI6IlNpZW1hIHNpZW1hIn0.p9cDTrjcno39hA52Q" +
+        "KBR3C8jdd7HjRVoqNm7ixl7zVk"
+
+      val expectedResult =
+        """
+      {
+        "success":false,
+        "message":"Provided date is incorrect",
+        "data": ""
+      }
+      """
+
+      val config = mock[Configuration]
+      when(config.get[String]("secret.key")).thenReturn("Test secret key")
+
+      val taskRepository = mock[TaskRepository]
+      val projectRepository = mock[ProjectRepository]
+
+      val taskAggregate = new TaskAggregate(taskRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository)
+      val authHandler = AuthenticationHandler(config)
+      val givenRequest = FakeRequest()
+        .withMethod(PUT)
+        .withHeaders((AUTHORIZATION, bearer))
+
+      When("Update method is performed")
+      val controller = new TaskController(Helpers.stubControllerComponents(), taskAggregate, projectAggregate, authHandler)
+      val result: Future[Result] = controller.update().apply(givenRequest)
+
+      Then("Result should be with status Bad request with expected json as body")
+      status(result) mustBe BAD_REQUEST
+      contentAsJson(result) mustBe Json.parse(expectedResult)
+    }
+
+    "be failed because of incorrect duration" in {
+      Given("Data needed to prepare request, expected result")
+      val projectIdOld = "project_2"
+      val projectIdNew = "df"
+      val authorIdOld = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb2")
+      val authorIdNew = UUID("5c2a9bf6-89fe-4328-b90e-df0d0c4aa77a")
+      val startNew = LocalDateTime.of(2021, 12, 23, 15, 0, 0)
+      val end = LocalDateTime.of(2021, 12, 23, 17, 32, 0)
+
+      val duration = TaskDuration(2, 32)
+
+      val timeDetails = TaskTimeDetails(startNew, end, duration)
+      val givenDeleteCommand = UpdateTaskCommand(
+        projectIdOld,
+        projectIdNew,
+        authorIdOld,
+        authorIdNew,
+        LocalDateTime.of(2021, 12, 23, 13, 0),
+        timeDetails,
+        Option(56),
+        Option("Elo elo")
+      )
+
+      val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkX29sZCI6InByb2plY3RfMiIsInByb2plY3" +
+        "RfaWRfbmV3IjoiZGYiLCJhdXRob3JfaWRfb2xkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwiYXV0aG9yX2l" +
+        "kX25ldyI6IjVjMmE5YmY2LTg5ZmUtNDMyOC1iOTBlLWRmMGQwYzRhYTc3YSIsInN0YXJ0X2RhdGVfbmV3IjoiMjMtMTItMjAyMSAxNTow" +
+        "MCIsInN0YXJ0X2RhdGVfb2xkIjoiMjMtMTItMjAyMSAxMzowMCIsImR1cmF0aW9uIjoic2ZrbmdkaGpmZGZqIiwidm9sdW1lIjoxMSwiY" +
+        "29tbWVudCI6IlNpZW1hIHNpZW1hIn0.c1T4bLfKmB4HlUFe_ojIxx1zdwperqKaAPNRFFqs78s"
+
+      val expectedResult =
+        """
+      {
+        "success":false,
+        "message":"Provided duration is incorrect",
+        "data": ""
+      }
+      """
+
+      val config = mock[Configuration]
+      when(config.get[String]("secret.key")).thenReturn("Test secret key")
+
+      val taskRepository = mock[TaskRepository]
+      val projectRepository = mock[ProjectRepository]
+
+      val taskAggregate = new TaskAggregate(taskRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository)
+      val authHandler = AuthenticationHandler(config)
+      val givenRequest = FakeRequest()
+        .withMethod(PUT)
+        .withHeaders((AUTHORIZATION, bearer))
+
+      When("Update method is performed")
+      val controller = new TaskController(Helpers.stubControllerComponents(), taskAggregate, projectAggregate, authHandler)
+      val result: Future[Result] = controller.update().apply(givenRequest)
+
+      Then("Result should be with status Bad request with expected json as body")
+      status(result) mustBe BAD_REQUEST
+      contentAsJson(result) mustBe Json.parse(expectedResult)
+    }
+
+    "be failed because of task in conflict with another task" in {
+      Given("Data needed to prepare request, expected result")
+      val projectIdOld = "project_2"
+      val projectIdNew = "df"
+      val authorIdOld = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb2")
+      val authorIdNew = UUID("5c2a9bf6-89fe-4328-b90e-df0d0c4aa77a")
+      val startNew = LocalDateTime.of(2021, 12, 23, 15, 0, 0)
+      val end = LocalDateTime.of(2021, 12, 23, 17, 32, 0)
+
+      val duration = TaskDuration(2, 32)
+
+      val timeDetails = TaskTimeDetails(startNew, end, duration)
+      val givenDeleteCommand = UpdateTaskCommand(
+        projectIdOld,
+        projectIdNew,
+        authorIdOld,
+        authorIdNew,
+        LocalDateTime.of(2021, 12, 23, 13, 0),
+        timeDetails,
+        Option(56),
+        Option("Elo elo")
+      )
+
+      val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkX29sZCI6InByb2plY3RfMiIsInByb2plY3R" +
+        "faWRfbmV3IjoiZGYiLCJhdXRob3JfaWRfb2xkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwiYXV0aG9yX2lkX" +
+        "25ldyI6IjVjMmE5YmY2LTg5ZmUtNDMyOC1iOTBlLWRmMGQwYzRhYTc3YSIsInN0YXJ0X2RhdGVfb2xkIjoiMjMtMTItMjAyMSAxMzowMC" +
+        "IsInN0YXJ0X2RhdGVfbmV3IjoiMjMtMTItMjAyMSAxNTowMCIsImR1cmF0aW9uIjoiMiBob3VycyAzMiBtaW51dGVzIiwidm9sdW1lIjo1N" +
+        "iwiY29tbWVudCI6IkVsbyBlbG8ifQ.evFwSEuaUAkvROnTQSc2MPUofo-ISy-p-drSAVYQRlI"
+
+      val expectedResult =
+        """
+      {
+        "success":false,
+        "message":"Provided task is in conflict with another task",
+        "data": ""
+      }
+      """
+
+      val config = mock[Configuration]
+      when(config.get[String]("secret.key")).thenReturn("Test secret key")
+
+      val taskRepository = mock[TaskRepository]
+      val projectRepository = mock[ProjectRepository]
+
+      val taskQuery = GetTaskByProjectIdAndTimeDetailsQuery(projectIdNew, timeDetails)
+
+      when(taskRepository.find(taskQuery))
+        .thenReturn(Future.successful(Option(Task(projectIdOld, authorIdOld, timeDetails))))
+
+      val taskAggregate = new TaskAggregate(taskRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository)
+      val authHandler = AuthenticationHandler(config)
+      val givenRequest = FakeRequest()
+        .withMethod(PUT)
+        .withHeaders((AUTHORIZATION, bearer))
+
+      When("Update method is performed")
+      val controller = new TaskController(Helpers.stubControllerComponents(), taskAggregate, projectAggregate, authHandler)
+      val result: Future[Result] = controller.update().apply(givenRequest)
+
+      Then("Result should be with status Bad request with expected json as body")
+      status(result) mustBe BAD_REQUEST
+      contentAsJson(result) mustBe Json.parse(expectedResult)
+    }
+
+    "be failed because of not existing project" in {
+      Given("Data needed to prepare request, expected result")
+      val projectIdOld = "project_2"
+      val projectIdNew = "df"
+      val authorIdOld = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb2")
+      val authorIdNew = UUID("5c2a9bf6-89fe-4328-b90e-df0d0c4aa77a")
+      val startNew = LocalDateTime.of(2021, 12, 23, 15, 0, 0)
+      val end = LocalDateTime.of(2021, 12, 23, 17, 32, 0)
+
+      val duration = TaskDuration(2, 32)
+
+      val timeDetails = TaskTimeDetails(startNew, end, duration)
+
+      val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkX29sZCI6InByb2plY3RfMiIsInByb2plY3R" +
+        "faWRfbmV3IjoiZGYiLCJhdXRob3JfaWRfb2xkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwiYXV0aG9yX2lkX" +
+        "25ldyI6IjVjMmE5YmY2LTg5ZmUtNDMyOC1iOTBlLWRmMGQwYzRhYTc3YSIsInN0YXJ0X2RhdGVfb2xkIjoiMjMtMTItMjAyMSAxMzowMC" +
+        "IsInN0YXJ0X2RhdGVfbmV3IjoiMjMtMTItMjAyMSAxNTowMCIsImR1cmF0aW9uIjoiMiBob3VycyAzMiBtaW51dGVzIiwidm9sdW1lIjo1N" +
+        "iwiY29tbWVudCI6IkVsbyBlbG8ifQ.evFwSEuaUAkvROnTQSc2MPUofo-ISy-p-drSAVYQRlI"
+
+      val expectedResult =
+        """
+      {
+        "success":false,
+        "message":"Provided project could not be found",
+        "data": ""
+      }
+      """
+
+      val config = mock[Configuration]
+      when(config.get[String]("secret.key")).thenReturn("Test secret key")
+
+      val taskRepository = mock[TaskRepository]
+      val projectRepository = mock[ProjectRepository]
+
+      val taskQuery = GetTaskByProjectIdAndTimeDetailsQuery(projectIdNew, timeDetails)
+
+      when(taskRepository.find(taskQuery))
+        .thenReturn(Future.successful(Option.empty))
+
+      when(projectRepository.find(projectIdNew, authorIdNew))
+        .thenReturn(Future.successful(Option.empty))
+
+      val taskAggregate = new TaskAggregate(taskRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository)
+      val authHandler = AuthenticationHandler(config)
+      val givenRequest = FakeRequest()
+        .withMethod(PUT)
+        .withHeaders((AUTHORIZATION, bearer))
+
+      When("Update method is performed")
+      val controller = new TaskController(Helpers.stubControllerComponents(), taskAggregate, projectAggregate, authHandler)
+      val result: Future[Result] = controller.update().apply(givenRequest)
+
+      Then("Result should be with status Bad request with expected json as body")
+      status(result) mustBe BAD_REQUEST
+      contentAsJson(result) mustBe Json.parse(expectedResult)
     }
   }
 

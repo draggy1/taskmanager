@@ -136,7 +136,7 @@ case class TaskRepository @Inject()(config: MongoDbManager){
     val equalsTaskStart = equal("taskTimeDetails.start", command.startDateOld)
     val andCondition = and(equalsProjectId, equalsTaskStart)
 
-    val json = Json.toJson(Response[String](success = true, "Task deleted", EMPTY))
+    val json = Json.toJson(Response[String](success = true, "Task updated", EMPTY))
 
     for {
       deleteResult <- delete(andCondition, json)

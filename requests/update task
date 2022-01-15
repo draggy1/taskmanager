@@ -1,0 +1,13 @@
+Successful update task with:
+{
+  "project_id_old": "project_2",
+  "project_id_new": "df",
+  "author_id_old": "e54e5692-60d3-4c84-a251-66aa998d7cb2",
+  "author_id_new": "e54e5692-60d3-4c84-a251-66aa998d7cb1",
+  "start_date_old": "23-12-2021 13:00",
+  "start_date_new": "23-12-2021 15:32",
+  "duration": "2 hours 32 minutes",
+  "volume": "11",
+  "comment": "Siema siema"
+}
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkX29sZCI6InByb2plY3RfMiIsInByb2plY3RfaWRfbmV3IjoiZGYiLCJhdXRob3JfaWRfb2xkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwiYXV0aG9yX2lkX25ldyI6ImU1NGU1NjkyLTYwZDMtNGM4NC1hMjUxLTY2YWE5OThkN2NiMSIsInN0YXJ0X2RhdGVfb2xkIjoiMjMtMTItMjAyMSAxMzowMCIsInN0YXJ0X2RhdGVfbmV3IjoiMjMtMTItMjAyMSAxNTozMiIsImR1cmF0aW9uIjoiMiBob3VycyAzMiBtaW51dGVzIiwidm9sdW1lIjoxMSwiY29tbWVudCI6IlNpZW1hIHNpZW1hIn0.6Mk1k9ZYP21pFYyKIzEM0XGg-D55UdVrK-LnOTkkPRA" -X PUT http://localhost:8080/task/update
