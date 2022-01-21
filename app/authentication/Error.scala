@@ -17,3 +17,4 @@ case object IncorrectDuration extends Error("Provided duration is incorrect", St
 case object TaskInConflictWithAnother extends Error("Provided task is in conflict with another task", Status.BAD_REQUEST)
 case object TaskToDeleteNotExist extends Error("Task not exist for provided project id and start", Status.BAD_REQUEST)
 case object TaskToDeleteAlreadyDeleted extends Error("Task to delete is already deleted", Status.BAD_REQUEST)
+case object ProjectToDeleteAlreadyDeleted extends Error("Project to delete is already deleted", Status.BAD_REQUEST)

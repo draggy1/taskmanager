@@ -1,0 +1,6 @@
+Delete project with:
+{
+  "project_id": "some_project_id"
+}
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkIjoiZGYiLCJhdXRob3JfaWQiOiJlNTRlNTY5Mi02MGQzLTRjODQtYTI1MS02NmFhOTk4ZDdjYjEifQ.3Vc9MhIfShYWmnl7s9R3xgg4YwPqMOkt-ISB0uy0FDc" -X PUT http://localhost:8080/project/delete

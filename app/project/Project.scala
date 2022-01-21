@@ -7,9 +7,13 @@ import java.time.LocalDateTime
 
 case object Project {
   def apply(authorId: UUID, projectId: String): Project =
-    Project(new ObjectId(), authorId, projectId, LocalDateTime.now())
+    Project(new ObjectId(), authorId, projectId, LocalDateTime.now(), Option.empty)
 }
-case class Project(_id: ObjectId, authorId: UUID, projectId: String, timestamp: LocalDateTime)
+case class Project(_id: ObjectId,
+                   authorId: UUID,
+                   projectId: String,
+                   timestamp: LocalDateTime,
+                   deleted: Option[LocalDateTime])
 
 
 

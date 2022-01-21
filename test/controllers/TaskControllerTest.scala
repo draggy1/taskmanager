@@ -52,7 +52,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val projectRepository = mock[ProjectRepository]
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
@@ -117,7 +117,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
         .thenReturn(Future.successful(response))
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
@@ -155,7 +155,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val projectRepository = mock[ProjectRepository]
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
@@ -192,7 +192,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val projectRepository = mock[ProjectRepository]
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
@@ -230,7 +230,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val projectRepository = mock[ProjectRepository]
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
@@ -277,7 +277,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
         .thenReturn(Future.successful(Option(prepareGivenTask(projectId))))
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
@@ -327,7 +327,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
         .thenReturn(Future.successful(Option.empty))
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
@@ -420,11 +420,11 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       when(projectRepository.find(projectId, authorId))
         .thenReturn(Future.successful(Option(Project(authorId, projectId))))
 
-      when(taskRepository.delete(givenDeleteCommand))
+      when(taskRepository.deleteOne(givenDeleteCommand))
         .thenReturn(Future.successful(response))
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(DELETE)
@@ -460,7 +460,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val projectRepository = mock[ProjectRepository]
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(DELETE)
@@ -494,7 +494,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val projectRepository = mock[ProjectRepository]
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(DELETE)
@@ -530,7 +530,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val projectRepository = mock[ProjectRepository]
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(DELETE)
@@ -566,7 +566,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val projectRepository = mock[ProjectRepository]
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(DELETE)
@@ -604,7 +604,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val projectRepository = mock[ProjectRepository]
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(DELETE)
@@ -649,7 +649,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
         .thenReturn(Future.successful(Option.empty))
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(DELETE)
@@ -704,7 +704,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
         .thenReturn(Future.successful(Option.empty))
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(DELETE)
@@ -756,7 +756,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
         .thenReturn(Future.successful(givenTaskOption))
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(DELETE)
@@ -867,7 +867,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
         .thenReturn(Future.successful(response))
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(PUT)
@@ -902,7 +902,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val projectRepository = mock[ProjectRepository]
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(PUT)
@@ -942,7 +942,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val projectRepository = mock[ProjectRepository]
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(PUT)
@@ -982,7 +982,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val projectRepository = mock[ProjectRepository]
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(PUT)
@@ -1022,7 +1022,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val projectRepository = mock[ProjectRepository]
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(PUT)
@@ -1049,16 +1049,6 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val duration = TaskDuration(2, 32)
 
       val timeDetails = TaskTimeDetails(startNew, end, duration)
-      val givenDeleteCommand = UpdateTaskCommand(
-        projectIdOld,
-        projectIdNew,
-        authorIdOld,
-        authorIdNew,
-        LocalDateTime.of(2021, 12, 23, 13, 0),
-        timeDetails,
-        Option(56),
-        Option("Elo elo")
-      )
 
       val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkX29sZCI6InByb2plY3RfMiIsInByb2plY3" +
         "RfaWRfbmV3IjoiZGYiLCJhdXRob3JfaWRfb2xkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwiYXV0aG9yX2l" +
@@ -1082,7 +1072,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val projectRepository = mock[ProjectRepository]
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(PUT)
@@ -1109,16 +1099,6 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val duration = TaskDuration(2, 32)
 
       val timeDetails = TaskTimeDetails(startNew, end, duration)
-      val givenDeleteCommand = UpdateTaskCommand(
-        projectIdOld,
-        projectIdNew,
-        authorIdOld,
-        authorIdNew,
-        LocalDateTime.of(2021, 12, 23, 13, 0),
-        timeDetails,
-        Option(56),
-        Option("Elo elo")
-      )
 
       val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkX29sZCI6InByb2plY3RfMiIsInByb2plY3R" +
         "faWRfbmV3IjoiZGYiLCJhdXRob3JfaWRfb2xkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwiYXV0aG9yX2lkX" +
@@ -1147,7 +1127,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
         .thenReturn(Future.successful(Option(Task(projectIdOld, authorIdOld, timeDetails))))
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(PUT)
@@ -1164,9 +1144,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
 
     "be failed because of not existing project" in {
       Given("Data needed to prepare request, expected result")
-      val projectIdOld = "project_2"
       val projectIdNew = "df"
-      val authorIdOld = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb2")
       val authorIdNew = UUID("5c2a9bf6-89fe-4328-b90e-df0d0c4aa77a")
       val startNew = LocalDateTime.of(2021, 12, 23, 15, 0, 0)
       val end = LocalDateTime.of(2021, 12, 23, 17, 32, 0)
@@ -1205,7 +1183,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
         .thenReturn(Future.successful(Option.empty))
 
       val taskAggregate = new TaskAggregate(taskRepository)
-      val projectAggregate = new ProjectAggregate(projectRepository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(PUT)

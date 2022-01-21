@@ -19,6 +19,7 @@ import play.api.test.Helpers.{AUTHORIZATION, POST, contentAsJson, defaultAwaitTi
 import play.api.test.{FakeRequest, Helpers}
 import project.commands.{CreateProjectCommand, UpdateProjectCommand}
 import project.{Project, ProjectAggregate, ProjectRepository}
+import task.TaskRepository
 
 import scala.concurrent.Future
 
@@ -44,9 +45,10 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       val config = mock[Configuration]
       when(config.get[String]("secret.key")).thenReturn("Test secret key")
 
-      val repository = mock[ProjectRepository]
+      val projectRepository = mock[ProjectRepository]
+      val taskRepository = mock[TaskRepository]
 
-      val projectAggregate = new ProjectAggregate(repository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
@@ -84,14 +86,16 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       val config = mock[Configuration]
       when(config.get[String]("secret.key")).thenReturn("Test secret key")
 
-      val repository = mock[ProjectRepository]
+      val projectRepository = mock[ProjectRepository]
+      val taskRepository = mock[TaskRepository]
+
       val body = HttpEntity.Strict(ByteString(expectedJson), Some(ContentTypes.JSON))
       val response = Result(ResponseHeader(CREATED), body)
 
-      when(repository.find(projectId)).thenReturn(Future.successful(Option.empty))
-      when(repository.create(CreateProjectCommand(authorId, projectId))).thenReturn(Future.successful(response))
+      when(projectRepository.find(projectId)).thenReturn(Future.successful(Option.empty))
+      when(projectRepository.create(CreateProjectCommand(authorId, projectId))).thenReturn(Future.successful(response))
 
-      val projectAggregate = new ProjectAggregate(repository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
@@ -126,10 +130,12 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       val config = mock[Configuration]
       when(config.get[String]("secret.key")).thenReturn("Test secret key")
 
-      val repository = mock[ProjectRepository]
-      when(repository.find(projectId)).thenReturn(Future.successful(Some(Project(authorId, projectId))))
+      val projectRepository = mock[ProjectRepository]
+      val taskRepository = mock[TaskRepository]
 
-      val projectAggregate = new ProjectAggregate(repository)
+      when(projectRepository.find(projectId)).thenReturn(Future.successful(Some(Project(authorId, projectId))))
+
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
@@ -162,9 +168,10 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       val config = mock[Configuration]
       when(config.get[String]("secret.key")).thenReturn("Test secret key")
 
-      val repository = mock[ProjectRepository]
+      val projectRepository = mock[ProjectRepository]
+      val taskRepository = mock[TaskRepository]
 
-      val projectAggregate = new ProjectAggregate(repository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
@@ -197,9 +204,10 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       val config = mock[Configuration]
       when(config.get[String]("secret.key")).thenReturn("Test secret key")
 
-      val repository = mock[ProjectRepository]
+      val projectRepository = mock[ProjectRepository]
+      val taskRepository = mock[TaskRepository]
 
-      val projectAggregate = new ProjectAggregate(repository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
@@ -227,24 +235,25 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
         }
         """
 
-        val config = mock[Configuration]
-        when(config.get[String]("secret.key")).thenReturn("Test secret key")
+      val config = mock[Configuration]
+      when(config.get[String]("secret.key")).thenReturn("Test secret key")
 
-        val repository = mock[ProjectRepository]
+      val projectRepository = mock[ProjectRepository]
+      val taskRepository = mock[TaskRepository]
 
-        val projectAggregate = new ProjectAggregate(repository)
-        val authHandler = AuthenticationHandler(config)
-        val givenRequest = FakeRequest()
-          .withMethod(POST)
-          .withHeaders((AUTHORIZATION, bearer))
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val authHandler = AuthenticationHandler(config)
+      val givenRequest = FakeRequest()
+        .withMethod(POST)
+        .withHeaders((AUTHORIZATION, bearer))
 
-        When("Update method is performed")
-        val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
-        val result: Future[Result] = controller.update().apply(givenRequest)
+      When("Update method is performed")
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val result: Future[Result] = controller.update().apply(givenRequest)
 
-        Then("Result should be with status Ok with expected json as body")
-        status(result) mustBe BAD_REQUEST
-        contentAsJson(result) mustBe Json.parse(expectedJson)
+      Then("Result should be with status Ok with expected json as body")
+      status(result) mustBe BAD_REQUEST
+      contentAsJson(result) mustBe Json.parse(expectedJson)
     }
 
     "be successful" in {
@@ -275,14 +284,16 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       val body = HttpEntity.Strict(ByteString(expectedJson), Some(ContentTypes.JSON))
       val response = Result(ResponseHeader(OK), body)
 
-      val repository = mock[ProjectRepository]
-      when(repository.find(projectIdNew)).thenReturn(Future.successful(Option.empty))
-      when(repository.find(projectIdOld)).thenReturn(Future.successful(Some(Project(authorId, projectIdOld))))
-      when(repository.find(projectIdOld, authorId)).thenReturn(Future.successful(Some(Project(authorId, projectIdOld))))
-      when(repository.update(UpdateProjectCommand(authorId, projectIdOld, projectIdNew)))
+      val projectRepository = mock[ProjectRepository]
+      val taskRepository = mock[TaskRepository]
+
+      when(projectRepository.find(projectIdNew)).thenReturn(Future.successful(Option.empty))
+      when(projectRepository.find(projectIdOld)).thenReturn(Future.successful(Some(Project(authorId, projectIdOld))))
+      when(projectRepository.find(projectIdOld, authorId)).thenReturn(Future.successful(Some(Project(authorId, projectIdOld))))
+      when(projectRepository.update(UpdateProjectCommand(authorId, projectIdOld, projectIdNew)))
         .thenReturn(Future.successful(response))
 
-      val projectAggregate = new ProjectAggregate(repository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
@@ -314,9 +325,10 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       val config = mock[Configuration]
       when(config.get[String]("secret.key")).thenReturn("Test secret key")
 
-      val repository = mock[ProjectRepository]
+      val projectRepository = mock[ProjectRepository]
+      val taskRepository = mock[TaskRepository]
 
-      val projectAggregate = new ProjectAggregate(repository)
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
@@ -352,12 +364,14 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       val projectIdOld = "unique_project_id_1"
       val projectIdNew = "new_unique_project_id_1"
 
-      val repository = mock[ProjectRepository]
-      when(repository.find(projectIdNew)).thenReturn(Future.successful(Option.empty))
-      when(repository.find(projectIdOld)).thenReturn(Future.successful(Some(Project(authorId, projectIdOld))))
-      when(repository.find(projectIdOld, authorId)).thenReturn(Future.successful(Option.empty))
+      val projectRepository = mock[ProjectRepository]
+      val taskRepository = mock[TaskRepository]
 
-      val projectAggregate = new ProjectAggregate(repository)
+      when(projectRepository.find(projectIdNew)).thenReturn(Future.successful(Option.empty))
+      when(projectRepository.find(projectIdOld)).thenReturn(Future.successful(Some(Project(authorId, projectIdOld))))
+      when(projectRepository.find(projectIdOld, authorId)).thenReturn(Future.successful(Option.empty))
+
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
@@ -392,10 +406,12 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       val authorId = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb1")
       val projectIdNew = "new_unique_project_id_1"
 
-      val repository = mock[ProjectRepository]
-      when(repository.find(projectIdNew)).thenReturn(Future.successful(Some(Project(authorId, projectIdNew))))
+      val projectRepository = mock[ProjectRepository]
+      val taskRepository = mock[TaskRepository]
 
-      val projectAggregate = new ProjectAggregate(repository)
+      when(projectRepository.find(projectIdNew)).thenReturn(Future.successful(Some(Project(authorId, projectIdNew))))
+
+      val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
@@ -431,11 +447,13 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
     val projectIdOld = "unique_project_id_1"
     val projectIdNew = "new_unique_project_id_1"
 
-    val repository = mock[ProjectRepository]
-    when(repository.find(projectIdNew)).thenReturn(Future.successful(Option.empty))
-    when(repository.find(projectIdOld)).thenReturn(Future.successful(Option.empty))
+    val projectRepository = mock[ProjectRepository]
+    val taskRepository = mock[TaskRepository]
 
-    val projectAggregate = new ProjectAggregate(repository)
+    when(projectRepository.find(projectIdNew)).thenReturn(Future.successful(Option.empty))
+    when(projectRepository.find(projectIdOld)).thenReturn(Future.successful(Option.empty))
+
+    val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
     val authHandler = AuthenticationHandler(config)
     val givenRequest = FakeRequest()
       .withMethod(POST)
@@ -470,11 +488,13 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
     val projectIdOld = "unique_project_id_1"
     val projectIdNew = "new_unique_project_id_1"
 
-    val repository = mock[ProjectRepository]
-    when(repository.find(projectIdNew)).thenReturn(Future.successful(Option.empty))
-    when(repository.find(projectIdOld)).thenReturn(Future.successful(Option.empty))
+    val projectRepository = mock[ProjectRepository]
+    val taskRepository = mock[TaskRepository]
 
-    val projectAggregate = new ProjectAggregate(repository)
+    when(projectRepository.find(projectIdNew)).thenReturn(Future.successful(Option.empty))
+    when(projectRepository.find(projectIdOld)).thenReturn(Future.successful(Option.empty))
+
+    val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
     val authHandler = AuthenticationHandler(config)
     val givenRequest = FakeRequest()
       .withMethod(POST)

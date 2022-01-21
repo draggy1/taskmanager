@@ -11,6 +11,9 @@ POST     /project/create            controllers.ProjectController.create()
 POST     /project/update            controllers.ProjectController.update()
 
 +nocsrf
+PUT      /project/delete            controllers.ProjectController.delete()
+
++nocsrf
 POST     /task/create               controllers.TaskController.create()
 
 +nocsrf

@@ -31,12 +31,14 @@ class CreateProjectValidator(aggregate: ProjectAggregate) {
     case Right(command) => isDuplicated(command)
   }
 
-  private def isDuplicated(command: CreateProjectCommand) =
-    aggregate.getProject(GetProjectByIdQuery(command.projectId))
+  private def isDuplicated(command: CreateProjectCommand) = {
+    val eventualMaybeProject = aggregate.getProject(GetProjectByIdQuery(command.projectId))
+    eventualMaybeProject
       .map {
         case Some(_) => Left(DuplicatedProjectId)
         case None => Right(command)
       }
+  }
 }
 
 object CreateProjectValidator {

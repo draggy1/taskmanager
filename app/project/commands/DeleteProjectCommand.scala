@@ -1,5 +1,4 @@
 package project.commands
-
 import authentication.Error
 import common.StringUtils.EMPTY
 import common.UUIDUtils.UUID_NIL
@@ -7,26 +6,24 @@ import io.jvm.uuid.UUID
 import pdi.jwt.JwtClaim
 import play.api.http.Status
 import play.api.libs.functional.syntax.{toAlternativeOps, toFunctionalBuilderOps}
-import play.api.libs.json._
+import play.api.libs.json.{JsPath, JsResult, JsValue, Json, JsonValidationError, Reads}
 
-import scala.language.postfixOps
+case class DeleteProjectCommand(authorId: UUID, projectId: String)
 
-case class CreateProjectCommand(authorId: UUID, projectId: String)
-
-case object CreateProjectCommand {
-  implicit def projectReads: Reads[CreateProjectCommand] =
+case object DeleteProjectCommand {
+  implicit def projectReads: Reads[DeleteProjectCommand] =
     ((JsPath \ "author_id").read[UUID] or Reads.pure(UUID_NIL) and
-    ((JsPath \ "project_id").read[String] or Reads.pure(EMPTY))
-  )((authorId, projectId) => CreateProjectCommand(authorId, projectId))
+      ((JsPath \ "project_id").read[String] or Reads.pure(EMPTY))
+      )((author_id, project_id) => DeleteProjectCommand(author_id, project_id))
 
-  def mapJwtToCommand(claim: JwtClaim): Either[Error, CreateProjectCommand] = {
+  def mapJwtToCommand(claim: JwtClaim): Either[Error, DeleteProjectCommand] = {
     val json: JsValue = Json.parse(claim.content)
-    val result: JsResult[CreateProjectCommand] = Json.fromJson[CreateProjectCommand](json)
+    val result: JsResult[DeleteProjectCommand] = Json.fromJson[DeleteProjectCommand](json)
 
     mapEventualErrorToResult(result)
   }
 
-  private def mapEventualErrorToResult(result: JsResult[CreateProjectCommand]): Either[Error, CreateProjectCommand] =
+  private def mapEventualErrorToResult(result: JsResult[DeleteProjectCommand]): Either[Error, DeleteProjectCommand] =
     result.asEither
       .left
       .map(pathWithErrors => new Error(getValidationError(pathWithErrors), Status.BAD_REQUEST))

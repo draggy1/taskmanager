@@ -13,14 +13,14 @@ import org.bson.codecs.configuration.CodecRegistries.{fromProviders, fromRegistr
 import org.bson.codecs.configuration.{CodecProvider, CodecRegistries, CodecRegistry}
 import org.mongodb.scala.MongoClient.DEFAULT_CODEC_REGISTRY
 import org.mongodb.scala.MongoCollection
-import org.mongodb.scala.bson.ObjectId
 import org.mongodb.scala.bson.codecs.Macros
+import org.mongodb.scala.bson.conversions.Bson
 import org.mongodb.scala.model.Filters.equal
 import org.mongodb.scala.model.Updates.{combine, set}
 import play.api.http.Status.{CREATED, INTERNAL_SERVER_ERROR, OK}
-import play.api.libs.json.{Json, Writes}
+import play.api.libs.json.{JsValue, Json, Writes}
 import play.api.mvc.{ResponseHeader, Result}
-import project.commands.{CreateProjectCommand, UpdateProjectCommand}
+import project.commands.{CreateProjectCommand, DeleteProjectCommand, UpdateProjectCommand}
 
 import java.time.LocalDateTime
 import javax.inject.{Inject, Singleton}
@@ -30,9 +30,9 @@ import scala.concurrent.Future
 @Singleton
 case class ProjectRepository @Inject()(config: MongoDbManager) {
   private val projectCodecProvider: CodecProvider = Macros.createCodecProvider[Project]()
+
   private val uuidCodec = new UuidCodec(UuidRepresentation.STANDARD)
   private val uuidRegistry: CodecRegistry = CodecRegistries.fromCodecs(uuidCodec)
-
   private val codecRegistry: CodecRegistry = fromRegistries(fromProviders(projectCodecProvider), uuidRegistry, DEFAULT_CODEC_REGISTRY)
 
   private val collection: MongoCollection[Project] = config.database
@@ -48,10 +48,14 @@ case class ProjectRepository @Inject()(config: MongoDbManager) {
     "project_id_old" -> data.projectIdOld,
     "project_id_new" -> data.projectIdNew)
 
+  implicit val deleteResponseWrites: Writes[DeleteProjectCommand] = (data: DeleteProjectCommand) => Json.obj(
+    "author_id" -> data.authorId,
+    "project_id" -> data.projectId)
+
   implicit val successWrites: Writes[Response[CreateProjectCommand]] = Json.writes[Response[CreateProjectCommand]]
 
   def create(command: CreateProjectCommand): Future[Result] = {
-    val project = Project(new ObjectId(), command.authorId, command.projectId, LocalDateTime.now())
+    val project = Project(command.authorId, command.projectId)
 
     collection.insertOne(project)
       .toFuture()
@@ -75,21 +79,37 @@ case class ProjectRepository @Inject()(config: MongoDbManager) {
 
   def update(command: UpdateProjectCommand): Future[Result] = {
     val equalsProjectId = Filters.eq("projectId", command.projectIdOld)
+    val setter = combine(set("projectId", command.projectIdNew))
+    val json = Json.toJson(Response[UpdateProjectCommand](success = true, "Project updated", command))
 
-    collection.findOneAndUpdate(equalsProjectId, combine(set("projectId", command.projectIdNew)))
+    performUpdateByProvidedData(json, OK, equalsProjectId, setter)
+  }
+
+  def delete(command: DeleteProjectCommand): Future[Result] = {
+    val equalsProjectId = Filters.eq("projectId", command.projectId)
+    val setter = combine(set("deleted", LocalDateTime.now()))
+    val json = Json.toJson(Response[DeleteProjectCommand](success = true, "Project deleted", command))
+
+    performUpdateByProvidedData(json, OK, equalsProjectId, setter)
+  }
+
+  private def performUpdateByProvidedData(json: JsValue, status: Int, equalsProjectId: Bson, setter: Bson) =
+    collection.findOneAndUpdate(equalsProjectId, setter)
       .toFuture()
-      .map(_ => prepareSuccessUpdateResult(command))
-      .recover { case _ => prepareErrorResult() }
+      .map(_ => prepareResult(json, status))
+      .recover {
+        case _ =>
+          val json = Json.toJson(Response[String](success = false, "Database error", EMPTY))
+          prepareResult(json, INTERNAL_SERVER_ERROR)
+      }
+
+  private def prepareResult(json: JsValue, status: Int): Result = {
+    getResult(ResponseHeader(status), json)
   }
 
   private def prepareSuccessResult(command: CreateProjectCommand): Result = {
     val json = Json.toJson(Response[CreateProjectCommand](success = true, "Project created", command))
     getResult(ResponseHeader(CREATED), json)
-  }
-
-  def prepareSuccessUpdateResult(command: UpdateProjectCommand): Result = {
-    val json = Json.toJson(Response[UpdateProjectCommand](success = true, "Project updated", command))
-    getResult(ResponseHeader(OK), json)
   }
 
   private def prepareErrorResult(): Result = {

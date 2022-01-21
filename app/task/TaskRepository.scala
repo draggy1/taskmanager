@@ -1,5 +1,6 @@
 package task
 
+import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Filters.{and, or}
 import common.StringUtils.EMPTY
 import common.responses.Response
@@ -29,13 +30,13 @@ import scala.concurrent.Future
 
 case class TaskRepository @Inject()(config: MongoDbManager){
   private val taskCodecProvider: CodecProvider = Macros.createCodecProvider[Task]()
+
   private val taskDurationCodecProvider: CodecProvider = Macros.createCodecProvider[TaskDuration]()
   private val timeDetailsCodecProvider: CodecProvider = Macros.createCodecProvider[TaskTimeDetails]()
   private val uuidCodec = new UuidCodec(UuidRepresentation.STANDARD)
   private val uuidRegistry: CodecRegistry = CodecRegistries.fromCodecs(uuidCodec)
   private val codecRegistry: CodecRegistry =
     fromRegistries(fromProviders(taskCodecProvider, timeDetailsCodecProvider, taskDurationCodecProvider), uuidRegistry, DEFAULT_CODEC_REGISTRY)
-
   private val collection: MongoCollection[Task] = config.database
     .withCodecRegistry(codecRegistry)
     .getCollection("task")
@@ -114,17 +115,17 @@ case class TaskRepository @Inject()(config: MongoDbManager){
       .toFutureOption()
   }
 
-  def delete(command: DeleteTaskCommand): Future[Result] = {
+  def deleteOne(command: DeleteTaskCommand): Future[Result] = {
     val equalsProjectId = equal("projectId", command.projectId)
     val equalsTaskStart = equal("taskTimeDetails.start", command.start)
     val andCondition = and(equalsProjectId, equalsTaskStart)
 
     val json = Json.toJson(Response[DeleteTaskCommand](success = true, "Task deleted", command))
 
-    delete(andCondition, json)
+    deleteOne(andCondition, json)
   }
 
-  private def delete(andCondition: Bson, json: JsValue) = {
+  private def deleteOne(andCondition: Bson, json: JsValue) = {
     collection.findOneAndUpdate(andCondition, combine(set("taskTimeDetails.delete", LocalDateTime.now())))
       .toFuture()
       .map(_ => prepareResult(OK, json))
@@ -139,7 +140,7 @@ case class TaskRepository @Inject()(config: MongoDbManager){
     val json = Json.toJson(Response[String](success = true, "Task updated", EMPTY))
 
     for {
-      deleteResult <- delete(andCondition, json)
+      deleteResult <- deleteOne(andCondition, json)
       createResult <- create(mapToCreateCommand(command))
     } yield mergeFutures(deleteResult, createResult, command)
   }
@@ -151,6 +152,20 @@ case class TaskRepository @Inject()(config: MongoDbManager){
     } else {
       prepareErrorResult()
     }
+  }
+
+  def deleteAll(projectId: String): Future[Result] = {
+    val equalsProjectId = Filters.eq("projectId", projectId)
+    val deleteIsNull = Filters.eq("taskTimeDetails.delete", null)
+    val andClause = Filters.and(equalsProjectId, deleteIsNull)
+
+    collection.updateMany(andClause, combine(set("taskTimeDetails.delete", LocalDateTime.now())))
+      .toFuture()
+      .map(_ => {
+        val json = Json.toJson(Response[String](success = true, "Tasks removed", projectId))
+        prepareResult(OK, json)
+      })
+      .recover { case _ => prepareErrorResult() }
   }
 
   private def areStatusesSuccessful(deleteResult: Result, createResult: Result) =
