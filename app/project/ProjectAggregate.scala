@@ -1,6 +1,7 @@
 package project
 
 
+import common.StringUtils
 import common.responses.Response
 import common.responses.Response.getResult
 import play.api.http.Status
@@ -41,10 +42,10 @@ class ProjectAggregate @Inject()(projectRepository: ProjectRepository, taskRepos
 
   def mergeFutures(deleteResult: Result, createResult: Result, command: DeleteProjectCommand): Result = {
     if (areStatusesSuccessful(deleteResult, createResult)){
-      val json = Json.toJson(Response[DeleteProjectCommand](success = true, "Task deleted", command))
+      val json = Json.toJson(Response[DeleteProjectCommand](success = true, "Project deleted", command))
       prepareResult(json, OK)
     } else {
-      val json = Json.toJson(Response[DeleteProjectCommand](success = false, "Task delete failed", command))
+      val json = Json.toJson(Response[String](success = false, "Project delete failed", StringUtils.EMPTY))
       prepareResult(json, INTERNAL_SERVER_ERROR)
     }
   }

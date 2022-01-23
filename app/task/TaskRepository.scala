@@ -162,7 +162,7 @@ case class TaskRepository @Inject()(config: MongoDbManager){
     collection.updateMany(andClause, combine(set("taskTimeDetails.delete", LocalDateTime.now())))
       .toFuture()
       .map(_ => {
-        val json = Json.toJson(Response[String](success = true, "Tasks removed", projectId))
+        val json = Json.toJson(Response[String](success = true, "Tasks deleted", projectId))
         prepareResult(OK, json)
       })
       .recover { case _ => prepareErrorResult() }

@@ -47,15 +47,15 @@ case class DeleteProjectValidator(projectAggregate: ProjectAggregate) {
     }
 
   private def isUserAuthorOfProject(context: DeleteProjectContext): Future[Either[Error, DeleteProjectContext]] = {
-    context.task
+    context.project
       .map {
-        case None => Left(UserIsNotAuthor)
-        case Some(_) => Right(context)
+        case Some(project) => if(project.authorId.equals(context.command.authorId))
+          Right(context) else Left(UserIsNotAuthor)
       }
   }
 
   private def isProjectExist(context: DeleteProjectContext) = {
-    context.task
+    context.project
       .map {
         case None => Left(ProjectIdNotFound)
         case Some(_) => Right(context)
@@ -63,7 +63,7 @@ case class DeleteProjectValidator(projectAggregate: ProjectAggregate) {
   }
 
   private def isProjectAlreadyDeleted(context: DeleteProjectContext): Future[Either[Error, DeleteProjectCommand]] = {
-    val task = context.task
+    val task = context.project
     task.map {
       case Some(task) => if(task.deleted.isEmpty) Right(context.command) else Left(ProjectToDeleteAlreadyDeleted)
     }
@@ -76,4 +76,4 @@ object DeleteProjectValidator {
   def apply(projectAggregate: ProjectAggregate): DeleteProjectValidator = new DeleteProjectValidator(projectAggregate)
 }
 
-case class DeleteProjectContext(command: DeleteProjectCommand, task: Future[Option[Project]])
+case class DeleteProjectContext(command: DeleteProjectCommand, project: Future[Option[Project]])
