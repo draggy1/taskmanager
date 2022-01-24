@@ -1,7 +1,7 @@
 package controllers.steps.project
 
 import authentication.{AuthenticationHandler, Error}
-import controllers.steps.Step
+import controllers.steps.Step2
 import pdi.jwt.JwtClaim
 import play.api.mvc.{AnyContent, Request, Result}
 import project.ProjectAggregate
@@ -12,7 +12,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 class DeleteProjectSteps(projectAggregate: ProjectAggregate,
-                          authHandler: AuthenticationHandler) extends Step(authHandler) {
+                          authHandler: AuthenticationHandler) extends Step2(authHandler) {
   override def prepare(): Request[AnyContent] => Future[Either[authentication.Error, Future[Result]]] = {
     authenticate
       .andThen(mapToCommand)

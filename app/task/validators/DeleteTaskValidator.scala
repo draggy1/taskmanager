@@ -1,7 +1,7 @@
 package task.validators
 
 import authentication.{EmptyAuthorId, EmptyProjectId, Error, IncorrectDate, TaskToDeleteAlreadyDeleted, TaskToDeleteNotExist, UserIsNotAuthor}
-import common.LocalDateTimeUtil.NIL_LOCAL_DATE_TIME
+import common.TimeUtils.NIL_LOCAL_DATE_TIME
 import common.UUIDUtils.UUID_NIL
 import project.ProjectAggregate
 import project.queries.GetProjectByIdAndAuthorIdQuery
