@@ -2,10 +2,10 @@ package controllers.steps.task
 
 import authentication.{AuthenticationHandler, Error}
 import controllers.steps.Step
-import pdi.jwt.JwtClaim
 import play.api.mvc.{AnyContent, Request, Result}
 import project.ProjectAggregate
 import task.TaskAggregate
+import task.TaskReads.deleteTaskCommandReads
 import task.commands.DeleteTaskCommand
 import task.validators.DeleteTaskValidator
 
@@ -14,7 +14,7 @@ import scala.concurrent.Future
 
 class DeleteTaskSteps (taskAggregate: TaskAggregate,
                        projectAggregate: ProjectAggregate,
-                       authHandler: AuthenticationHandler) extends Step(authHandler){
+                       authHandler: AuthenticationHandler) extends Step(authHandler, deleteTaskCommandReads){
 
   override def prepare(): Request[AnyContent] => Future[Either[Error, Future[Result]]] = {
     authenticate
@@ -22,12 +22,6 @@ class DeleteTaskSteps (taskAggregate: TaskAggregate,
       .andThen(validate)
       .andThen(perform)
   }
-
-  private val mapToCommand = (result: Either[Error, JwtClaim]) =>
-    result match {
-      case Left(result) => Left(result)
-      case Right(jwtClaims) => DeleteTaskCommand.mapJwtToCommand(jwtClaims)
-    }
 
   private val validate:  Either[Error, DeleteTaskCommand] => Future[Either[Error, DeleteTaskCommand]] = {
     case Left(result) => Future.successful(Left(result))

@@ -2,10 +2,10 @@ package controllers.steps.task
 
 import authentication.{AuthenticationHandler, Error}
 import controllers.steps.Step
-import pdi.jwt.JwtClaim
 import play.api.mvc.{AnyContent, Request, Result}
 import project.ProjectAggregate
 import task.TaskAggregate
+import task.TaskReads.updateTaskCommandReads
 import task.commands.UpdateTaskCommand
 import task.validators.UpdateTaskValidator
 
@@ -14,7 +14,7 @@ import scala.concurrent.Future
 
 class UpdateTaskSteps (taskAggregate: TaskAggregate,
                        projectAggregate: ProjectAggregate,
-                       authHandler: AuthenticationHandler) extends Step(authHandler){
+                       authHandler: AuthenticationHandler) extends Step(authHandler, updateTaskCommandReads){
 
   override def prepare(): Request[AnyContent] => Future[Either[Error, Future[Result]]] = {
     authenticate
@@ -22,12 +22,6 @@ class UpdateTaskSteps (taskAggregate: TaskAggregate,
       .andThen(validate)
       .andThen(perform)
   }
-
-  private val mapToCommand = (result: Either[Error, JwtClaim]) =>
-    result match {
-      case Left(result) => Left(result)
-      case Right(jwtClaims) => UpdateTaskCommand.mapJwtToCommand(jwtClaims)
-    }
 
   private val validate:  Either[Error, UpdateTaskCommand] => Future[Either[Error, UpdateTaskCommand]] = {
     case Left(result) => Future.successful(Left(result))
