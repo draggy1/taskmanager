@@ -1,17 +1,19 @@
 package controllers.steps.project
 
 import authentication.{AuthenticationHandler, Error}
-import pdi.jwt.JwtClaim
+import controllers.steps.Step
 import play.api.mvc.{AnyContent, Request, Result}
 import project.ProjectAggregate
+import project.ProjectReads.createProjectCommandReads
 import project.commands.CreateProjectCommand
 import project.validators.CreateProjectValidator
+import task.TaskAggregate
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class CreateProjectSteps(aggregate: ProjectAggregate,
-                         authHandler: AuthenticationHandler){
+class CreateProjectSteps(projectAggregate: ProjectAggregate,
+                         authHandler: AuthenticationHandler) extends Step(authHandler, createProjectCommandReads){
   def prepare(): Request[AnyContent] => Future[Either[Error, Future[Result]]] = {
     authenticate
       .andThen(mapToCommand)
@@ -19,26 +21,19 @@ class CreateProjectSteps(aggregate: ProjectAggregate,
       .andThen(performCreationProject)
   }
 
-  private val authenticate = (request: Request[AnyContent]) => authHandler.performWithAuthentication(request)
-
-  private val mapToCommand = (result: Either[Error, JwtClaim]) =>
-    result match {
-      case Left(result) => Left(result)
-      case Right(jwtClaims) => CreateProjectCommand.mapJwtToCommand(jwtClaims)
-    }
-
   private val validate:  Either[Error, CreateProjectCommand] => Future[Either[Error, CreateProjectCommand]] = {
     case Left(result) => Future.successful(Left(result))
-    case Right(command) => CreateProjectValidator(aggregate).validate(command)
+    case Right(command) => CreateProjectValidator(projectAggregate).validate(command)
   }
 
   private val performCreationProject = (result: Future[Either[Error, CreateProjectCommand]]) =>
     result.map {
       case Left(result) => Left(result)
-      case Right(command) => Right(aggregate.createProject(command))
+      case Right(command) => Right(projectAggregate.createProject(command))
     }
 }
 
 case object CreateProjectSteps {
-  def apply(aggregate: ProjectAggregate, authHandler: AuthenticationHandler): CreateProjectSteps = new CreateProjectSteps(aggregate, authHandler)
+  def apply(projectAggregate: ProjectAggregate, taskAggregate: TaskAggregate, authHandler: AuthenticationHandler): CreateProjectSteps =
+    new CreateProjectSteps(projectAggregate, authHandler)
 }
