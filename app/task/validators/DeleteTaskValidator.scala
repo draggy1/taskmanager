@@ -16,9 +16,9 @@ class DeleteTaskValidator(taskAggregate: TaskAggregate, projectAggregate: Projec
 
     commonValidators.isProjectEmpty
       .andThen(commonValidators.notValidAuthorId)
-      .andThen(isProperStartDate)
+      .andThen(commonValidators.isStartDateCorrect)
       .andThen(isProvidedTaskExist)
-      .andThen(isProjectAlreadyDeleted)
+      .andThen(isTaskAlreadyDeleted)
       .andThen(commonValidators.userIsNotAuthor)
       .apply(command)
   }
@@ -42,15 +42,15 @@ class DeleteTaskValidator(taskAggregate: TaskAggregate, projectAggregate: Projec
       }
   }
 
-  val isProjectAlreadyDeleted: Future[Either[Error, DeleteTaskCommand]] => Future[Either[Error, DeleteTaskCommand]] =
+  val isTaskAlreadyDeleted: Future[Either[Error, DeleteTaskCommand]] => Future[Either[Error, DeleteTaskCommand]] =
     (result: Future[Either[Error, DeleteTaskCommand]]) => {
       result.flatMap{
         case Left(error) => Future.successful(Left(error))
-        case Right(context) => isProjectAlreadyDeleted(context)
+        case Right(command) => isTaskAlreadyDeleted(command)
       }
     }
 
-  private def isProjectAlreadyDeleted(command: DeleteTaskCommand): Future[Either[Error, DeleteTaskCommand]] =
+  private def isTaskAlreadyDeleted(command: DeleteTaskCommand): Future[Either[Error, DeleteTaskCommand]] =
     taskAggregate.getTask(GetTaskByProjectIdAndStartQuery(command.projectId, command.start)).map {
       case Some(task) => if (task.taskTimeDetails.delete.isEmpty) Right(command) else Left(TaskToDeleteAlreadyDeleted)
   }

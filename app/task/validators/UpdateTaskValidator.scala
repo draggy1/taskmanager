@@ -1,11 +1,10 @@
 package task.validators
 
-import authentication.{Error, IncorrectDate, IncorrectDuration, TaskInConflictWithAnother}
+import authentication.{Error, IncorrectDate, TaskInConflictWithAnother}
 import common.CommonValidators
 import common.LocalDateTimeUtil.NIL_LOCAL_DATE_TIME
 import project.ProjectAggregate
 import task.TaskAggregate
-import task.TaskDuration.TASK_DURATION_EMPTY
 import task.commands.UpdateTaskCommand
 import task.queries.GetTaskByProjectIdAndTimeDetailsQuery
 
@@ -16,8 +15,8 @@ class UpdateTaskValidator (taskAggregate: TaskAggregate, commonValidators: Commo
   def validate(command: UpdateTaskCommand): Future[Either[Error, UpdateTaskCommand]] =
     commonValidators.isProjectEmpty
       .andThen(commonValidators.notValidAuthorId)
-      .andThen(areStartDatesCorrect)
-      .andThen(isProperDuration)
+      .andThen(commonValidators.isStartDateCorrect)
+      .andThen(commonValidators.isProperDuration)
       .andThen(isNotInConflict)
       .andThen(commonValidators.isProjectExist)
       .andThen(commonValidators.userIsNotAuthor)
@@ -30,13 +29,6 @@ class UpdateTaskValidator (taskAggregate: TaskAggregate, commonValidators: Commo
 
   private def areStartDatesNotCorrect(command: UpdateTaskCommand) =
     NIL_LOCAL_DATE_TIME.equals(command.taskTimeDetails.start) || NIL_LOCAL_DATE_TIME.equals(command.startDateOld)
-
-
-  val isProperDuration: Either[Error, UpdateTaskCommand] => Either[Error, UpdateTaskCommand] = {
-    case Left(error) => Left(error)
-    case Right(command: UpdateTaskCommand) => if(TASK_DURATION_EMPTY.equals(command.taskTimeDetails.duration))
-      Left(IncorrectDuration) else Right(command)
-  }
 
   val isNotInConflict: Either[Error, UpdateTaskCommand] => Future[Either[Error, UpdateTaskCommand]] = {
     case Left(error) => Future.successful(Left(error))

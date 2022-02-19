@@ -1,12 +1,13 @@
 package task.commands
 
-import common.Command
+import common.LocalDateTimeUtil.NIL_LOCAL_DATE_TIME
+import common.{Command, WithStart}
 import common.UUIDUtils.UUID_NIL
 import io.jvm.uuid.UUID
 
 import java.time.LocalDateTime
 
-case class DeleteTaskCommand(projectId: String, authorId: UUID, start: LocalDateTime) extends Command {
+case class DeleteTaskCommand(projectId: String, authorId: UUID, start: LocalDateTime) extends Command with WithStart{
   override def getAuthorId: UUID = authorId
 
   override def getProjectId: String = projectId
@@ -16,4 +17,6 @@ case class DeleteTaskCommand(projectId: String, authorId: UUID, start: LocalDate
   override def getProjectToCheckIfExist: String = projectId
 
   override def isAuthorIdBlank: Boolean = UUID_NIL.equals(authorId)
+
+  override def isStartDateNotCorrect: Boolean = NIL_LOCAL_DATE_TIME.equals(start)
 }

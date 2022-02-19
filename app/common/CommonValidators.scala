@@ -1,8 +1,9 @@
 package common
 
-import authentication.{DuplicatedProjectId, EmptyAuthorId, EmptyProjectId, Error, ProjectIdNotFound, UserIsNotAuthor}
+import authentication.{DuplicatedProjectId, EmptyAuthorId, EmptyProjectId, Error, IncorrectDate, IncorrectDuration, ProjectIdNotFound, ProjectToDeleteAlreadyDeleted, UserIsNotAuthor}
 import project.ProjectAggregate
 import project.queries.GetProjectByIdQuery
+import task.TaskDuration.TASK_DURATION_EMPTY
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -58,5 +59,28 @@ class CommonValidators[C <: Command](aggregate: ProjectAggregate) {
         case Some(project) => if(project.authorId.equals(command.getAuthorId))
           Right(command) else Left(UserIsNotAuthor)
       }
+  }
+
+  val isProjectAlreadyDeleted: Future[Either[Error, C]] => Future[Either[Error, C]] =
+    (result: Future[Either[Error, C]]) => result.flatMap {
+      case Left(error) => Future.successful(Left(error))
+      case Right(command) => isProjectAlreadyDeleted(command)
+    }
+
+  private def isProjectAlreadyDeleted(command: C): Future[Either[Error, C]] =
+    aggregate.getProject(GetProjectByIdQuery(command.getProjectId)).map {
+      case Some(project) => if(project.deleted.isEmpty) Right(command) else Left(ProjectToDeleteAlreadyDeleted)
+    }
+
+  val isProperDuration: Either[Error, C with WithTaskTimeDetails] => Either[Error, C] = {
+    case Left(error) => Left(error)
+    case Right(command) => if(TASK_DURATION_EMPTY.equals(command.getTimeDetails.duration))
+      Left(IncorrectDuration) else Right(command)
+  }
+
+  val isStartDateCorrect: Either[Error, C with WithStart] => Either[Error, C] = {
+    case Left(error) => Left(error)
+    case Right(command: C) => if(command.isStartDateNotCorrect)
+      Left(IncorrectDate) else Right(command)
   }
 }
