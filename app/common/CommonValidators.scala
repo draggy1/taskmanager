@@ -1,7 +1,6 @@
 package common
 
 import authentication.{DuplicatedProjectId, EmptyAuthorId, EmptyProjectId, Error, ProjectIdNotFound, UserIsNotAuthor}
-import common.UUIDUtils.UUID_NIL
 import project.ProjectAggregate
 import project.queries.GetProjectByIdQuery
 
@@ -11,12 +10,12 @@ import scala.concurrent.Future
 class CommonValidators[C <: Command](aggregate: ProjectAggregate) {
   val isProjectEmpty: C => Either[Error, C] =
     (command: C) => {
-      if (command.checkIfProjectIdIsBlank()) Left(EmptyProjectId) else Right(command)
+      if (command.isProjectIdBlank) Left(EmptyProjectId) else Right(command)
     }
 
   val notValidAuthorId: Either[Error, C] => Either[Error, C] = {
     case Left(error) => Left(error)
-    case Right(command) => if (UUID_NIL.equals(command.getAuthorId)) Left(EmptyAuthorId) else Right(command)
+    case Right(command) => if (command.isAuthorIdBlank) Left(EmptyAuthorId) else Right(command)
   }
 
   val isDuplicated: Either[Error, C] => Future[Either[Error, C]] = {

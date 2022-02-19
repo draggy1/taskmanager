@@ -1,9 +1,9 @@
 package task.validators
 
-import authentication.{EmptyProjectId, Error, IncorrectDate, IncorrectDuration, ProjectIdNotFound, TaskInConflictWithAnother}
+import authentication.{EmptyProjectId, Error, IncorrectDate, IncorrectDuration, TaskInConflictWithAnother}
+import common.CommonValidators
 import common.LocalDateTimeUtil.NIL_LOCAL_DATE_TIME
 import project.ProjectAggregate
-import project.queries.GetProjectByIdAndAuthorIdQuery
 import task.TaskAggregate
 import task.TaskDuration.TASK_DURATION_EMPTY
 import task.commands.CreateTaskCommand
@@ -12,12 +12,14 @@ import task.queries.GetTaskByProjectIdAndTimeDetailsQuery
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class CreateTaskValidator(taskAggregate: TaskAggregate, projectAggregate: ProjectAggregate) {
-  def validate(command: CreateTaskCommand): Future[Either[Error, CreateTaskCommand]] = isProjectEmpty
+class CreateTaskValidator(taskAggregate: TaskAggregate, projectAggregate: ProjectAggregate, commonValidators: CommonValidators[CreateTaskCommand]) {
+  def validate(command: CreateTaskCommand): Future[Either[Error, CreateTaskCommand]] =
+    commonValidators.isProjectEmpty
     .andThen(isProperStartDate)
     .andThen(isProperDuration)
     .andThen(isNotInConflict)
-    .andThen(projectExist)
+    .andThen(commonValidators.isProjectExist)
+    .andThen(commonValidators.userIsNotAuthor)
     .apply(command)
 
   val isProjectEmpty: CreateTaskCommand => Either[Error, CreateTaskCommand] =
@@ -47,24 +49,9 @@ class CreateTaskValidator(taskAggregate: TaskAggregate, projectAggregate: Projec
       case None => Right(command)
     }
   }
-
-  val projectExist: Future[Either[Error, CreateTaskCommand]] => Future[Either[Error, CreateTaskCommand]] =
-    (result: Future[Either[Error, CreateTaskCommand]]) => result.flatMap {
-      case Left(error) => Future.successful(Left(error))
-      case Right(command) => projectExist(command)
-    }
-
-  private def projectExist(command: CreateTaskCommand) = {
-    val query = GetProjectByIdAndAuthorIdQuery(command.projectId, command.authorId)
-    projectAggregate.getProject(query)
-      .map {
-        case None => Left(ProjectIdNotFound)
-        case Some(_) => Right(command)
-      }
-  }
 }
 
 object CreateTaskValidator {
   def apply(taskAggregate: TaskAggregate, projectAggregate: ProjectAggregate): CreateTaskValidator =
-    new CreateTaskValidator(taskAggregate, projectAggregate)
+    new CreateTaskValidator(taskAggregate, projectAggregate, new CommonValidators[CreateTaskCommand](projectAggregate))
 }

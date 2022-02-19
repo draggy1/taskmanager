@@ -1,10 +1,9 @@
 package task.validators
 
-import authentication.{EmptyAuthorId, EmptyProjectId, Error, IncorrectDate, IncorrectDuration, ProjectIdNotFound, TaskInConflictWithAnother}
+import authentication.{Error, IncorrectDate, IncorrectDuration, TaskInConflictWithAnother}
+import common.CommonValidators
 import common.LocalDateTimeUtil.NIL_LOCAL_DATE_TIME
-import common.UUIDUtils.UUID_NIL
 import project.ProjectAggregate
-import project.queries.GetProjectByIdAndAuthorIdQuery
 import task.TaskAggregate
 import task.TaskDuration.TASK_DURATION_EMPTY
 import task.commands.UpdateTaskCommand
@@ -13,30 +12,16 @@ import task.queries.GetTaskByProjectIdAndTimeDetailsQuery
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class UpdateTaskValidator (taskAggregate: TaskAggregate, projectAggregate: ProjectAggregate) {
+class UpdateTaskValidator (taskAggregate: TaskAggregate, commonValidators: CommonValidators[UpdateTaskCommand]) {
   def validate(command: UpdateTaskCommand): Future[Either[Error, UpdateTaskCommand]] =
-    areProjectIdsEmpty
-      .andThen(areAuthorIdsEmpty)
+    commonValidators.isProjectEmpty
+      .andThen(commonValidators.notValidAuthorId)
       .andThen(areStartDatesCorrect)
       .andThen(isProperDuration)
       .andThen(isNotInConflict)
-      .andThen(projectExist)
+      .andThen(commonValidators.isProjectExist)
+      .andThen(commonValidators.userIsNotAuthor)
       .apply(command)
-
-  val areProjectIdsEmpty: UpdateTaskCommand => Either[Error, UpdateTaskCommand] =
-    (command: UpdateTaskCommand) => if(isAnyProjectIdBlank(command)) Left(EmptyProjectId) else Right(command)
-
-  private def isAnyProjectIdBlank(command: UpdateTaskCommand) =
-    command.projectIdOld.isBlank || command.projectIdNew.isBlank
-
-  val areAuthorIdsEmpty: Either[Error, UpdateTaskCommand] => Either[Error, UpdateTaskCommand]  = {
-    case Left(error) => Left(error)
-    case Right(command: UpdateTaskCommand) =>
-      if(isAnyAuthorIdBlank(command)) Left(EmptyAuthorId) else Right(command)
-  }
-
-  private def isAnyAuthorIdBlank(command: UpdateTaskCommand) =
-    UUID_NIL.equals(command.authorIdOld) || UUID_NIL.equals(command.authorIdNew)
 
   val areStartDatesCorrect: Either[Error, UpdateTaskCommand] => Either[Error, UpdateTaskCommand] = {
     case Left(error) => Left(error)
@@ -65,24 +50,9 @@ class UpdateTaskValidator (taskAggregate: TaskAggregate, projectAggregate: Proje
       case None => Right(command)
     }
   }
-
-  val projectExist: Future[Either[Error, UpdateTaskCommand]] => Future[Either[Error, UpdateTaskCommand]] =
-    (result: Future[Either[Error, UpdateTaskCommand]]) => result.flatMap {
-      case Left(error) => Future.successful(Left(error))
-      case Right(command) => projectExist(command)
-    }
-
-  private def projectExist(command: UpdateTaskCommand) = {
-    val query = GetProjectByIdAndAuthorIdQuery(command.projectIdOld, command.authorIdOld)
-    projectAggregate.getProject(query)
-      .map {
-        case None => Left(ProjectIdNotFound)
-        case Some(_) => Right(command)
-      }
-  }
 }
 
 object UpdateTaskValidator {
   def apply(taskAggregate: TaskAggregate, projectAggregate: ProjectAggregate): UpdateTaskValidator =
-    new UpdateTaskValidator(taskAggregate, projectAggregate)
+    new UpdateTaskValidator(taskAggregate, new CommonValidators[UpdateTaskCommand](projectAggregate))
 }

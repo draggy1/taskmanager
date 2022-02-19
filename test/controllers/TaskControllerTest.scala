@@ -2,7 +2,7 @@ package controllers
 
 import akka.util.ByteString
 import authentication.AuthenticationHandler
-import common.StringUtils
+import common.StringUtils.EMPTY
 import io.jvm.uuid.UUID
 import org.bson.types.ObjectId
 import org.mockito.Mockito.when
@@ -34,7 +34,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
   "TaskController#create" should {
     "be failed because of empty Bearer token" in {
       Given("Data needed to prepare request, expected result")
-      val bearer = StringUtils.EMPTY
+      val bearer = EMPTY
 
       val expectedJson =
         """
@@ -111,7 +111,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val query = GetTaskByProjectIdAndTimeDetailsQuery(projectId, timeDetails)
 
       when(taskRepository.find(query)).thenReturn(Future.successful(Option.empty))
-      when(projectRepository.find(projectId, authorId))
+      when(projectRepository.find(projectId))
         .thenReturn(Future.successful(Option(Project(authorId, projectId))))
       when(taskRepository.create(CreateTaskCommand(projectId, authorId, timeDetails, Option(43), Option("Random comment"))))
         .thenReturn(Future.successful(response))
@@ -323,7 +323,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val query = GetTaskByProjectIdAndTimeDetailsQuery(projectId, timeDetails)
 
       when(taskRepository.find(query)).thenReturn(Future.successful(Option.empty))
-      when(projectRepository.find(projectId, authorId))
+      when(projectRepository.find(projectId))
         .thenReturn(Future.successful(Option.empty))
 
       val taskAggregate = new TaskAggregate(taskRepository)
@@ -417,7 +417,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       when(taskRepository.find(taskQuery))
         .thenReturn(Future.successful(givenTaskOption))
 
-      when(projectRepository.find(projectId, authorId))
+      when(projectRepository.find(projectId))
         .thenReturn(Future.successful(Option(Project(authorId, projectId))))
 
       when(taskRepository.deleteOne(givenDeleteCommand))
@@ -477,7 +477,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
 
     "be failed because of incorrect bearer" in {
       Given("Data needed to prepare request, expected result")
-      val bearer = StringUtils.EMPTY
+      val bearer = EMPTY
 
       val expectedJson =
         """
@@ -700,8 +700,8 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       when(taskRepository.find(taskQuery))
         .thenReturn(Future.successful(givenTaskOption))
 
-      when(projectRepository.find(projectId, authorId))
-        .thenReturn(Future.successful(Option.empty))
+      when(projectRepository.find(projectId))
+        .thenReturn(Future.successful(Option(Project(UUID("f8015844-881d-46df-947a-f17179a769dc"), projectId))))
 
       val taskAggregate = new TaskAggregate(taskRepository)
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
@@ -860,7 +860,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       when(taskRepository.find(taskQuery))
         .thenReturn(Future.successful(Option.empty))
 
-      when(projectRepository.find(projectIdOld, authorIdOld))
+      when(projectRepository.find(projectIdOld/*, authorIdOld*/))
         .thenReturn(Future.successful(Option(Project(authorIdOld, projectIdOld))))
 
       when(taskRepository.update(givenUpdateCommand))
@@ -884,7 +884,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
 
     "be failed because of incorrect Bearer token" in {
       Given("Data needed to prepare request, expected result")
-      val bearer = StringUtils.EMPTY
+      val bearer = EMPTY
 
       val expectedResult =
         """
@@ -1039,16 +1039,6 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
 
     "be failed because of incorrect duration" in {
       Given("Data needed to prepare request, expected result")
-      val projectIdOld = "project_2"
-      val projectIdNew = "df"
-      val authorIdOld = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb2")
-      val authorIdNew = UUID("5c2a9bf6-89fe-4328-b90e-df0d0c4aa77a")
-      val startNew = LocalDateTime.of(2021, 12, 23, 15, 0, 0)
-      val end = LocalDateTime.of(2021, 12, 23, 17, 32, 0)
-
-      val duration = TaskDuration(2, 32)
-
-      val timeDetails = TaskTimeDetails(startNew, end, duration)
 
       val bearer = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9qZWN0X2lkX29sZCI6InByb2plY3RfMiIsInByb2plY3" +
         "RfaWRfbmV3IjoiZGYiLCJhdXRob3JfaWRfb2xkIjoiZTU0ZTU2OTItNjBkMy00Yzg0LWEyNTEtNjZhYTk5OGQ3Y2IyIiwiYXV0aG9yX2l" +
@@ -1092,7 +1082,6 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val projectIdOld = "project_2"
       val projectIdNew = "df"
       val authorIdOld = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb2")
-      val authorIdNew = UUID("5c2a9bf6-89fe-4328-b90e-df0d0c4aa77a")
       val startNew = LocalDateTime.of(2021, 12, 23, 15, 0, 0)
       val end = LocalDateTime.of(2021, 12, 23, 17, 32, 0)
 
@@ -1147,7 +1136,6 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
 
       val projectIdNew = "df"
       val projectIdOld = "project_2"
-      val authorIdOld = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb2")
       val startNew = LocalDateTime.of(2021, 12, 23, 15, 0, 0)
       val end = LocalDateTime.of(2021, 12, 23, 17, 32, 0)
 
@@ -1181,7 +1169,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       when(taskRepository.find(taskQuery))
         .thenReturn(Future.successful(Option.empty))
 
-      when(projectRepository.find(projectIdOld, authorIdOld))
+      when(projectRepository.find(projectIdOld))
         .thenReturn(Future.successful(Option.empty))
 
       val taskAggregate = new TaskAggregate(taskRepository)
