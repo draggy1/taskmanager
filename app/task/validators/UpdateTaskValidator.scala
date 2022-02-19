@@ -73,7 +73,7 @@ class UpdateTaskValidator (taskAggregate: TaskAggregate, projectAggregate: Proje
     }
 
   private def projectExist(command: UpdateTaskCommand) = {
-    val query = GetProjectByIdAndAuthorIdQuery(command.projectIdNew, command.authorIdNew)
+    val query = GetProjectByIdAndAuthorIdQuery(command.projectIdOld, command.authorIdOld)
     projectAggregate.getProject(query)
       .map {
         case None => Left(ProjectIdNotFound)

@@ -785,7 +785,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       val duration = TaskDuration(2, 32)
 
       val timeDetails = TaskTimeDetails(startNew, end, duration)
-      val givenDeleteCommand = UpdateTaskCommand(
+      val givenUpdateCommand = UpdateTaskCommand(
         projectIdOld,
         projectIdNew,
         authorIdOld,
@@ -860,10 +860,10 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       when(taskRepository.find(taskQuery))
         .thenReturn(Future.successful(Option.empty))
 
-      when(projectRepository.find(projectIdNew, authorIdNew))
+      when(projectRepository.find(projectIdOld, authorIdOld))
         .thenReturn(Future.successful(Option(Project(authorIdOld, projectIdOld))))
 
-      when(taskRepository.update(givenDeleteCommand))
+      when(taskRepository.update(givenUpdateCommand))
         .thenReturn(Future.successful(response))
 
       val taskAggregate = new TaskAggregate(taskRepository)
@@ -1144,8 +1144,10 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
 
     "be failed because of not existing project" in {
       Given("Data needed to prepare request, expected result")
+
       val projectIdNew = "df"
-      val authorIdNew = UUID("5c2a9bf6-89fe-4328-b90e-df0d0c4aa77a")
+      val projectIdOld = "project_2"
+      val authorIdOld = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb2")
       val startNew = LocalDateTime.of(2021, 12, 23, 15, 0, 0)
       val end = LocalDateTime.of(2021, 12, 23, 17, 32, 0)
 
@@ -1179,7 +1181,7 @@ class TaskControllerTest extends PlaySpec with MockitoSugar with GivenWhenThen w
       when(taskRepository.find(taskQuery))
         .thenReturn(Future.successful(Option.empty))
 
-      when(projectRepository.find(projectIdNew, authorIdNew))
+      when(projectRepository.find(projectIdOld, authorIdOld))
         .thenReturn(Future.successful(Option.empty))
 
       val taskAggregate = new TaskAggregate(taskRepository)

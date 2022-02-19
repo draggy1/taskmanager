@@ -361,7 +361,7 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       val config = mock[Configuration]
       when(config.get[String]("secret.key")).thenReturn("Test secret key")
 
-      val authorId = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb1")
+      val authorId = UUID("e54e5692-60d3-4c84-a251-66aa998d7cb2")
       val projectIdOld = "unique_project_id_1"
       val projectIdNew = "new_unique_project_id_1"
 
@@ -370,7 +370,6 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
 
       when(projectRepository.find(projectIdNew)).thenReturn(Future.successful(Option.empty))
       when(projectRepository.find(projectIdOld)).thenReturn(Future.successful(Some(Project(authorId, projectIdOld))))
-      when(projectRepository.find(projectIdOld, authorId)).thenReturn(Future.successful(Option.empty))
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
       val authHandler = AuthenticationHandler(config)
