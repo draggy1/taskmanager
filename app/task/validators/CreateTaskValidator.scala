@@ -1,18 +1,18 @@
 package task.validators
 
 import authentication.Error
-import common.CommonValidators
+import common.ValidatorFacade
 import project.ProjectAggregate
 import task.TaskAggregate
 import task.commands.CreateTaskCommand
 
 import scala.concurrent.Future
 
-class CreateTaskValidator(commonValidators: CommonValidators[CreateTaskCommand]) {
+class CreateTaskValidator(commonValidators: ValidatorFacade[CreateTaskCommand]) {
   def validate(command: CreateTaskCommand): Future[Either[Error, CreateTaskCommand]] =
-    commonValidators.isProjectEmpty
+    commonValidators.isProjectIdBlank
     .andThen(commonValidators.isStartDateCorrect)
-    .andThen(commonValidators.isProperDuration)
+    .andThen(commonValidators.isDurationEmpty)
     .andThen(commonValidators.isNotInConflict)
     .andThen(commonValidators.isProjectExist)
     .andThen(commonValidators.userIsNotAuthor)
@@ -21,5 +21,5 @@ class CreateTaskValidator(commonValidators: CommonValidators[CreateTaskCommand])
 
 object CreateTaskValidator {
   def apply(taskAggregate: TaskAggregate, projectAggregate: ProjectAggregate): CreateTaskValidator =
-    new CreateTaskValidator(new CommonValidators[CreateTaskCommand](projectAggregate, taskAggregate))
+    new CreateTaskValidator(new ValidatorFacade[CreateTaskCommand](projectAggregate, taskAggregate))
 }

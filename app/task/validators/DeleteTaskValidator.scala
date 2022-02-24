@@ -1,17 +1,17 @@
 package task.validators
 
 import authentication.Error
-import common.CommonValidators
+import common.ValidatorFacade
 import project.ProjectAggregate
 import task.TaskAggregate
 import task.commands.DeleteTaskCommand
 
 import scala.concurrent.Future
 
-class DeleteTaskValidator(commonValidators: CommonValidators[DeleteTaskCommand]) {
+class DeleteTaskValidator(commonValidators: ValidatorFacade[DeleteTaskCommand]) {
   def validate(command: DeleteTaskCommand): Future[Either[Error, DeleteTaskCommand]] =
-    commonValidators.isProjectEmpty
-    .andThen(commonValidators.notValidAuthorId)
+    commonValidators.isProjectIdBlank
+    .andThen(commonValidators.isAuthorIdBlank)
     .andThen(commonValidators.isStartDateCorrect)
     .andThen(commonValidators.isProvidedTaskExist)
     .andThen(commonValidators.isTaskAlreadyDeleted)
@@ -20,5 +20,5 @@ class DeleteTaskValidator(commonValidators: CommonValidators[DeleteTaskCommand])
 }
 object DeleteTaskValidator {
   def apply(taskAggregate: TaskAggregate, projectAggregate: ProjectAggregate): DeleteTaskValidator =
-    new DeleteTaskValidator(new CommonValidators[DeleteTaskCommand](projectAggregate, taskAggregate))
+    new DeleteTaskValidator(new ValidatorFacade[DeleteTaskCommand](projectAggregate, taskAggregate))
 }
