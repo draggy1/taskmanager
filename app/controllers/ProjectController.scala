@@ -5,6 +5,7 @@ import common.responses.Response.mapErrorToResult
 import controllers.steps.project.{CreateProjectSteps, DeleteProjectSteps, UpdateProjectSteps}
 import play.api.mvc._
 import project.ProjectAggregate
+import task.TaskAggregate
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -13,6 +14,7 @@ import scala.concurrent.Future
 @Singleton
 class ProjectController @Inject()(val controllerComponents: ControllerComponents,
                                   projectAggregate: ProjectAggregate,
+                                  taskAggregate: TaskAggregate,
                                   authHandler: AuthenticationHandler) extends BaseController {
   /**
    * Create an endpoint for setting up a new project
@@ -20,7 +22,7 @@ class ProjectController @Inject()(val controllerComponents: ControllerComponents
    * @return
    */
   def create(): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] => {
-    CreateProjectSteps(projectAggregate, authHandler)
+    CreateProjectSteps(projectAggregate, taskAggregate, authHandler)
       .prepare()
       .apply(request)
       .flatMap {
@@ -36,7 +38,7 @@ class ProjectController @Inject()(val controllerComponents: ControllerComponents
    * @return
    */
   def update(): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
-    UpdateProjectSteps(projectAggregate, authHandler)
+    UpdateProjectSteps(projectAggregate, taskAggregate, authHandler)
       .prepare()
       .apply(request)
       .flatMap {
@@ -46,7 +48,7 @@ class ProjectController @Inject()(val controllerComponents: ControllerComponents
   }
 
   def delete(): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
-    DeleteProjectSteps(projectAggregate, authHandler)
+    DeleteProjectSteps(projectAggregate, taskAggregate, authHandler)
       .prepare()
       .apply(request)
       .flatMap {

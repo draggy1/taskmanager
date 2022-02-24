@@ -19,4 +19,6 @@ case class DeleteTaskCommand(projectId: String, authorId: UUID, start: LocalDate
   override def isAuthorIdBlank: Boolean = UUID_NIL.equals(authorId)
 
   override def isStartDateNotCorrect: Boolean = NIL_LOCAL_DATE_TIME.equals(start)
+
+  override def getStart: LocalDateTime = start
 }

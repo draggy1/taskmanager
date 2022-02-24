@@ -4,6 +4,7 @@ import authentication.Error
 import common.CommonValidators
 import project.ProjectAggregate
 import project.commands.CreateProjectCommand
+import task.TaskAggregate
 
 import scala.concurrent.Future
 
@@ -18,6 +19,6 @@ class CreateProjectValidator(commonValidator: CommonValidators[CreateProjectComm
 }
 
 object CreateProjectValidator {
-  def apply(aggregate: ProjectAggregate): CreateProjectValidator =
-    new CreateProjectValidator(new CommonValidators[CreateProjectCommand](aggregate))
+  def apply(projectAggregate: ProjectAggregate, taskAggregate: TaskAggregate): CreateProjectValidator =
+    new CreateProjectValidator(new CommonValidators[CreateProjectCommand](projectAggregate, taskAggregate))
 }

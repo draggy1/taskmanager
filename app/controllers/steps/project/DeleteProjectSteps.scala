@@ -7,11 +7,13 @@ import project.ProjectAggregate
 import project.ProjectReads.deleteProjectCommandReads
 import project.commands.DeleteProjectCommand
 import project.validators.DeleteProjectValidator
+import task.TaskAggregate
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 class DeleteProjectSteps(projectAggregate: ProjectAggregate,
+                         taskAggregate: TaskAggregate,
                           authHandler: AuthenticationHandler) extends Step(authHandler, deleteProjectCommandReads) {
   override def prepare(): Request[AnyContent] => Future[Either[authentication.Error, Future[Result]]] = {
     authenticate
@@ -22,7 +24,7 @@ class DeleteProjectSteps(projectAggregate: ProjectAggregate,
 
   private val validate:  Either[Error, DeleteProjectCommand] => Future[Either[Error, DeleteProjectCommand]] = {
     case Left(result) => Future.successful(Left(result))
-    case Right(command) => DeleteProjectValidator(projectAggregate).validate(command)
+    case Right(command) => DeleteProjectValidator(projectAggregate, taskAggregate).validate(command)
   }
 
   private val perform = (result: Future[Either[Error, DeleteProjectCommand]]) =>
@@ -33,7 +35,6 @@ class DeleteProjectSteps(projectAggregate: ProjectAggregate,
 }
 
 case object DeleteProjectSteps {
-  def apply(projectAggregate: ProjectAggregate, authHandler: AuthenticationHandler): DeleteProjectSteps = {
-    new DeleteProjectSteps(projectAggregate, authHandler)
-  }
+  def apply(projectAggregate: ProjectAggregate, taskAggregate: TaskAggregate, authHandler: AuthenticationHandler): DeleteProjectSteps =
+    new DeleteProjectSteps(projectAggregate, taskAggregate, authHandler)
 }

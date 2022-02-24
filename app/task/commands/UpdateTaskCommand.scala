@@ -29,6 +29,8 @@ case class UpdateTaskCommand(projectIdOld: String,
   override def getTimeDetails: TaskTimeDetails = taskTimeDetails
 
   override def isStartDateNotCorrect: Boolean = NIL_LOCAL_DATE_TIME.equals(taskTimeDetails.start) || NIL_LOCAL_DATE_TIME.equals(startDateOld)
+
+  override def getStart: LocalDateTime = taskTimeDetails.start
 }
 
 

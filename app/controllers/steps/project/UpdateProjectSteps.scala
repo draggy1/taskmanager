@@ -7,11 +7,13 @@ import project.ProjectAggregate
 import project.ProjectReads.updateProjectCommandReads
 import project.commands.UpdateProjectCommand
 import project.validators.UpdateProjectValidator
+import task.TaskAggregate
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class UpdateProjectSteps(aggregate: ProjectAggregate,
+class UpdateProjectSteps(projectAggregate: ProjectAggregate,
+                         taskAggregate: TaskAggregate,
                          authHandler: AuthenticationHandler) extends Step(authHandler, updateProjectCommandReads){
 
   def prepare(): Request[AnyContent] => Future[Either[Error, Future[Result]]] =
@@ -22,16 +24,17 @@ class UpdateProjectSteps(aggregate: ProjectAggregate,
 
   private val validate:  Either[Error, UpdateProjectCommand] => Future[Either[Error, UpdateProjectCommand]] = {
     case Left(result) => Future.successful(Left(result))
-    case Right(command) => UpdateProjectValidator(aggregate).validate(command)
+    case Right(command) => UpdateProjectValidator(projectAggregate, taskAggregate).validate(command)
   }
 
   private val performUpdateProject = (result: Future[Either[Error, UpdateProjectCommand]]) =>
     result.map {
       case Left(result) => Left(result)
-      case Right(command) => Right(aggregate.updateProject(command))
+      case Right(command) => Right(projectAggregate.updateProject(command))
     }
 }
 
 case object UpdateProjectSteps {
-  def apply(aggregate: ProjectAggregate, authHandler: AuthenticationHandler): UpdateProjectSteps = new UpdateProjectSteps(aggregate, authHandler)
+  def apply(projectAggregate: ProjectAggregate, taskAggregate: TaskAggregate, authHandler: AuthenticationHandler): UpdateProjectSteps =
+    new UpdateProjectSteps(projectAggregate, taskAggregate, authHandler)
 }

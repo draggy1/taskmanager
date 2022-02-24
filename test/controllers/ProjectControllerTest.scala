@@ -19,7 +19,7 @@ import play.api.test.Helpers.{AUTHORIZATION, POST, PUT, contentAsJson, defaultAw
 import play.api.test.{FakeRequest, Helpers}
 import project.commands.{CreateProjectCommand, DeleteProjectCommand, UpdateProjectCommand}
 import project.{Project, ProjectAggregate, ProjectRepository}
-import task.TaskRepository
+import task.{TaskAggregate, TaskRepository}
 
 import java.time.LocalDateTime
 import scala.concurrent.Future
@@ -50,13 +50,14 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       val taskRepository = mock[TaskRepository]
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Creation method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.create().apply(givenRequest)
 
       Then("Result should be with status Created with expected json as body")
@@ -97,13 +98,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       when(projectRepository.create(CreateProjectCommand(authorId, projectId))).thenReturn(Future.successful(response))
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
+
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Creation method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.create().apply(givenRequest)
 
       Then("Result should be with status Created with expected json as body")
@@ -137,13 +140,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       when(projectRepository.find(projectId)).thenReturn(Future.successful(Some(Project(authorId, projectId))))
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
+
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Creation method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.create().apply(givenRequest)
 
       Then("Result should be with status Bad Request with expected json as body")
@@ -173,13 +178,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       val taskRepository = mock[TaskRepository]
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
+
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Creation method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.create().apply(givenRequest)
 
       Then("Result should be with status Bad Request with expected json as body")
@@ -209,13 +216,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       val taskRepository = mock[TaskRepository]
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
+
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Creation method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.create().apply(givenRequest)
 
       Then("Result should be with status Bad Request with expected json as body")
@@ -243,13 +252,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       val taskRepository = mock[TaskRepository]
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
+
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Update method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.update().apply(givenRequest)
 
       Then("Result should be with status Ok with expected json as body")
@@ -295,13 +306,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
         .thenReturn(Future.successful(response))
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
+
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Update method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.update().apply(givenRequest)
 
       Then("Result should be with status Ok with expected json as body")
@@ -330,13 +343,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       val taskRepository = mock[TaskRepository]
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
+
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Update method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.update().apply(givenRequest)
 
       Then("Result should be with status Bad request with expected json as body")
@@ -372,13 +387,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       when(projectRepository.find(projectIdOld)).thenReturn(Future.successful(Some(Project(authorId, projectIdOld))))
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
+
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Update method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.update().apply(givenRequest)
 
       Then("Result should be with status Bad request with expected json as body")
@@ -412,13 +429,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       when(projectRepository.find(projectIdNew)).thenReturn(Future.successful(Some(Project(authorId, projectIdNew))))
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
+
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Update method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.update().apply(givenRequest)
 
       Then("Result should be with status Bad request with expected json as body")
@@ -454,13 +473,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
     when(projectRepository.find(projectIdOld)).thenReturn(Future.successful(Option.empty))
 
     val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+    val taskAggregate = new TaskAggregate(taskRepository)
+
     val authHandler = AuthenticationHandler(config)
     val givenRequest = FakeRequest()
       .withMethod(POST)
       .withHeaders((AUTHORIZATION, bearer))
 
     When("Update method is performed")
-    val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+    val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
     val result: Future[Result] = controller.update().apply(givenRequest)
 
     Then("Result should be with status Bad request with expected json as body")
@@ -495,13 +516,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
     when(projectRepository.find(projectIdOld)).thenReturn(Future.successful(Option.empty))
 
     val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+    val taskAggregate = new TaskAggregate(taskRepository)
+
     val authHandler = AuthenticationHandler(config)
     val givenRequest = FakeRequest()
       .withMethod(POST)
       .withHeaders((AUTHORIZATION, bearer))
 
     When("Update method is performed")
-    val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+    val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
     val result: Future[Result] = controller.update().apply(givenRequest)
 
     Then("Result should be with status Bad request with expected json as body")
@@ -528,13 +551,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
       val taskRepository = mock[TaskRepository]
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
+
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(POST)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Delete method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.delete().apply(givenRequest)
 
       Then("Result should be with status Bad request with expected json as body")
@@ -603,13 +628,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
         .thenReturn(Future.successful(responseTasksDeleted))
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
+
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(PUT)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Delete method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.delete().apply(givenRequest)
 
       Then("Result should be with status Ok with expected json as body")
@@ -642,13 +669,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
         .thenReturn(Future.successful(None))
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
+
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(PUT)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Delete method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.delete().apply(givenRequest)
 
       Then("Result should be with status Bad request with expected json as body")
@@ -681,13 +710,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
         .thenReturn(Future.successful(None))
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
+
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(PUT)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Delete method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.delete().apply(givenRequest)
 
       Then("Result should be with status Bad request with expected json as body")
@@ -720,13 +751,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
         .thenReturn(Future.successful(None))
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
+
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(PUT)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Delete method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.delete().apply(givenRequest)
 
       Then("Result should be with status Bad request with expected json as body")
@@ -760,13 +793,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
         .thenReturn(Future.successful(Some(Project(authorId, projectId))))
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
+
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(PUT)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Delete method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.delete().apply(givenRequest)
 
       Then("Result should be with status Bad request with expected json as body")
@@ -802,13 +837,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
         .thenReturn(Future.successful(Some(Project(authorId, projectId, Option(deleted)))))
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
+
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(PUT)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Delete method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.delete().apply(givenRequest)
 
       Then("Result should be with status Bad request with expected json as body")
@@ -871,13 +908,15 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
         .thenReturn(Future.successful(responseTasksDeleted))
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
+      val taskAggregate = new TaskAggregate(taskRepository)
+
       val authHandler = AuthenticationHandler(config)
       val givenRequest = FakeRequest()
         .withMethod(PUT)
         .withHeaders((AUTHORIZATION, bearer))
 
       When("Delete method is performed")
-      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, authHandler)
+      val controller = new ProjectController(Helpers.stubControllerComponents(), projectAggregate, taskAggregate, authHandler)
       val result: Future[Result] = controller.delete().apply(givenRequest)
 
       Then("Result should be with status Bad request with expected json as body")

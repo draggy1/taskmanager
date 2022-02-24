@@ -5,6 +5,8 @@ import common.{Command, WithStart, WithTaskTimeDetails}
 import io.jvm.uuid.UUID
 import task.TaskTimeDetails
 
+import java.time.LocalDateTime
+
 case class CreateTaskCommand(projectId: String, authorId: UUID, taskTimeDetails: TaskTimeDetails, volume: Option[Int],
                              comment: Option[String]) extends Command with WithTaskTimeDetails with WithStart{
   override def getAuthorId: UUID = authorId
@@ -20,4 +22,6 @@ case class CreateTaskCommand(projectId: String, authorId: UUID, taskTimeDetails:
   override def getTimeDetails: TaskTimeDetails = taskTimeDetails
 
   override def isStartDateNotCorrect: Boolean = NIL_LOCAL_DATE_TIME.equals(taskTimeDetails.start)
+
+  override def getStart: LocalDateTime = taskTimeDetails.start
 }

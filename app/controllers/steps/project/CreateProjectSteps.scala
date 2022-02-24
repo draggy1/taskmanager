@@ -7,11 +7,13 @@ import project.ProjectAggregate
 import project.ProjectReads.createProjectCommandReads
 import project.commands.CreateProjectCommand
 import project.validators.CreateProjectValidator
+import task.TaskAggregate
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 class CreateProjectSteps(projectAggregate: ProjectAggregate,
+                         taskAggregate: TaskAggregate,
                          authHandler: AuthenticationHandler) extends Step(authHandler, createProjectCommandReads){
   def prepare(): Request[AnyContent] => Future[Either[Error, Future[Result]]] = {
     authenticate
@@ -22,7 +24,7 @@ class CreateProjectSteps(projectAggregate: ProjectAggregate,
 
   private val validate:  Either[Error, CreateProjectCommand] => Future[Either[Error, CreateProjectCommand]] = {
     case Left(result) => Future.successful(Left(result))
-    case Right(command) => CreateProjectValidator(projectAggregate).validate(command)
+    case Right(command) => CreateProjectValidator(projectAggregate, taskAggregate).validate(command)
   }
 
   private val performCreationProject = (result: Future[Either[Error, CreateProjectCommand]]) =>
@@ -33,5 +35,6 @@ class CreateProjectSteps(projectAggregate: ProjectAggregate,
 }
 
 case object CreateProjectSteps {
-  def apply(aggregate: ProjectAggregate, authHandler: AuthenticationHandler): CreateProjectSteps = new CreateProjectSteps(aggregate, authHandler)
+  def apply(aggregate: ProjectAggregate, taskAggregate: TaskAggregate, authHandler: AuthenticationHandler): CreateProjectSteps =
+    new CreateProjectSteps(aggregate, taskAggregate, authHandler)
 }
