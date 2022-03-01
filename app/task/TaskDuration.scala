@@ -1,6 +1,6 @@
 package task
 
-import common.StringUtils.SPACE
+import common.utils.StringUtils.SPACE
 
 import scala.util.Try
 

@@ -1,4 +1,5 @@
-package common
+package common.utils
+
 import authentication.Error
 import pdi.jwt.JwtClaim
 import play.api.http.Status

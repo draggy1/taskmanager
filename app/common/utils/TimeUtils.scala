@@ -1,17 +1,17 @@
-package common
+package common.utils
 
-import task.{TaskDuration, TaskTimeDetails}
 import task.TaskDuration.TASK_DURATION_EMPTY
 import task.TaskTimeDetails.getTaskEnd
+import task.{TaskDuration, TaskTimeDetails}
 
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import scala.util.Try
 
 case object TimeUtils {
-  val NIL_LOCAL_DATE_TIME: LocalDateTime = LocalDateTime.of(1900,1,1,0,0,0)
+  val NIL_LOCAL_DATE_TIME: LocalDateTime = LocalDateTime.of(1900, 1, 1, 0, 0, 0)
 
-  def prepareTaskTimeDetails(startDateAsString: String, durationOpt: Option[String]) = {
+  def prepareTaskTimeDetails(startDateAsString: String, durationOpt: Option[String]): TaskTimeDetails = {
     val startDate = mapToLocalDateTime(startDateAsString)
     val duration = mapToDuration(durationOpt)
     TaskTimeDetails(startDate, getTaskEnd(startDate, duration), duration)

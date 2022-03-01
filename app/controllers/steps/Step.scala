@@ -1,7 +1,7 @@
 package controllers.steps
 
 import authentication.{AuthenticationHandler, Error}
-import common.JwtUtils
+import common.utils.JwtUtils
 import pdi.jwt.JwtClaim
 import play.api.libs.json.Reads
 import play.api.mvc.{AnyContent, Request, Result}

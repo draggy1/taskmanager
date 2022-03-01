@@ -1,6 +1,6 @@
-package common
+package common.utils
 
-case object StringUtils{
+case object StringUtils {
   val EMPTY: String = ""
   val SPACE: String = " "
 }

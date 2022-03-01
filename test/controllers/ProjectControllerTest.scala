@@ -2,7 +2,7 @@ package controllers
 
 import akka.util.ByteString
 import authentication.AuthenticationHandler
-import common.StringUtils
+import common.utils.StringUtils
 import io.jvm.uuid.UUID
 import org.mockito.Mockito.when
 import org.scalatest.GivenWhenThen

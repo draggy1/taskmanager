@@ -1,9 +1,8 @@
 package project
 
-
-import common.StringUtils
 import common.responses.Response
 import common.responses.Response.getResult
+import common.utils.StringUtils
 import play.api.http.Status
 import play.api.http.Status.{INTERNAL_SERVER_ERROR, OK}
 import play.api.libs.json.{JsValue, Json, Writes}

@@ -2,7 +2,7 @@ package controllers
 
 import akka.util.ByteString
 import authentication.AuthenticationHandler
-import common.StringUtils.EMPTY
+import common.utils.StringUtils.EMPTY
 import io.jvm.uuid.UUID
 import org.bson.types.ObjectId
 import org.mockito.Mockito.when

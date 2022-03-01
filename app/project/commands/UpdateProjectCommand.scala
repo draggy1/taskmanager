@@ -1,7 +1,7 @@
 package project.commands
 
 import common.Command
-import common.UUIDUtils.UUID_NIL
+import common.utils.UUIDUtils.UUID_NIL
 import io.jvm.uuid.UUID
 
 case class UpdateProjectCommand(authorId: UUID, projectIdOld: String, projectIdNew: String) extends Command {

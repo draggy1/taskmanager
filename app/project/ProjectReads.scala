@@ -1,7 +1,7 @@
 package project
 
-import common.StringUtils.EMPTY
-import common.UUIDUtils.UUID_NIL
+import common.utils.StringUtils.EMPTY
+import common.utils.UUIDUtils.UUID_NIL
 import io.jvm.uuid.UUID
 import play.api.libs.functional.syntax.{toAlternativeOps, toFunctionalBuilderOps}
 import play.api.libs.json.{JsPath, Reads}

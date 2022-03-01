@@ -1,7 +1,7 @@
 package project.validators
 
 import authentication.Error
-import common.ValidatorFacade
+import common.validators.ValidatorFacade
 import project.ProjectAggregate
 import project.commands.UpdateProjectCommand
 import task.TaskAggregate

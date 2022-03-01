@@ -1,6 +1,6 @@
 package task.commands
 
-import common.LocalDateTimeUtil.NIL_LOCAL_DATE_TIME
+import common.utils.TimeUtils.NIL_LOCAL_DATE_TIME
 import common.{Command, WithStart, WithTaskTimeDetails}
 import io.jvm.uuid.UUID
 import task.TaskTimeDetails

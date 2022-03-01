@@ -2,7 +2,7 @@ package project
 
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Filters.and
-import common.StringUtils.EMPTY
+import common.utils.StringUtils.EMPTY
 import common.responses.Response
 import common.responses.Response.getResult
 import configuration.MongoDbManager

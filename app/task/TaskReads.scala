@@ -1,9 +1,9 @@
 package task
 
-import common.StringUtils.EMPTY
-import common.TimeUtils
-import common.TimeUtils.{mapToLocalDateTime, prepareTaskTimeDetails}
-import common.UUIDUtils.UUID_NIL
+import common.utils.StringUtils.EMPTY
+import common.utils.TimeUtils.{mapToLocalDateTime, prepareTaskTimeDetails}
+import common.utils.UUIDUtils.UUID_NIL
+import common.utils.TimeUtils
 import io.jvm.uuid.UUID
 import play.api.libs.functional.syntax.{toAlternativeOps, toFunctionalBuilderOps}
 import play.api.libs.json.{JsPath, Reads}

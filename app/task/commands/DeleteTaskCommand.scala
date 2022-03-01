@@ -1,8 +1,8 @@
 package task.commands
 
-import common.LocalDateTimeUtil.NIL_LOCAL_DATE_TIME
+import common.utils.TimeUtils.NIL_LOCAL_DATE_TIME
 import common.{Command, WithStart}
-import common.UUIDUtils.UUID_NIL
+import common.utils.UUIDUtils.UUID_NIL
 import io.jvm.uuid.UUID
 
 import java.time.LocalDateTime
