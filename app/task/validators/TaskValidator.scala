@@ -10,22 +10,24 @@ import scala.concurrent.Future
 
 case class TaskValidator[C <: Command](aggregate: TaskAggregate) {
   def checkIfTaskIsInConflict(command: C with WithTaskTimeDetails): Future[Either[Error, C]] = {
-    val query = GetTaskByProjectIdAndTimeDetailsQuery(command.getProjectId, command.getTimeDetails)
-    aggregate.getTask(query).map {
-      case Some(_) => Left(TaskInConflictWithAnother)
-      case None => Right(command)
+    aggregate.getTask(GetTaskByProjectIdAndTimeDetailsQuery(command.getProjectId, command.getTimeDetails))
+      .map {
+        case Some(_) => Left(TaskInConflictWithAnother)
+        case None => Right(command)
     }
   }
 
-  def isProvidedTaskExist(command: C with WithStart): Future[Either[Error, C]] =
+  def isProvidedTaskExist(command: C with WithStart): Future[Either[Error, C]] = {
     aggregate.getTask(GetTaskByProjectIdAndStartQuery(command.getProjectId, command.getStart))
       .map {
         case None => Left(TaskToDeleteNotExist)
         case Some(_) => Right(command)
       }
+  }
 
   def isTaskAlreadyDeleted(command: C with WithStart): Future[Either[Error, C]] =
-    aggregate.getTask(GetTaskByProjectIdAndStartQuery(command.getProjectId, command.getStart)).map {
-      case Some(task) => if (task.taskTimeDetails.delete.isEmpty) Right(command) else Left(TaskToDeleteAlreadyDeleted)
+    aggregate.getTask(GetTaskByProjectIdAndStartQuery(command.getProjectId, command.getStart))
+      .map {
+        case Some(task) => if (task.taskTimeDetails.delete.isEmpty) Right(command) else Left(TaskToDeleteAlreadyDeleted)
     }
 }

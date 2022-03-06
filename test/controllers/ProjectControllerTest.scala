@@ -624,7 +624,7 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
         .thenReturn(Future.successful(Some(Project(authorId, projectId))))
       when(projectRepository.delete(DeleteProjectCommand(authorId, projectId)))
         .thenReturn(Future.successful(responseProjectDeleted))
-      when(taskRepository.deleteAll(projectId))
+      when(taskRepository.deleteAll(DeleteProjectCommand(authorId, projectId)))
         .thenReturn(Future.successful(responseTasksDeleted))
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)
@@ -904,7 +904,7 @@ class ProjectControllerTest extends PlaySpec with MockitoSugar with GivenWhenThe
         .thenReturn(Future.successful(Some(Project(authorId, projectId))))
       when(projectRepository.delete(DeleteProjectCommand(authorId, projectId)))
         .thenReturn(Future.successful(responseProjectDeleted))
-      when(taskRepository.deleteAll(projectId))
+      when(taskRepository.deleteAll(DeleteProjectCommand(authorId, projectId)))
         .thenReturn(Future.successful(responseTasksDeleted))
 
       val projectAggregate = new ProjectAggregate(projectRepository, taskRepository)

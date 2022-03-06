@@ -10,8 +10,7 @@ import scala.concurrent.Future
 
 case class ProjectValidator[C <: Command](aggregate: ProjectAggregate) {
   def isProjectDuplicated(command: C): Future[Either[DuplicatedProjectId.type, C]] = {
-  val projectFuture = aggregate.getProject(GetProjectByIdQuery(command.getProjectId))
-    projectFuture
+    aggregate.getProject(GetProjectByIdQuery(command.getProjectId))
       .map {
         case Some(_) => Left(DuplicatedProjectId)
         case None => Right(command)
@@ -33,7 +32,8 @@ case class ProjectValidator[C <: Command](aggregate: ProjectAggregate) {
       }
 
   def isProjectAlreadyDeleted(command: C): Future[Either[Error, C]] =
-    aggregate.getProject(GetProjectByIdQuery(command.getProjectId)).map {
-      case Some(project) => if(project.deleted.isEmpty) Right(command) else Left(ProjectToDeleteAlreadyDeleted)
+    aggregate.getProject(GetProjectByIdQuery(command.getProjectId))
+      .map {
+        case Some(project) => if(project.deleted.isEmpty) Right(command) else Left(ProjectToDeleteAlreadyDeleted)
     }
 }

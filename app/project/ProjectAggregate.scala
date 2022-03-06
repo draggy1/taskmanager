@@ -35,7 +35,7 @@ class ProjectAggregate @Inject()(projectRepository: ProjectRepository, taskRepos
   def delete(command: DeleteProjectCommand): Future[Result] = {
     for {
       deleteResult <- projectRepository.delete(command)
-      createResult <- taskRepository.deleteAll(command.projectId)
+      createResult <- taskRepository.deleteAll(command)
     } yield mergeFutures(deleteResult, createResult, command)
   }
 
